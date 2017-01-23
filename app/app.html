@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>X-Plane Map</title>
+    <link href="stylesheets/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="panel" class="bl">
+    <table id="planesTable">
+      <tr class="topRow">
+        <td title="Click to focus on this plane."><label><input type="radio" id="nofocus" name="plane"></label></td>
+        <td title="Double-click to rename.">Name</td>
+        <td title="Click to show or hide trace.">Trace</td>
+        <td title="Click to reset the plane's trace.">Clear</td>
+        <td title="Click to remove the plane.">Rmv</td>
+      </tr>
+      <tr class="planeRow" data-ip="ip">
+        <td></td>
+        <td>No plane yet</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <p id="loading"></p>
+    <span id="bottom-note">External Moving Map v2.0<br>Developed by <a href="mailto:foucauld.degeorges@gmail.com">Foucauld Degeorges</a> and released for free on <a href="http://forums.x-plane.org/index.php?app=downloads&showfile=25569">x-plane.org</a></span>
+  </div>
+  <div id="map-canvas-wrapper">
+    <div id="map-canvas"></div>
+    <div id="panel-button">Show panel (Tab)</div>
+    <div id="navaids-button">Show navaids (N)</div>
+  </div>
+  <div id="errorBox">
+  </div>
+  <script src="helpers/context_menu.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALMYSbib0J3i5xU5NUt4XPPzHX1Ll90u4"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

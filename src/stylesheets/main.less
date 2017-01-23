@@ -1,0 +1,135 @@
+html, body, #map-canvas, #map-canvas-wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+#map-canvas-wrapper {
+  margin-right: 0px;
+  position: relative;
+}
+
+#errorBox {
+  position: absolute;
+  top: 5px;
+  left: 30%;
+  z-index: 5;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  font-family: Roboto,Arial,sans-serif;
+  text-decoration: none;
+  border: 1px solid #ff0000;
+  background-color: #ff5b5b;
+  color: #fff;
+  width: 40%;
+  display: none;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+#panel {
+  display: none;
+  float: right;
+  position: absolute;
+  right: -300px;
+  height: 100%;
+  width: 300px;
+  background-color: #fff;
+  font-family: Roboto,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+}
+#bottom-note {
+  position: absolute;
+     bottom: 0;
+     text-align: center;
+     font-size: 11px;
+     color: #666;
+     margin: 0px 15px 5px 15px;
+}
+
+#panel-button, #navaids-button {
+  position: absolute;
+  bottom: 20px;
+  font-family: Roboto,Arial,sans-serif;
+  text-decoration: none;
+  border: 1px solid #999;
+  font-size: 13px;
+  font-weight: 300;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 3px;
+  cursor: pointer;
+}
+#panel-button { right: 45px; }
+#navaids-button {right: 160px; }
+
+#panel-button:hover, #navaids-button:hover {
+  background-color: #ccc;
+}
+#panel-button:active, #navaids-button:active {
+  background-color: #7bbcfc;
+}
+#planesTable {
+  border-collapse: collapse;
+  border: 0;
+  border-radius: 2px;
+  table-layout: fixed;
+  width: 300px;
+}
+
+#planesTable input[type=radio] {
+  display: none;
+}
+
+.planeRow {
+  height: 35px;
+  overflow: hidden;
+}
+
+#planeNameInput {
+  width: 140px;
+}
+#planesTable tr:nth-child(odd) {background-color: #ddd;}
+
+.planeRow.followed {
+  background-color: #7bbcfc !important;
+}
+#planesTable td {
+  padding: 2px;
+  overflow: hidden;
+}
+#planesTable tr td:nth-child(1) {
+  width: 11px;
+}
+#planesTable tr td:nth-child(1) label {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  cursor: pointer;
+}
+#planesTable tr td:nth-child(2) {
+  width: 158px;
+  padding-left: 5px;
+  font-size: 11px;
+  cursor: pointer;
+}
+#planesTable tr td:nth-child(2) strong {
+  font-size: 13px;
+}
+
+#planesTable tr td:nth-child(3) {
+  width: 36px;
+  text-align: center;
+}
+#planesTable tr td:nth-child(4) {
+  width: 36px;
+  text-align: center;
+}
+#planesTable tr td:nth-child(5) {
+  width: 36px;
+  text-align: center;
+}
