@@ -5,11 +5,14 @@
 
 import path from 'path';
 import url from 'url';
-import express from 'express';
-import { app, Menu } from 'electron';
+import { app, Menu, shell } from 'electron';
 import { devMenuTemplate } from './menu/dev_menu_template';
 import { editMenuTemplate } from './menu/edit_menu_template';
 import createWindow from './helpers/window';
+import UDPListener from './udp';
+import MapServer from './server';
+
+const defaultMenu = require('electron-default-menu');
 
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
@@ -18,11 +21,11 @@ import env from './env';
 var mainWindow;
 
 var setApplicationMenu = function () {
-    var menus = [editMenuTemplate];
+    const menu = defaultMenu(app, shell);
     if (env.name !== 'production') {
-        menus.push(devMenuTemplate);
+        menu.push(devMenuTemplate);
     }
-    Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 };
 
 // Save userData in separate folders for each environment.
@@ -56,19 +59,7 @@ app.on('window-all-closed', function () {
     app.quit();
 });
 
-var server = express();
+var planesList = {};
 
-server.get('/data', function (req, res) {
-  let plane = {
-    '192.168.1.1': {
-      lat: 45.3446546,
-      lon: 2.34536556,
-      alt: 15774
-    }
-  }
-  res.send(JSON.stringify(plane));
-});
-
-server.listen(8080, function () {
-  console.log('Example app listening on port 8080!');
-});
+var mapServer = new MapServer(planesList).listen(8080);
+var udpClient = new UDPListener(planesList).listen(49003);
