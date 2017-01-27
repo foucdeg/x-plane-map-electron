@@ -7,12 +7,12 @@ import path from 'path';
 import url from 'url';
 import { app, Menu, shell } from 'electron';
 import { devMenuTemplate } from './menu/dev_menu_template';
-import { editMenuTemplate } from './menu/edit_menu_template';
 import createWindow from './helpers/window';
 import UDPListener from './udp';
 import MapServer from './server';
 
 const defaultMenu = require('electron-default-menu');
+require('electron-context-menu')();
 
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
@@ -40,12 +40,12 @@ app.on('ready', function () {
     setApplicationMenu();
 
     var mainWindow = createWindow('main', {
-        width: 800,
-        height: 600,
+        width: 1000,
+        height: 800,
     });
 
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'app.html'),
+        pathname: path.join(__dirname, 'config.html'),
         protocol: 'file:',
         slashes: true
     }));

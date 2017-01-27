@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>X-Plane Map</title>
+    <link href="stylesheets/config.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="config-wrapper">
+    <header>
+      <img class="logo" src="images/logo.png"></img>
+      <h1>X-Plane Map</h1>
+    </header>
+    <main>
+      <nav>
+        <div class="nav-item active">
+          <h3>Single Pilot</h3>
+          <p class="nav-subtext">It's just me</p>
+        </div>
+        <div class="nav-item">
+          <h3>Multi-Pilot</h3>
+          <p class="nav-subtext">I am the map server</p>
+        </div>
+        <div class="nav-item">
+          <h3>Multi-Pilot</h3>
+          <p class="nav-subtext">Someone else is the map server</p>
+        </div>
+        <div class="nav-item">
+          <h3>Advanced Setup</h3>
+          <p class="nav-subtext">Ports and stuff</p>
+        </div>
+        <div class="submit-button">
+          <a href="app.html">
+            <h3>All Set!</h3>
+          </a>
+        </div>
+      </nav>
+      <section id="single-pilot">
+        <h2>X-Plane Configuration</h2>
+        <p>In Data > Network tab, check data line 20 for UDP output.</p>
+        <p>In Network tab, enter <strong class="dynamic-ip">127.0.0.1</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
+      </section>
+    </main>
+  </div>
+  <script src="helpers/external_links.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

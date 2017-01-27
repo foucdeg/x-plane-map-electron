@@ -1,7 +1,3 @@
-// Use new ES6 modules syntax for everything.
-import os from 'os'; // native node.js module
-import { remote } from 'electron'; // native electron module
-import env from './env';
 import $ from 'jquery';
 
 const period = 1000; //time between refreshes in ms
