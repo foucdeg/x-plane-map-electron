@@ -11,6 +11,10 @@ body {
   padding-top: 50px;
 }
 
+input:focus {
+  outline: none;
+}
+
 .config-wrapper {
   height: 600px;
   width: 800px;
@@ -44,21 +48,22 @@ body {
     height: ~"calc(100% - 120px)";
     nav {
       -webkit-user-select: none;
-      width: 40%;
+      width: 35%;
       height: 100%;
       display: inline-block;
       float: left;
       border-right: 1px solid #aaa;
       position: relative;
 
-      .nav-item, .submit-button {
-        cursor: pointer;
+      a.nav-item, a.submit-button {
         height: 80px;
         width: 100%;
         padding: 10px 20px;
-
+        display: block;
+        text-decoration: none;
       }
-      .nav-item {
+      a.nav-item {
+        color: inherit;
         border-bottom: 1px solid #aaa;
 
         h3 {
@@ -76,31 +81,62 @@ body {
         }
       }
 
-      .submit-button {
+      a.submit-button {
         position: absolute;
         bottom: 0;
         border-top: 1px solid #aaa;
         border-bottom-left-radius: 10px;
-        background-color: rgba(154, 209, 75, 0.56);
-        a {
-          color: #666;
-          text-decoration: none;
-          display: block;
-          width: 100%;
-          height: 100%;
-          font-size: 15px;
-        }
+        background-color: #aadc63;
+        color: #4d7b0c;
+
         &:hover {
-          background-color: #9ad14b;
+          background-color: #9ac75a;
         }
       }
     }
 
     section {
-      width: 60%;
+      width: 65%;
       display: inline-block;
       float: left;
       padding: 0px 20px;
+
+      input[type="text"], input[type="number"] {
+        line-height: 20px;
+        font-size: 13px;
+        padding-left: 5px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      a.action, a.warning {
+        text-decoration: none;
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 3px;
+        line-height: 20px;
+      }
+      a.action {
+        color: #4d7b0c;
+        background-color: #aadc63;
+        border: 1px solid #4d7b0c;
+
+        &:hover {
+          background-color: #9ac75a;
+        }
+      }
+
+      a.warning {
+        color: inherit;
+        background-color: #fff247;
+        border: 1px solid #e4d500;
+
+        &:hover {
+          background-color: #f1e100;
+        }
+      }
     }
   }
 }

@@ -47,7 +47,8 @@ app.on('ready', function () {
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'config.html'),
         protocol: 'file:',
-        slashes: true
+        slashes: true,
+        hash: '#single'
     }));
 
     if (env.name === 'development') {

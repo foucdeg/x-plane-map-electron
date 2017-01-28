@@ -13,36 +13,70 @@
     </header>
     <main>
       <nav>
-        <div class="nav-item active">
+        <a class="nav-item" href="#single">
           <h3>Single Pilot</h3>
           <p class="nav-subtext">It's just me</p>
-        </div>
-        <div class="nav-item">
+        </a>
+        <a class="nav-item" href="#multi-server">
           <h3>Multi-Pilot</h3>
           <p class="nav-subtext">I am the map server</p>
-        </div>
-        <div class="nav-item">
+        </a>
+        <a class="nav-item" href="#multi-client">
           <h3>Multi-Pilot</h3>
           <p class="nav-subtext">Someone else is the map server</p>
-        </div>
-        <div class="nav-item">
+        </a>
+        <a class="nav-item" href="#config">
           <h3>Advanced Setup</h3>
           <p class="nav-subtext">Ports and stuff</p>
-        </div>
-        <div class="submit-button">
-          <a href="app.html">
-            <h3>All Set!</h3>
-          </a>
-        </div>
+        </a>
+        <a class="submit-button" href="app.html">
+          <h3>All Set, Let's Go!</h3>
+        </a>
       </nav>
-      <section id="single-pilot">
+      <section data-section-id="single">
         <h2>X-Plane Configuration</h2>
         <p>In Data > Network tab, check data line 20 for UDP output.</p>
         <p>In Network tab, enter <strong class="dynamic-ip">127.0.0.1</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
       </section>
+      <section data-section-id="multi-server">
+        <h2>Map Configuration for Other Players</h2>
+        <p>Tell your fellow pilots to connect their X-Plane-Map to your map server at the IP <strong class="dynamic-network-ip">192.168.0.3</strong> and port <strong class="dynamic-x-plane-port">8080</strong>.</p>
+        <h2>X-Plane Configuration for Everybody</h2>
+        <p>In Data > Network tab, check data line 20 for UDP output.</p>
+        <p>In Network tab, enter <strong class="dynamic-network-ip">192.168.0.3</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
+      </section>
+      <section data-section-id="multi-client">
+        <h2>Map Server</h2>
+        <p>Please enter the map server address as displayed on their screen.</p>
+        IP address : <input type="text" placeholder="e.g. 192.168.1.13"/>
+        Port : <input type="number" max="65535" min="0" value="8080"/>
+        <a class="action" id="map-server-connect-btn" href="javascript:void(0)">Connect</a>
+        <p id="map-server-connection-success">The map server is responding to us. It's looking good!</p>
+        <p id="map-server-connection-faliure">The map server isn't responding. Please check the above information against the map server config.</p>
+        <h2>X-Plane Configuration</h2>
+        <p>In Data > Network tab, check data line 20 for UDP output.</p>
+        <p>In Network tab, enter <strong class="dynamic-ip">127.0.0.1</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
+      </section>
+      <section data-section-id="config">
+        <h2>Advanced Configuration</h2>
+        <label>X-Plane listening port:</label> <input type="number" max="65535" min="0" value="49003"/>
+        <p>This is the port where we expect X-Plane to send data to. Change it if you can't use the default one (49003).</p>
+        <label>Map server port:</label> <input type="number" max="65535" min="0" value="8080"/>
+        <p>This is the port where the map server on this computer will serve the map. Change it if you can't use the default one (8080).</p>
+        <label>Navigation overlay URL:</label> <input id="tiles-url-field" type="text" size="35" value="http://x-plane-map.fouc.net/nav.php"/>
+        <p>
+          This is the URL to get the navigation data overlay from.
+          The default is my server, change this if you have your own.
+          Learn how it works from <a class="js-external-link" href="https://github.com/foucdeg/x-plane-map-server">Github</a>.
+        </p>
+        <a class="action" id="config-save-btn" href="javascript:void(0)">Save</a>
+        or
+        <a class="warning" id="config-reset-btn" href="javascript:void(0)">Reset to Defaults</a>
+        </optgroup>
+      </section>
     </main>
   </div>
   <script src="helpers/external_links.js"></script>
-  <script src="./app.js"></script>
+  <script src="./config.js"></script>
 </body>
 </html>
