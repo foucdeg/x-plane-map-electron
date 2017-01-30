@@ -1,5 +1,13 @@
 import $ from 'jquery';
-
+import config from 'electron-settings';
+config.defaults({
+  xPlanePort: 49003,
+  mapServerPort: 8080,
+  mapTilesUrl: 'http://x-plane-map.fouc.net/nav.php'
+});
+config.get('mapTilesUrl').then((mapTilesUrl) => {
+  console.log(mapTilesUrl);
+});
 const period = 1000; //time between refreshes in ms
 
 var mapOptions = {
@@ -201,7 +209,7 @@ function updatePosition() {
   })
   .fail(function(err) {
     console.error(err);
-    showError('There seems to be an issue with the script, is it still running ?')
+    showError('There seems to be an issue with the script, is it still running?')
   });
 }
 

@@ -11,8 +11,8 @@ export default class MapServer {
   }
 
   listen(port) {
-    this.server.listen(8080, function () {
-      console.log('Map server listening on port 8080');
+    this.server.listen(port, function () {
+      console.log('Map server listening on port ' + port);
     });
   }
 }

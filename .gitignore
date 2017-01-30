@@ -8,6 +8,7 @@ Thumbs.db
 /app/stylesheets
 /app/app.js
 /app/config.js
+/app/setup.js
 /app/background.js
 /app/env.json
 /app/**/*.map

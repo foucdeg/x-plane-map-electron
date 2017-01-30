@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>X-Plane Map</title>
-    <link href="stylesheets/config.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/setup.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div class="config-wrapper">
@@ -36,14 +36,14 @@
       <section data-section-id="single">
         <h2>X-Plane Configuration</h2>
         <p>In Data > Network tab, check data line 20 for UDP output.</p>
-        <p>In Network tab, enter <strong class="dynamic-ip">127.0.0.1</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
+        <p>In Network tab, enter <strong>127.0.0.1</strong> for the IP and <strong data-bind="xPlanePort"></strong> for the port.</p>
       </section>
       <section data-section-id="multi-server">
         <h2>Map Configuration for Other Players</h2>
-        <p>Tell your fellow pilots to connect their X-Plane-Map to your map server at the IP <strong class="dynamic-network-ip">192.168.0.3</strong> and port <strong class="dynamic-x-plane-port">8080</strong>.</p>
+        <p>Tell your fellow pilots to connect their X-Plane-Map to your map server at the IP <strong data-bind="localIP"></strong> and port <strong data-bind="mapServerPort"></strong>.</p>
         <h2>X-Plane Configuration for Everybody</h2>
         <p>In Data > Network tab, check data line 20 for UDP output.</p>
-        <p>In Network tab, enter <strong class="dynamic-network-ip">192.168.0.3</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
+        <p>In Network tab, enter <strong data-bind="localIP"></strong> for the IP and <strong data-bind="xPlanePort"></strong> for the port.</p>
       </section>
       <section data-section-id="multi-client">
         <h2>Map Server</h2>
@@ -55,18 +55,18 @@
         <p id="map-server-connection-faliure">The map server isn't responding. Please check the above information against the map server config.</p>
         <h2>X-Plane Configuration</h2>
         <p>In Data > Network tab, check data line 20 for UDP output.</p>
-        <p>In Network tab, enter <strong class="dynamic-ip">127.0.0.1</strong> for the IP and <strong class="dynamic-x-plane-port">49003</strong> for the port.</p>
+        <p>In Network tab, enter <strong data-bind="remoteServerIP"></strong> for the IP and <strong class="xPlanePort"></strong> for the port.</p>
       </section>
       <section data-section-id="config">
         <h2>Advanced Configuration</h2>
-        <label>X-Plane listening port:</label> <input type="number" max="65535" min="0" value="49003"/>
+        <label>X-Plane listening port:</label> <input type="number" max="65535" min="0" data-bind-value="xPlanePort"/>
         <p>This is the port where we expect X-Plane to send data to. Change it if you can't use the default one (49003).</p>
-        <label>Map server port:</label> <input type="number" max="65535" min="0" value="8080"/>
+        <label>Map server port:</label> <input type="number" max="65535" min="0" data-bind-value="mapServerPort"/>
         <p>This is the port where the map server on this computer will serve the map. Change it if you can't use the default one (8080).</p>
-        <label>Navigation overlay URL:</label> <input id="tiles-url-field" type="text" size="35" value="http://x-plane-map.fouc.net/nav.php"/>
+        <label>Navigation overlay URL:</label> <input id="tiles-url-field" type="text" size="35" data-bind-value="mapTilesUrl"/>
         <p>
           This is the URL to get the navigation data overlay from.
-          The default is my server, change this if you have your own.
+          The default is my server, change this if you have developed your own.
           Learn how it works from <a class="js-external-link" href="https://github.com/foucdeg/x-plane-map-server">Github</a>.
         </p>
         <a class="action" id="config-save-btn" href="javascript:void(0)">Save</a>
@@ -77,6 +77,6 @@
     </main>
   </div>
   <script src="helpers/external_links.js"></script>
-  <script src="./config.js"></script>
+  <script src="./setup.js"></script>
 </body>
 </html>

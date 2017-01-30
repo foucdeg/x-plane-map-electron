@@ -1,16 +1,8 @@
-import $ from 'jquery';
-
-$(document).ready(function() {
-  $(window).bind('hashchange', changeTab);
-
-  changeTab();
+let config = require('electron-settings');
+config.defaults({
+  xPlanePort: 49003,
+  mapServerPort: 8080,
+  mapTilesUrl: 'http://x-plane-map.fouc.net/nav.php'
 });
 
-function changeTab() {
-  const hash = document.location.hash.substring(1);
-  $('section').hide();
-  $(document).find('section[data-section-id="' + hash + '"]').show();
-
-  $('nav a').removeClass('active');
-  $('nav').find('a[href="#' + hash + '"]').addClass('active');
-}
+module.exports = config;
