@@ -100,6 +100,8 @@ input:focus {
       display: inline-block;
       float: left;
       padding: 0px 20px;
+      -webkit-user-select: none;
+      cursor: default;
 
       input[type="text"], input[type="number"] {
         line-height: 20px;
@@ -111,14 +113,16 @@ input:focus {
         font-weight: bold;
       }
 
-      a.action, a.warning {
+      .action, .warning {
+        cursor: pointer;
         text-decoration: none;
         display: inline-block;
         padding: 2px 7px;
         border-radius: 3px;
         line-height: 20px;
+        font-size: inherit;
       }
-      a.action {
+      .action {
         color: #4d7b0c;
         background-color: #aadc63;
         border: 1px solid #7fc102;
@@ -128,7 +132,7 @@ input:focus {
         }
       }
 
-      a.warning {
+      .warning {
         color: inherit;
         background-color: #fff247;
         border: 1px solid #e4d500;

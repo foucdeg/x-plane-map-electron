@@ -48,31 +48,37 @@
       <section data-section-id="multi-client">
         <h2>Map Server</h2>
         <p>Please enter the map server address as displayed on their screen.</p>
-        IP address : <input type="text" placeholder="e.g. 192.168.1.13"/>
-        Port : <input type="number" max="65535" min="0" value="8080"/>
-        <a class="action" id="map-server-connect-btn" href="javascript:void(0)">Connect</a>
-        <p id="map-server-connection-success">The map server is responding to us. It's looking good!</p>
-        <p id="map-server-connection-faliure">The map server isn't responding. Please check the above information against the map server config.</p>
-        <h2>X-Plane Configuration</h2>
-        <p>In Data > Network tab, check data line 20 for UDP output.</p>
-        <p>In Network tab, enter <strong data-bind="remoteServerIP"></strong> for the IP and <strong class="xPlanePort"></strong> for the port.</p>
+        <form id="remoteConfigForm">
+          IP address : <input type="text" name="ip" data-bind-value="remoteServerIP" placeholder="e.g. 192.168.1.13"/>
+          Port : <input type="number" name="port" max="65535" min="0" data-bind-value="remoteMapServerPort"/>
+          <input class="action" type="submit" value="Connect">
+        </form>
+        <p id="mapServerConnectionFailure">The map server isn't responding. Please check the above information against the map server config.</p>
+        <div id="mapServerConnectionSuccess">
+          <p>The map server is responding to us. It's looking good!</p>
+          <h2>X-Plane Configuration</h2>
+          <p>In Data > Network tab, check data line 20 for UDP output.</p>
+          <p>In Network tab, enter <strong data-bind="remoteServerIP"></strong> for the IP and <strong data-bind="remoteXPlanePort"></strong> for the port.</p>
+        </div>
       </section>
       <section data-section-id="config">
         <h2>Advanced Configuration</h2>
-        <label>X-Plane listening port:</label> <input type="number" max="65535" min="0" data-bind-value="xPlanePort"/>
-        <p>This is the port where we expect X-Plane to send data to. Change it if you can't use the default one (49003).</p>
-        <label>Map server port:</label> <input type="number" max="65535" min="0" data-bind-value="mapServerPort"/>
-        <p>This is the port where the map server on this computer will serve the map. Change it if you can't use the default one (8080).</p>
-        <label>Navigation overlay URL:</label> <input id="tiles-url-field" type="text" size="35" data-bind-value="mapTilesUrl"/>
-        <p>
-          This is the URL to get the navigation data overlay from.
-          The default is my server, change this if you have developed your own.
-          Learn how it works from <a class="js-external-link" href="https://github.com/foucdeg/x-plane-map-server">Github</a>.
-        </p>
-        <a class="action" id="config-save-btn" href="javascript:void(0)">Save</a>
-        or
-        <a class="warning" id="config-reset-btn" href="javascript:void(0)">Reset to Defaults</a>
-        </optgroup>
+        <form id="localConfigForm">
+          <label>X-Plane listening port:</label>
+          <input type="number" name="xPlanePort" max="65535" min="1" data-bind-value="xPlanePort"/>
+          <p>This is the port where we expect X-Plane to send data to. Change it if you can't use the default one (49003).</p>
+          <label>Map server port:</label> <input type="number" max="65535" min="1" name="mapServerPort" data-bind-value="mapServerPort"/>
+          <p>This is the port where the map server on this computer will serve the map. Change it if you can't use the default one (8080).</p>
+          <label>Navigation overlay URL:</label> <input name="mapTilesUrl" type="text" size="35" data-bind-value="mapTilesUrl"/>
+          <p>
+            This is the URL to get the navigation data overlay from.
+            The default is my server, change this if you have developed your own.
+            Learn how it works from <a class="js-external-link" href="https://github.com/foucdeg/x-plane-map-server">Github</a>.
+          </p>
+          <input class="action" type="submit" value="Save">
+          or
+          <a class="warning" id="configReset" href="javascript:void(0)">Reset to Defaults</a>
+        </form>
       </section>
     </main>
   </div>

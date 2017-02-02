@@ -5,19 +5,13 @@ import { devMenuTemplate } from './menu/dev_menu_template';
 import createWindow from './helpers/window';
 import UDPListener from './udp';
 import MapServer from './server';
-//import config from './config';
 let config = require('./config');
-
 require('electron-context-menu')();
 
-import env from './env';
-
-var mainWindow;
-
-if (env.name !== 'production') {
-  var userDataPath = app.getPath('userData');
-  app.setPath('userData', userDataPath + ' (' + env.name + ')');
-}
+let planesList = {};
+let mapServer = new MapServer(planesList);
+let udpClient = new UDPListener(planesList);
+let mainWindow;
 
 app.on('ready', function () {
   var mainWindow = createWindow('main', {
@@ -31,12 +25,30 @@ app.on('ready', function () {
     slashes: true,
     hash: '#single'
   }));
+
+  if (config.getSync('mode') === 'local') {
+    mapServer.listen(config.getSync('mapServerPort'));
+    udpClient.listen(config.getSync('xPlanePort'));
+  }
 });
 
 app.on('window-all-closed', function () {
   app.quit();
 });
 
-var planesList = {};
-var mapServer = new MapServer(planesList).listen(config.getSync('mapServerPort'));
-var udpClient = new UDPListener(planesList).listen(config.getSync('xPlanePort'));
+config.on('mapServerPortChange', function(mapServerPort) {
+  mapServer.listen(mapServerPort);
+});
+config.on('xPlanePortChange', function(xPlanePort) {
+  udpClient.listen(xPlanePort);
+});
+config.on('modeChange', function(mode) {
+  if (mode === 'local') {
+    mapServer.listen(config.getSync('mapServerPort'));
+    udpClient.listen(config.getSync('xPlanePort'));
+  }
+  else {
+    mapServer.stopListening();
+    udpClient.stopListening();
+  }
+});
