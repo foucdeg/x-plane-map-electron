@@ -1,10 +1,11 @@
 import path from 'path';
 import url from 'url';
-import { app, Menu, shell } from 'electron';
-import { devMenuTemplate } from './menu/dev_menu_template';
+import { app, Menu } from 'electron';
 import createWindow from './helpers/window';
 import UDPListener from './udp';
 import MapServer from './server';
+import menuTemplate from './menu/menu';
+
 let config = require('./config');
 require('electron-context-menu')();
 
@@ -14,6 +15,8 @@ let udpClient = new UDPListener(planesList);
 let mainWindow;
 
 app.on('ready', function () {
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
+
   var mainWindow = createWindow('main', {
     width: 1000,
     height: 800,
