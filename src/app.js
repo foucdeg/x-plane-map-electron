@@ -44,7 +44,7 @@ function initialize() {
   $('#navaids-button').click(showNavaids);
 
   if (config.mode === 'remote') {
-    mapServerURL = config.remoteServerIP + ':' + config.remoteMapServerPort;
+    mapServerURL = 'http://' + config.remoteServerIP + ':' + config.remoteMapServerPort;
   }
   else {
     mapServerURL = 'http://localhost:' + config.mapServerPort;
@@ -130,6 +130,7 @@ function updatePosition() {
       );
 
       //set table content
+      $('.planeRow[data-ip="' + ip +'"] .planeName').html(planeList[ip].name);
       $('.planeRow[data-ip="' + ip +'"] .altText').html(planeList[ip].altitude.toFixed() + ' ft');
       $('.planeRow[data-ip="' + ip +'"] .hdgText').html((planeList[ip].heading).toFixed() % 360 + '&deg;');
       $('.planeRow[data-ip="' + ip +'"] .spdText').html('GS ' + planeList[ip].speed.toFixed() + ' kts');
@@ -190,7 +191,7 @@ function refreshCP() {
       '<tr class="planeRow' + ((planeToFollow == ip) ? ' followed' : '') + '" data-ip="' + ip + '">' +
       '<td style="background-color: ' + planeList[ip].color + ';"title="Click to focus on this plane."><label><input type="radio" name="plane"></label></td>' +
       '<td title="Double-click to rename.">' +
-      '<strong class="plane-name">' + planeList[ip].name +'</strong><br>' +
+      '<strong class="planeName">' + planeList[ip].name +'</strong><br>' +
       '<span class="altText">' + planeList[ip].altitude.toFixed() + ' ft</span> | <span class="hdgText">' + (planeList[ip].heading + 360).toFixed() % 360 + '&deg;</span> | <span class="spdText">GS ' + planeList[ip].speed.toFixed() + ' kts</span>' +
       '</td>' +
       '<td title="Click to show or hide trace."><input type="checkbox" class="trace-show" checked></td>' +
@@ -235,8 +236,7 @@ function refreshCP() {
   });
 
   //plane name edition
-  $('.plane-name').dblclick(function() {
-    console.log('dblclick');
+  $('.planeName').dblclick(function() {
     let theIP = $(this).parents('.planeRow').data("ip");
     let theName = planeList[ip].name;
     $(this).replaceWith($('<input/>', {value: theName, id: 'planeNameInput', 'data-ip': theIP}).val(theName));
