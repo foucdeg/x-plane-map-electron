@@ -17,6 +17,7 @@ gulp.task('bundle', function () {
     return Promise.all([
         bundle(srcDir.path('background.js'), destDir.path('background.js')),
         bundle(srcDir.path('app.js'), destDir.path('app.js')),
+        bundle(srcDir.path('constants.js'), destDir.path('constants.js')),
         bundle(srcDir.path('setup.js'), destDir.path('setup.js')),
         bundle(srcDir.path('config.js'), destDir.path('config.js'))
     ]);

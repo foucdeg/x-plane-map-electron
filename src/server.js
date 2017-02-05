@@ -10,7 +10,7 @@ let headers = (req, res, next) => {
 
 let removePositionHistory = (planeList) => {
   return _.mapValues(planeList, function(item) {
-    return _.pick(item, ['altitude', 'longitude', 'latitude', 'speed', 'heading']);
+    return _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading']);
   });
 }
 
@@ -19,6 +19,7 @@ export default class MapServer {
     this.planeList = planeList;
     this.app = express();
     this.app.use(headers);
+    this.app.use(require('body-parser').json());
 
     this.app.get('/data', (req, res) => {
       res.send(JSON.stringify(removePositionHistory(this.planeList)));
@@ -26,6 +27,14 @@ export default class MapServer {
 
     this.app.get('/config', (req, res) => {
       res.send(JSON.stringify(config.getSync()));
+    });
+
+    this.app.post('/rename', (req, res) => {
+      if (!(req.body.name && req.body.ip && this.planeList[req.body.ip])) {
+        return res.sendStatus(400);
+      }
+      this.planeList[req.body.ip].name = req.body.name;
+      res.sendStatus(201);
     });
 
     this.listening = false;

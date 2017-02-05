@@ -7,6 +7,7 @@ Thumbs.db
 # ignore everything in 'app' folder what had been generated from 'src' folder
 /app/stylesheets
 /app/app.js
+/app/constants.js
 /app/config.js
 /app/setup.js
 /app/background.js

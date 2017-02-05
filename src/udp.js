@@ -49,6 +49,7 @@ export default class UDPListener {
     Object.assign(planeInfo, newLocation);
 
     if (!planeInfo.positionHistory) planeInfo.positionHistory = [];
+    if (!planeInfo.name) planeInfo.name = ip;
 
     planeInfo.positionHistory.unshift(newLocation);
     while (planeInfo.positionHistory.length > historyLength) planeInfo.positionHistory.pop();
