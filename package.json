@@ -24,7 +24,7 @@
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
     "release": "build",
-    "start": "gulp start",
+    "start": "gulp start"
   },
   "dependencies": {
     "about-window": "^1.6.1",
