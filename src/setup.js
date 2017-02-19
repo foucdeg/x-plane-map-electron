@@ -39,7 +39,7 @@ $('#remoteConfigForm').submit(function(evt) {
   if (!validateIP(ip)) return alert('The IP you entered is not a valid IPv4.');
   if (!validatePort(port)) return alert('The port you entered is not valid. It should be an integer between 1 and 65535.');
 
-  $.get('http://' + ip + ':' + port + '/config')
+  $.get('http://' + ip + ':' + port + '/api/config')
   .then(function (remoteConfig) {
     config.setSync('remoteServerIP', ip);
     config.setSync('remoteMapServerPort', parseInt(port));

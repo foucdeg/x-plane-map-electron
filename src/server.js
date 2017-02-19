@@ -18,18 +18,30 @@ export default class MapServer {
   constructor(planeList) {
     this.planeList = planeList;
     this.app = express();
-    this.app.use(headers);
-    this.app.use(require('body-parser').json());
+    this.app.use(express.static('./app'));
 
-    this.app.get('/data', (req, res) => {
+    this.app.use('/api', require('body-parser').json());
+    this.app.use('/api', headers);
+
+    this.app.get('/', (req, res, next) => {
+      req.url = '/mobile.html';
+      this.app.handle(req, res);
+    });
+
+    this.app.get('/api/data', (req, res) => {
       res.send(JSON.stringify(removePositionHistory(this.planeList)));
     });
 
-    this.app.get('/config', (req, res) => {
+    this.app.get('/api/config', (req, res) => {
       res.send(JSON.stringify(config.getSync()));
     });
 
-    this.app.post('/rename', (req, res) => {
+    this.app.get('/static-config.js', (req, res) => {
+      res.setHeader('Content-Type', 'text/javascript');
+      res.send('window.config = ' + JSON.stringify(config.getSync()) + ';');
+    });
+
+    this.app.post('/api/rename', (req, res) => {
       if (!(req.body.name && req.body.ip && this.planeList[req.body.ip])) {
         return res.sendStatus(400);
       }
