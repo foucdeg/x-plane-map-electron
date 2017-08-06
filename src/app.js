@@ -59,6 +59,7 @@ var refreshControlPanel = false;
 var planeToFollow = null;
 var colorIndex = 0;
 var navMap;
+var isErrorShowing = false;
 
 var mapServerURL;
 
@@ -121,9 +122,9 @@ function updatePosition() {
 
   $.getJSON(mapServerURL + '/api/data')
   .then(function(data) {
-    if (data === {}) {
+    if ($.isEmptyObject(data)) {
       showError("No planes were detected. Please check X-Plane's data output and internet settings," +
-      " and make sure that everyone's firewall allows inbound and outbound UDP traffic to port 49003.");
+      " and make sure that the map server's firewall allows inbound UDP traffic to port " + config.xPlanePort + '.');
     }
 
     //delete all absent planes
@@ -309,8 +310,12 @@ function refreshCP() {
 
 //alert() equivalent
 function showError(text) {
-  $('#errorBox').text(text);
-  $('#errorBox').fadeIn().delay(3500).fadeOut();
+  if (!isErrorShowing) {
+    isErrorShowing = true;
+    $('#errorBox').text(text).fadeIn().delay(3500).fadeOut(function() {
+      isErrorShowing = false;
+    });
+  }
 }
 
 function nextColor() {

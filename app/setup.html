@@ -69,6 +69,7 @@
           <p>This is the port where we expect X-Plane to send data to. Change it if you can't use the default one (49003).</p>
           <label>Map server port:</label> <input type="number" max="65535" min="1" name="mapServerPort" data-bind-value="mapServerPort"/>
           <p>This is the port where the map server on this computer will serve the map. Change it if you can't use the default one (8080).</p>
+          <p>If you wish to access the map on a mobile device, this computer's firewall should accept inbound TCP traffic on this port.</p>
           <label>Navigation overlay URL:</label> <input name="mapTilesUrl" type="text" size="35" data-bind-value="mapTilesUrl"/>
           <p>
             This is the URL to get the navigation data overlay from.

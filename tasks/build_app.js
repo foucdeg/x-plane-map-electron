@@ -29,11 +29,6 @@ gulp.task('less', function () {
         .pipe(gulp.dest(destDir.path('stylesheets')));
 });
 
-gulp.task('environment', function () {
-    var configFile = 'config/env_' + utils.getEnvName() + '.json';
-    projectDir.copy(configFile, destDir.path('env.json'), { overwrite: true });
-});
-
 gulp.task('watch', function () {
     var beepOnError = function (done) {
         return function (err) {
@@ -52,4 +47,4 @@ gulp.task('watch', function () {
     }));
 });
 
-gulp.task('build', ['bundle', 'less', 'environment']);
+gulp.task('build', ['bundle', 'less']);
