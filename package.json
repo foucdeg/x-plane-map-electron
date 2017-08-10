@@ -20,40 +20,37 @@
     ]
   },
   "scripts": {
-    "postinstall": "install-app-deps",
-    "build": "gulp build",
-    "prerelease": "gulp build --env=production",
-    "release": "build",
-    "start": "gulp start"
+    "postinstall": "electron-builder install-app-deps",
+    "build": "./node_modules/.bin/webpack",
+    "prerelease": "npm run build --env=production",
+    "compile": "electron-builder",
+    "start": "./node_modules/.bin/electron .",
+    "watch": "./node_modules/.bin/webpack --watch"
   },
   "dependencies": {
-    "about-window": "^1.6.1",
-    "body-parser": "^1.16.0",
+    "about-window": "^1.7.0",
+    "body-parser": "^1.17.2",
     "electron-context-menu": "^0.8.0",
-    "electron-default-menu": "^1.0.0",
-    "electron-settings": "^2.2.2",
-    "express": "^4.14.0",
+    "electron-default-menu": "^1.0.1",
+    "electron-settings": "^2.2.4",
+    "express": "^4.15.4",
     "fs-jetpack": "^0.10.2",
-    "geolib": "^2.0.22",
-    "ip": "^1.1.4",
-    "jquery": "^3.1.1",
+    "geolib": "^2.0.23",
+    "google-maps": "^3.2.1",
+    "ip": "^1.1.5",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "qrcode-js": "0.0.2"
   },
   "devDependencies": {
-    "electron": "^1.4.7",
-    "electron-builder": "^8.6.0",
-    "electron-mocha": "^3.0.0",
-    "gulp": "^3.9.0",
-    "gulp-batch": "^1.0.5",
-    "gulp-less": "^3.0.3",
-    "gulp-plumber": "^1.1.0",
-    "gulp-util": "^3.0.6",
-    "gulp-watch": "^4.3.5",
+    "css-loader": "^0.28.4",
+    "electron": "^1.7.6",
+    "electron-builder": "^19.19.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
     "minimist": "^1.2.0",
-    "rollup": "^0.36.3",
-    "rollup-plugin-istanbul": "^1.1.0",
-    "source-map-support": "^0.4.2",
-    "spectron": "^3.3.0"
+    "source-map-support": "^0.4.15",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.2"
   }
 }

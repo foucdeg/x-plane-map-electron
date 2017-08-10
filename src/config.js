@@ -1,5 +1,5 @@
-let ip = require('ip');
-let config = require('electron-settings');
+import ip from 'ip';
+import config from 'electron-settings';
 
 config.defaults({
   xPlanePort: 49003,
@@ -34,4 +34,4 @@ config.on('write', () => {
   }
 });
 
-module.exports = config;
+export default config;

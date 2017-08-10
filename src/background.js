@@ -5,9 +5,10 @@ import createWindow from './helpers/window';
 import UDPListener from './udp';
 import MapServer from './server';
 import menuTemplate from './menu/menu';
+import electronContextMenu from 'electron-context-menu';
+electronContextMenu();
 
-let config = require('./config');
-require('electron-context-menu')();
+import config from './config';
 
 let planesList = {};
 let mapServer = new MapServer(planesList);

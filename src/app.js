@@ -1,76 +1,26 @@
-const constants = {
-  period: 1000,
-  mapOptions: {
-    center: { lat: 0,lng: 0},
-    zoom: 8
-  },
-  polyOptions: {
-    geodesic: true,
-    strokeColor: '#000000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-  },
-  markerOptions: {
-    icon: {
-      path: "M250.2,59.002c11.001,0,20.176,9.165,20.176,20.777v122.24l171.12,95.954v42.779l-171.12-49.501v89.227l40.337," +
-      "29.946v35.446l-60.52-20.18-60.502,20.166v-35.45l40.341-29.946v-89.227l-171.14,49.51v-42.779l171.14-95.954v-" +
-      "122.24c0-11.612,9.15-20.777,20.16-20.777z",
-      scale: 0.1,
-      fillOpacity: 1,
-      anchor: new google.maps.Point(250,250),
-      strokeWeight: 0.5
-    }
-  },
-  colors: [
-    "#26764E","#F08526","#9CFF54","#721B49","#A7D8F8",
-    "#2AFDBC","#FBE870","#711302","#2572C2","#1C271D",
-    "#632E85","#1E5F7A","#D8B2F5","#D307A2","#F391B5",
-    "#F180F5","#3A1E2E","#AE7707","#3E3D0E","#6AB06E"
-  ],
-  navOverlay: {
-    getTileUrl: function(coord, zoom) {
-      let tileSize = 256/Math.pow(2,zoom);
-      let west = coord.x * tileSize;
-      let east = west + tileSize;
-      let north = coord.y * tileSize;
-      let south = north + tileSize;
+import { PERIOD, MAP_OPTIONS, POLY_OPTIONS, MARKER_OPTIONS, COLORS, NAV_OVERLAY_OPTIONS, getTileUrlFunction } from './constants';
+import $ from 'jquery';
+import electron from 'electron';
+import qrcode from 'qrcode-js';
 
-      let northEast = map.getProjection().fromPointToLatLng(new google.maps.Point(east, north));
-      let southWest = map.getProjection().fromPointToLatLng(new google.maps.Point(west, south));
+import './stylesheets/map.less';
 
-      return [
-        config.mapTilesUrl,
-        '?north=', northEast.lat().toFixed(4),
-        '&south=', southWest.lat().toFixed(4),
-        '&east=',  northEast.lng().toFixed(4),
-        '&west=',  southWest.lng().toFixed(4)
-      ].join('');
-    },
-    tileSize: new google.maps.Size(256, 256),
-    minZoom : 6,
-    maxZoom : 12
-  }
-};
-
-var map;
-
-var planeList = {};
-var refreshControlPanel = false;
-var planeToFollow = null;
-var colorIndex = 0;
-var navMap;
-var isErrorShowing = false;
-
-var mapServerURL;
+let map;
+let config;
+let planeList = {};
+let refreshControlPanel = false;
+let planeToFollow = null;
+let colorIndex = 0;
+let navMap;
+let isErrorShowing = false;
+let mapServerURL;
 
 function initialize() {
-  map = new google.maps.Map(document.getElementById('map-canvas'), constants.mapOptions);
-  const $ = window.$;
-  const config = window.config;
+  map = new google.maps.Map(document.getElementById('map-canvas'), MAP_OPTIONS);
 
-  if (window.qrcode) {
+  if ($('#code').length) {
     var code = qrcode.toDataURL('http://' + config.localIP + ':' + config.mapServerPort, 4);
-    document.getElementById('code').setAttribute('src', code);
+    $('#code').attr('src', code);
   }
 
   google.maps.event.addListener(map, 'dragstart', function() {
@@ -107,19 +57,19 @@ function initialize() {
   }
 
   updatePosition();
-  setInterval(updatePosition, constants.period);
+  setInterval(updatePosition, PERIOD);
   //load initial plane data and place planes
 
   //nav data overlays
-  navMap = new google.maps.ImageMapType(constants.navOverlay);
+  let navOverlayOptions = Object.assign({}, NAV_OVERLAY_OPTIONS);
+  navOverlayOptions.tileSize = new google.maps.Size(250, 250);
+  navOverlayOptions.getTileUrl = getTileUrlFunction(map, google, config.mapTilesUrl);
+  navMap = new google.maps.ImageMapType(navOverlayOptions);
   navMap.setOpacity(0);
   map.overlayMapTypes.push(navMap);
 }
 
 function updatePosition() {
-  const $ = window.$;
-  const config = window.config;
-
   $.getJSON(mapServerURL + '/api/data')
   .then(function(data) {
     if ($.isEmptyObject(data)) {
@@ -186,11 +136,13 @@ function updatePosition() {
 function initializePlane(ip, data) {
   let color = nextColor();
   // markerOptions.icon.fillColor = color;
-  let markerOptions = Object.assign({}, constants.markerOptions);
+  let markerOptions = Object.assign({}, MARKER_OPTIONS);
   markerOptions.icon.fillColor = color;
+  markerOptions.icon.anchor = new google.maps.Point(250,250);
+
   let planeInfo = {
     marker : new google.maps.Marker(markerOptions),
-    trace: new google.maps.Polyline(constants.polyOptions),
+    trace: new google.maps.Polyline(POLY_OPTIONS),
     info: new google.maps.InfoWindow(),
     color: color
   };
@@ -257,7 +209,7 @@ function refreshCP() {
   $('.trace-clear').click(function() {
     ip = $(this).parents('.planeRow').data("ip");
     planeList[ip].trace.setMap(null);
-    planeList[ip].trace = new google.maps.Polyline(constants.polyOptions);
+    planeList[ip].trace = new google.maps.Polyline(POLY_OPTIONS);
     planeList[ip].trace.setMap(map);
     planeList[ip].trace.getPath().push(new google.maps.LatLng( planeList[ip].latitude, planeList[ip].longitude ));
   });
@@ -319,10 +271,8 @@ function showError(text) {
 }
 
 function nextColor() {
-  if (constants.colors[colorIndex]) {
-    colorIndex++;
-    return constants.colors[colorIndex];
-  }
+  let color = COLORS[++colorIndex];
+  if (color) return color;
   console.log("No more colors");
   return "#aaaaaa";
 }
@@ -357,11 +307,6 @@ function showNavaids() {
 
 //ready when you are!
 window.onload = function() {
-  if (window.require) { // if in Electron scope
-    window.$ = require('jquery');
-    window.config = require('electron').remote.require('./config').getSync();
-    window.qrcode = require('qrcode-js');
-  }
-
+  config = electron.remote.require('./config').getSync();
   initialize();
 }
