@@ -85,6 +85,17 @@ export function clearPlaneTrace(oldState, ip) {
   return oldState;
 }
 
+export function renamePlane(oldState, ip, name) {
+  let newState = Array.from(oldState);
+
+  oldState.forEach(plane => {
+    if (plane.ip === ip) {
+      plane.name = name;
+    }
+  });
+  return oldState;
+}
+
 export function decodeConfig() {
   let config = document.location.search
   .substring(1)

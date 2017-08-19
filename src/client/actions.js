@@ -11,7 +11,7 @@ export function setActivePlane(plane) {
   return { type: SET_ACTIVE_PLANE, key: plane ? plane.ip : plane };
 }
 
-export function renamePlane(plane, newName) {
+export function renamePlane(plane, name) {
   return function (dispatch, getState, config) {
     fetch(config.mapServerURL + '/api/rename', {
       method: 'POST',
@@ -20,10 +20,10 @@ export function renamePlane(plane, newName) {
       },
       body: JSON.stringify({
         ip: plane.ip,
-        name: newName
+        name
       })
     });
-    return { type: RENAME_PLANE, key: plane.ip, newName };
+    return { type: RENAME_PLANE, key: plane.ip, name };
   }
 }
 
