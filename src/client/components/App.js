@@ -25,7 +25,7 @@ export default class App extends Component {
     });
     setTimeout(() => {
       console.log('gonna resize');
-      google.maps.event.trigger(this._map, 'resize');
+      window.dispatchEvent(new Event('resize'));
     }, 500);
   }
 

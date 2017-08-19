@@ -61,16 +61,9 @@ export default class Panel extends Component {
           </tbody>
         </table>
         <div id="bottom-qr-code">
-          Scan this code from a mobile device to view mobile version
-          <QRCode value={this.qrCodeUrl} />
+          <QRCode value={this.qrCodeUrl} size={160}/>
+          <p>Scan this code from a mobile device to view mobile version</p>
         </div>
-        <span id="bottom-note">
-          External Moving Map v2.0
-          <br />
-          Developed by <a className="js-external-link" href="mailto:foucauld.degeorges@gmail.com">Foucauld Degeorges</a> and released for free on <a className="js-external-link" href="http://forums.x-plane.org/index.php?app=downloads&showfile=25569">x-plane.org</a>
-          <br />
-          App icon made by <a className="js-external-link" href="http://www.freepik.com" title="Freepik">Freepik</a> from <a className="js-external-link" href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>, licensed by <a className="js-external-link" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-        </span>
       </div>
     );
   }
