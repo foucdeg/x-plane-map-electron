@@ -24,6 +24,7 @@
     "build": "./node_modules/.bin/webpack",
     "precompile": "NODE_ENV=production npm run build",
     "compile": "electron-builder",
+    "postcompile": "open ./dist/",
     "start": "./node_modules/.bin/electron .",
     "watch": "./node_modules/.bin/webpack --watch",
     "fake": "node ./src/faker.js"

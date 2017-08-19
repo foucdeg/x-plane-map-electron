@@ -22,7 +22,7 @@ const serverConfig = {
   }
 };
 
-const clientConfig = {
+let clientConfig = {
   entry: './src/client/index.js',
   output: {
     filename: './app/client.js'
@@ -51,10 +51,13 @@ const clientConfig = {
       }
     ]
   },
-  plugins: process.env.NODE_ENV === 'production' ? [
-    new webpack.optimize.UglifyJsPlugin(), //minify everything
-  ] : []
+  plugins: [
+    new webpack.EnvironmentPlugin(['NODE_ENV'])
+  ]
 };
+if (process.env.NODE_ENV === 'production') {
+  clientConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
 
 const setupConfig = {
   entry: './src/client/setup.js',

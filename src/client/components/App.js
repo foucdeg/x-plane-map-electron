@@ -24,7 +24,6 @@ export default class App extends Component {
       isPanelOpen: !this.state.isPanelOpen
     });
     setTimeout(() => {
-      console.log('gonna resize');
       window.dispatchEvent(new Event('resize'));
     }, 500);
   }
