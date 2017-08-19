@@ -1,12 +1,24 @@
-html, body, #map-canvas, #map-canvas-wrapper {
+html, body, #root, div[data-reactroot], #map-canvas, #map-canvas-wrapper {
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: Arial,sans-serif;
 }
+
+div[data-reactroot] {
+  width: ~"calc(100% + 300px)";
+}
+
 #map-canvas-wrapper {
-  margin-right: 0px;
+  width: ~"calc(100% - 300px)";;
   position: relative;
+  transition: width 0.4s;
+  float: left;
+
+  &.shrinked {
+    width: ~"calc(100% - 600px)";
+  }
 }
 
 #errorBox {
@@ -18,7 +30,6 @@ html, body, #map-canvas, #map-canvas-wrapper {
   border: 1px solid #999;
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
-  font-family: Arial,sans-serif;
   text-decoration: none;
   border: 1px solid #ff0000;
   background-color: #ff5b5b;
@@ -31,16 +42,12 @@ html, body, #map-canvas, #map-canvas-wrapper {
 }
 
 #panel {
-  display: none;
-  float: right;
-  position: absolute;
-  right: -300px;
+  float: left;
   height: 100%;
   width: 300px;
-  background-color: #fff;
-  font-family: Roboto,Arial,sans-serif;
   font-size: 13px;
   font-weight: 300;
+  position: relative;
 
   #bottom-qr-code, #bottom-note {
     position: absolute;
@@ -62,7 +69,7 @@ html, body, #map-canvas, #map-canvas-wrapper {
 #panel-button, #navaids-button {
   position: absolute;
   bottom: 20px;
-  font-family: Roboto,Arial,sans-serif;
+
   text-decoration: none;
   border: 1px solid #999;
   font-size: 13px;
@@ -90,7 +97,7 @@ html, body, #map-canvas, #map-canvas-wrapper {
   table-layout: fixed;
   width: 300px;
 
-  tr:nth-child(odd) {
+  thead, tbody tr:nth-child(even) {
     background-color: #ddd;
   }
 
@@ -102,19 +109,18 @@ html, body, #map-canvas, #map-canvas-wrapper {
       background-color: #7bbcfc;
     }
 
-    td {
+    td, th {
       padding: 2px;
       overflow: hidden;
 
-      &:nth-child(1) {
+      &.full-width-cell {
+        text-align: center;
+      }
+
+      &:nth-child(1):not(.full-width-cell) {
         width: 11px;
         height: 100%;
-        cursor: pointer;
 
-        label {
-          display: inline-block;
-          width: 100%;
-        }
         input[type=radio] {
           display: none;
         }
@@ -123,6 +129,36 @@ html, body, #map-canvas, #map-canvas-wrapper {
       &:nth-child(2) {
         width: 158px;
         padding-left: 5px;
+        text-align: left;
+      }
+
+      &:nth-child(3) {
+        width: 36px;
+        text-align: center;
+      }
+
+      &:nth-child(4) {
+        width: 36px;
+        text-align: center;
+      }
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: normal;
+    }
+
+    td {
+      &:nth-child(1):not(.full-width-cell) {
+        cursor: pointer;
+
+        label {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+
+      &:nth-child(2) {
         font-size: 11px;
         cursor: pointer;
 
@@ -134,16 +170,11 @@ html, body, #map-canvas, #map-canvas-wrapper {
           font-size: 13px;
         }
       }
-
-      &:nth-child(3) {
-        width: 36px;
-        text-align: center;
-      }
-
-      &:nth-child(4), &:nth-child(5) {
-        width: 36px;
-        text-align: center;
-      }
     }
   }
+}
+
+.info-window {
+  margin: 0;
+  width: 150px;
 }

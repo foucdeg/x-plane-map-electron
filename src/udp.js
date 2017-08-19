@@ -12,17 +12,17 @@ export default class UDPListener {
     };
   }
 
-  static calculateSpeed(previous, current) {
-    if (!previous) return 0;
-    let distanceInMeters = geolib.getDistance(previous, current, 1);
-    let deltaTInMilliseconds = current.date - previous.date;
+  static calculateSpeed(from, to) {
+    if (!from) return 0;
+    let distanceInMeters = geolib.getDistance(from, to, 1);
+    let deltaTInMilliseconds = to.date - from.date;
     let speedInMS = 1000 * distanceInMeters / deltaTInMilliseconds;
     return speedInMS * 3600 / 1852;
   }
 
-  static calculateBearing(previous, current) {
-    if (!previous) return 0;
-    return geolib.getRhumbLineBearing(previous, current);
+  static calculateBearing(from, to) {
+    if (!from) return 0;
+    return geolib.getRhumbLineBearing(from, to);
   }
 
   constructor(planeList) {
@@ -42,6 +42,8 @@ export default class UDPListener {
     });
 
     this.listening = false;
+
+    setInterval(this.cleanOutdatedPlanes.bind(this), 1000);
   }
 
   updatePosition(ip, newLocation) {
@@ -84,5 +86,16 @@ export default class UDPListener {
       });
     }
     else if (callback) callback();
+  }
+
+  cleanOutdatedPlanes() {
+    Object.keys(this.planeList).forEach(ip => {
+      let latestPositionDate = this.planeList[ip].positionHistory[0].date;
+      // if latest known position is older than 30s
+      if ((Date.now() - latestPositionDate) > 30000) {
+        // assume they crashed and call 911
+        delete this.planeList[ip];
+      }
+    });
   }
 }

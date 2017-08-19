@@ -1,47 +1,14 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>X-Plane Map</title>
-</head>
-<body>
-  <div id="panel" class="bl">
-    <table id="planesTable">
-      <tr class="topRow">
-        <td title="Click to focus on this plane."><label><input type="radio" id="nofocus" name="plane"></label></td>
-        <td title="Double-click to rename.">Name</td>
-        <td title="Click to show or hide trace.">Trace</td>
-        <td title="Click to reset the plane's trace.">Clear</td>
-        <td title="Click to remove the plane.">Rmv</td>
-      </tr>
-      <tr class="planeRow" data-ip="ip">
-        <td></td>
-        <td>No plane yet</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-    <p id="loading"></p>
-    <div id="bottom-qr-code">
-      Scan this code from a mobile device to view mobile version
-      <img id="code" />
-    </div>
-    <span id="bottom-note">
-      External Moving Map v2.0<br>
-      Developed by <a class="js-external-link" href="mailto:foucauld.degeorges@gmail.com">Foucauld Degeorges</a> and released for free on <a class="js-external-link" href="http://forums.x-plane.org/index.php?app=downloads&showfile=25569">x-plane.org</a><br>
-      App icon made by <a class="js-external-link" href="http://www.freepik.com" title="Freepik">Freepik</a> from <a class="js-external-link" href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>, licensed by <a class="js-external-link" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-    </span>
-  </div>
-  <div id="map-canvas-wrapper">
-    <div id="map-canvas"></div>
-    <div id="panel-button">Show panel (Tab)</div>
-    <div id="navaids-button">Show navaids (N)</div>
-  </div>
-  <div id="errorBox">
-  </div>
-  <script src="helpers/external_links.js"></script>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALMYSbib0J3i5xU5NUt4XPPzHX1Ll90u4"></script>
-  <script src="./app.js"></script>
-</body>
+  <head>
+      <meta charset="utf-8">
+      <title>X-Plane Map</title>
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="helpers/external_links.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALMYSbib0J3i5xU5NUt4XPPzHX1Ll90u4"></script>
+    <script src="./client.js"></script>
+  </body>
 </html>

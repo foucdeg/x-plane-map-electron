@@ -6,6 +6,7 @@ import UDPListener from './udp';
 import MapServer from './server';
 import menuTemplate from './menu/menu';
 import electronContextMenu from 'electron-context-menu';
+
 electronContextMenu();
 
 import config from './config';
@@ -24,7 +25,7 @@ app.on('ready', function () {
   });
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'setup.html'),
+    pathname: app.getAppPath() + '/app/setup.html',
     protocol: 'file:',
     slashes: true,
     hash: '#single'

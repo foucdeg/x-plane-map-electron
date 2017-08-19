@@ -1,14 +1,12 @@
 export const PERIOD = 1000;
-export const MAP_OPTIONS = {
-  center: { lat: 0,lng: 0},
-  zoom: 8
-};
 
-export const POLY_OPTIONS = {
+export const POLYLINE_OPTIONS = {
   geodesic: true,
-  strokeColor: '#000000',
-  strokeOpacity: 1.0,
-  strokeWeight: 2
+  options: {
+    strokeColor: '#ff2527',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  }
 };
 
 export const MARKER_OPTIONS = {

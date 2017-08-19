@@ -15,6 +15,7 @@
 
 (function () {
     'use strict';
+    if (typeof require === 'undefined') return;
 
     var shell = require('electron').shell;
 
