@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EditableText from './EditableText';
 
 export default class PlaneRow extends Component {
   handleRadioClick(e) {
@@ -18,13 +19,17 @@ export default class PlaneRow extends Component {
           </label>
         </td>
         <td title="Double-click to rename">
-          <strong>{ this.props.plane.name }</strong>
-          <br />
-          <span>{ this.props.plane.altitude } ft</span>
-          &nbsp; &middot; &nbsp;
-          <span>{ this.props.plane.heading.toFixed() }&deg;</span>
-          &nbsp; &middot; &nbsp;
-          <span>GS { this.props.plane.speed.toFixed() } kts</span>
+          <EditableText
+            value={ this.props.plane.name }
+            onSubmit={ this.props.onPlaneRename }
+          />
+          <div className="second-row">
+            <span>{ this.props.plane.altitude } ft</span>
+            &nbsp; &middot; &nbsp;
+            <span>{ this.props.plane.heading.toFixed() }&deg;</span>
+            &nbsp; &middot; &nbsp;
+            <span>GS { this.props.plane.speed.toFixed() } kts</span>
+          </div>
         </td>
         <td title="Click to show or hide trace.">
           <input

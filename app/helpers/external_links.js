@@ -27,10 +27,7 @@
             if (element.nodeName === 'A') {
                 href = element.getAttribute('href');
             }
-            if (element.classList.contains('js-external-link')) {
-                isExternal = true;
-            }
-            if (href && isExternal) {
+            if (href) {
                 shell.openExternal(href);
                 e.preventDefault();
             } else if (element.parentElement) {

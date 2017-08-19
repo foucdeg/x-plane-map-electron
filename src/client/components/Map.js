@@ -67,6 +67,10 @@ class Map extends Component {
         defaultCenter={{ lat: 0, lng: 0 }}
         onDragStart={this.props.onPlaneLeave}
         overlayMapTypes={[ this._navOverlay ]}
+        options={{
+          fullscreenControl: false,
+          streetViewControl: false
+        }}
       >
         { this.props.planes.map(plane => (
           <Marker

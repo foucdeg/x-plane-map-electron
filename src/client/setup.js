@@ -3,8 +3,6 @@ import url from 'url';
 let config = require('electron').remote.require('./config');
 let hash = document.location.hash.substring(1);
 
-console.log(document.location);
-
 $(document).ready(() => {
   $(window).bind('hashchange', changeTab);
 

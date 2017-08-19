@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 const serverConfig = {
   entry: './src/background.js',
   output: {
@@ -20,12 +22,12 @@ const serverConfig = {
   }
 };
 
-const electronClientConfig = {
+const clientConfig = {
   entry: './src/client/index.js',
   output: {
     filename: './app/client.js'
   },
-  devtool: 'inline-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
   target: 'web',
   module: {
     rules: [
@@ -48,7 +50,10 @@ const electronClientConfig = {
         }
       }
     ]
-  }
+  },
+  plugins: process.env.NODE_ENV === 'production' ? [
+    new webpack.optimize.UglifyJsPlugin(), //minify everything
+  ] : []
 };
 
 const setupConfig = {
@@ -74,4 +79,4 @@ const setupConfig = {
   }
 }
 
-module.exports = [ serverConfig, electronClientConfig, setupConfig ];
+module.exports = [ serverConfig, clientConfig, setupConfig ];

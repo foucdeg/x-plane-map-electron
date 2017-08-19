@@ -29,7 +29,6 @@
     "fake": "node ./src/faker.js"
   },
   "dependencies": {
-    "about-window": "^1.7.0",
     "body-parser": "^1.17.2",
     "electron-context-menu": "^0.8.0",
     "electron-default-menu": "^1.0.1",

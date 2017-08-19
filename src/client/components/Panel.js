@@ -3,7 +3,6 @@ import PlaneRow from './PlaneRow';
 import { PERIOD } from '../constants';
 import { decodeConfig } from '../helpers';
 import QRCode from 'qrcode.react';
-console.log(QRCode);
 
 export default class Panel extends Component {
   constructor() {
@@ -11,7 +10,6 @@ export default class Panel extends Component {
 
     const config = decodeConfig();
     this.qrCodeUrl = 'http://' + config.localIP + ':' + config.mapServerPort + '/app.html' + document.location.search;
-    console.dir(this.qrCodeUrl.toString());
   }
 
   componentDidMount() {
@@ -49,11 +47,15 @@ export default class Panel extends Component {
                 onPlaneSelect={this.props.onPlaneSelect}
                 onPlaneTraceToggle={this.props.onPlaneTraceToggle}
                 onPlaneTraceClear={this.props.onPlaneTraceClear}
+                onPlaneRename={this.props.onPlaneRename.bind(this, plane)}
               />
             ))}
             { this.props.planes.length === 0 && (
               <tr>
-                <td colSpan="5" className="full-width-cell">No plane yet</td>
+                <td></td>
+                <td>No plane yet</td>
+                <td></td>
+                <td></td>
               </tr>
             )}
           </tbody>

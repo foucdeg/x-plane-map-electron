@@ -12,7 +12,19 @@ export function setActivePlane(plane) {
 }
 
 export function renamePlane(plane, newName) {
-  return { type: RENAME_PLANE, key: plane.ip, newName };
+  return function (dispatch, getState, config) {
+    fetch(config.mapServerURL + '/api/rename', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ip: plane.ip,
+        name: newName
+      })
+    });
+    return { type: RENAME_PLANE, key: plane.ip, newName };
+  }
 }
 
 export function removePlane(plane) {
@@ -37,16 +49,7 @@ function rejectPlanes(error) {
 
 export function fetchPlanes() {
   return function(dispatch, getState, config) {
-    let mapServerURL = null;
-
-    if (config.mode === 'remote') {
-      mapServerURL = 'http://' + config.remoteServerIP + ':' + config.remoteMapServerPort;
-    }
-    else {
-      mapServerURL = 'http://' + config.localIP + ':' + config.mapServerPort;
-    }
-
-    fetch(mapServerURL + '/api/data')
+    fetch(config.mapServerURL + '/api/data')
     .then(response => {
       return response.json()
     })

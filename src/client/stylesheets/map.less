@@ -95,7 +95,7 @@ div[data-reactroot] {
   border: 0;
   border-radius: 2px;
   table-layout: fixed;
-  width: 300px;
+  width: 100%;
 
   thead, tbody tr:nth-child(even) {
     background-color: #ddd;
@@ -118,7 +118,7 @@ div[data-reactroot] {
       }
 
       &:nth-child(1):not(.full-width-cell) {
-        width: 11px;
+        width: 5%;
         height: 100%;
 
         input[type=radio] {
@@ -127,18 +127,13 @@ div[data-reactroot] {
       }
 
       &:nth-child(2) {
-        width: 158px;
+        width: 65%;
         padding-left: 5px;
         text-align: left;
       }
 
-      &:nth-child(3) {
-        width: 36px;
-        text-align: center;
-      }
-
-      &:nth-child(4) {
-        width: 36px;
+      &:nth-child(3), &:nth-child(4) {
+        width: 15%;
         text-align: center;
       }
     }
@@ -160,13 +155,13 @@ div[data-reactroot] {
 
       &:nth-child(2) {
         font-size: 11px;
-        cursor: pointer;
 
-        #planeNameInput {
+        input {
           width: 140px;
         }
 
         strong {
+          cursor: pointer;
           font-size: 13px;
         }
       }

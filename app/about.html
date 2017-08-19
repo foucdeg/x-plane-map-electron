@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>About This App</title>
+    <style>
+      body, html {
+        height: 100%;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-app-region: drag;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        background-color: #eee;
+        font-size: 12px;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        padding: 0px 20px;
+        text-align: center;
+      }
+
+      .logo {
+        width: 200px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      .title,
+      .copyright,
+      .description {
+        margin: 0.2em;
+      }
+
+      .description {
+        margin-bottom: 1em;
+      }
+
+      .copyright {
+        color: #999;
+      }
+
+      a {
+        cursor: pointer;
+        color: #80a0c2;
+      }
+
+      .bug-report-link {
+        -webkit-app-region: no-drag;
+        position: absolute;
+        right: 0.5em;
+        bottom: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <img src="./logo.png" alt="App icon" height="200">
+    </div>
+    <h2 class="title">X-Plane-Map 2.0.0</h2>
+    <h3 class="description">Google Map view for X-Plane</h3>
+    <p class="copyright">
+      Developed by <a href="mailto:foucauld.degeorges@gmail.com">Foucauld Degeorges</a>
+      and released for free on <a href="http://forums.x-plane.org/index.php?app=downloads&showfile=25569">x-plane.org</a>
+    </p>
+    <p class="copyright">
+      App icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>
+      from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>,
+      licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+    <footer class="footer">
+      <div class="link bug-report-link">
+        Please report any bugs on <a href="https://github.com/foucdeg/x-plane-map-electron/">Github</a> or <a href="http://forums.x-plane.org/index.php?app=downloads&showfile=25569">x-plane.org</a>.
+      </div>
+    </footer>
+    <script src="helpers/external_links.js"></script>
+  </body>
+</html>

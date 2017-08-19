@@ -86,7 +86,7 @@ export function clearPlaneTrace(oldState, ip) {
 }
 
 export function decodeConfig() {
-  return document.location.search
+  let config = document.location.search
   .substring(1)
   .split('&')
   .map(decodeURIComponent)
@@ -95,4 +95,13 @@ export function decodeConfig() {
     accumulator[key] = value || true;
     return accumulator
   }, {});
+
+  if (config.mode === 'remote') {
+    config.mapServerURL = 'http://' + config.remoteServerIP + ':' + config.remoteMapServerPort;
+  }
+  else {
+    config.mapServerURL = 'http://' + config.localIP + ':' + config.mapServerPort;
+  }
+
+  return config;
 }
