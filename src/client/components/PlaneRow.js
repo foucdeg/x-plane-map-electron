@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EditableText from './EditableText';
+import { ICONS } from '../constants';
 
 export default class PlaneRow extends Component {
   handleRadioClick(e) {
@@ -8,15 +9,15 @@ export default class PlaneRow extends Component {
 
   render() {
     return (
-      <tr className={ this.props.isFollowed ? 'followed' : '' }>
+      <tr
+        title="Click to change plane icon"
+        className={ this.props.isFollowed ? 'followed' : '' }
+        onClick={this.handleRadioClick.bind(this)}
+      >
         <td
-          style={{ backgroundColor: this.props.plane.color }}
-          title="Click to focus on this plane."
-          onClick={this.handleRadioClick.bind(this)}
+          onClick={this.props.onPlaneIconChange.bind(this, this.props.plane)}
         >
-          <label>
-            <input type="radio" name="plane"/>
-          </label>
+          <img src={ICONS[this.props.plane.icon]} />
         </td>
         <td title="Double-click to rename">
           <EditableText
@@ -24,11 +25,11 @@ export default class PlaneRow extends Component {
             onSubmit={ this.props.onPlaneRename }
           />
           <div className="second-row">
-            <span>{ this.props.plane.altitude } ft</span>
+            <span>{ this.props.plane.altitude.toLocaleString('en-us', { maximumFractionDigits: 0 }) } ft</span>
             &nbsp; &middot; &nbsp;
-            <span>{ this.props.plane.heading.toFixed() }&deg;</span>
+            <span>{ this.props.plane.heading.toLocaleString('en-us', { maximumFractionDigits: 0 }) }&deg;</span>
             &nbsp; &middot; &nbsp;
-            <span>GS { this.props.plane.speed.toFixed() } kts</span>
+            <span>GS { this.props.plane.speed.toLocaleString('en-us', { maximumFractionDigits: 0 }) } kts</span>
           </div>
         </td>
         <td title="Click to show or hide trace.">

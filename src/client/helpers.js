@@ -1,42 +1,30 @@
-import { COLORS, MARKER_OPTIONS, POLYLINE_OPTIONS } from './constants';
+import { COLORS, POLYLINE_OPTIONS } from './constants';
 
 const BASE_PLANE = {
   isTraceActive: true,
-  icon: {
-    ...MARKER_OPTIONS.icon,
-    anchor: new google.maps.Point(250,250)
-  },
-  trace: {
-    ...POLYLINE_OPTIONS,
-    path: []
-  }
+  path: []
 };
 
-let colorIndex = 0;
-
-function nextColor() {
-  return COLORS[++colorIndex % COLORS.length];
-}
-
 function makeNewPlane(oldPlane, newData, ip) {
-  let { name, longitude, latitude, altitude, speed, heading } = newData;
+  let { name, longitude, latitude, altitude, speed, heading, icon } = newData;
 
   let newPlane = {
     ...oldPlane,
-    icon: { ...oldPlane.icon },
-    trace: {
-      ...oldPlane.trace,
-      path: Array.from(oldPlane.trace.path)
-    },
+    icon,
+    path: Array.from(oldPlane.path),
     name,
     altitude,
     speed,
     heading,
-    position: new google.maps.LatLng(latitude, longitude)
+    position: [ latitude, longitude ]
   };
 
-  newPlane.trace.path.push({ lat: latitude, lng: longitude });
-  if (!newPlane.color) newPlane.color = nextColor();
+  newPlane.path.push({
+    lat: latitude,
+    lng: longitude,
+    alt: altitude
+  });
+
   if (!newPlane.ip && ip) newPlane.ip = ip;
 
   return newPlane;
@@ -79,7 +67,7 @@ export function clearPlaneTrace(oldState, ip) {
 
   oldState.forEach(plane => {
     if (plane.ip === ip) {
-      plane.trace.path = [];
+      plane.path = [];
     }
   });
   return oldState;
@@ -91,6 +79,17 @@ export function renamePlane(oldState, ip, name) {
   oldState.forEach(plane => {
     if (plane.ip === ip) {
       plane.name = name;
+    }
+  });
+  return oldState;
+}
+
+export function changePlaneIcon(oldState, ip, icon) {
+  let newState = Array.from(oldState);
+
+  oldState.forEach(plane => {
+    if (plane.ip === ip) {
+      plane.icon = icon;
     }
   });
   return oldState;

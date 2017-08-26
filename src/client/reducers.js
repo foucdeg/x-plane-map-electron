@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import * as actions from './actions';
-import { mergePlaneData, togglePlaneTrace, clearPlaneTrace, renamePlane } from './helpers';
+import { mergePlaneData, togglePlaneTrace, clearPlaneTrace, renamePlane, changePlaneIcon } from './helpers';
 
 const followedPlane = (state = null, action) => {
   switch(action.type) {
@@ -26,6 +26,8 @@ const planes = (state = [], action) => {
       return clearPlaneTrace(state, action.key);
     case actions.RENAME_PLANE:
       return renamePlane(state, action.key, action.name);
+    case actions.CHANGE_ICON:
+      return changePlaneIcon(state, action.key, action.icon);
     default:
       return state;
   }

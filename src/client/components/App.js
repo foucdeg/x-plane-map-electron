@@ -10,7 +10,6 @@ export default class App extends Component {
 
     this.state = {
       isPanelOpen: false,
-      isNavOverlayVisible: false,
     }
   }
 
@@ -28,20 +27,10 @@ export default class App extends Component {
     }, 500);
   }
 
-  toggleNavOverlay() {
-    this.setState({
-      isNavOverlayVisible: !this.state.isNavOverlayVisible
-    });
-  }
-
   handleKeys(e) {
     if(e.key === 'Tab') {
       e.preventDefault();
       this.togglePanel();
-    }
-    if(e.key === 'n' && e.target.tagName !== 'input') {
-      e.preventDefault();
-      this.toggleNavOverlay();
     }
   }
 
@@ -66,11 +55,10 @@ export default class App extends Component {
               <div style={{ height: `100%` }} />
             }
           />
-          <div id="panel-button" onClick={this.togglePanel.bind(this)}>
-            { this.state.isPanelOpen ? 'Hide Panel (Tab)' : 'Show Panel (Tab)' }
-          </div>
-          <div id="navaids-button" onClick={this.toggleNavOverlay.bind(this)}>
-            { this.state.isNavOverlayVisible ? 'Hide Navaids (N)' : 'Show Navaids (N)' }
+          <div className="buttons">
+            <div className="panel-button" onClick={this.togglePanel.bind(this)}>
+              { this.state.isPanelOpen ? 'Hide Panel (Tab)' : 'Show Panel (Tab)' }
+            </div>
           </div>
         </div>
         <PlanesPanel />

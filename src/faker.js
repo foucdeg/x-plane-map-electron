@@ -10,9 +10,9 @@ setInterval(sendDatagram, 50);
 
 function sendDatagram() {
   i++;
-  let longitude = lonOffset + Math.cos(i / 4000.0);
+  let longitude = lonOffset + 4 * Math.cos(i / 4000.0);
   let latitude = 45 + 2 * Math.sin(i / 4000.0);
-  let altitude = 35000;
+  let altitude = 25000 + 20000 * Math.sin(i / 400.0);
 
   let startBuffer = Buffer.from([68,65,84,65,60,20,0,0,0]);
   let endBuffer = Buffer.from([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);

@@ -28,11 +28,7 @@ export default class Panel extends Component {
         <table id="planesTable">
           <thead>
             <tr>
-              <th title="Click to focus on this plane.">
-                <label>
-                  <input type="radio" id="nofocus" name="plane" />
-                </label>
-              </th>
+              <th title="Click to change plane icon."></th>
               <th title="Double-click to rename.">Name</th>
               <th title="Click to show or hide trace.">Trace</th>
               <th title="Click to reset the plane's trace.">Clear</th>
@@ -47,6 +43,7 @@ export default class Panel extends Component {
                 onPlaneSelect={this.props.onPlaneSelect}
                 onPlaneTraceToggle={this.props.onPlaneTraceToggle}
                 onPlaneTraceClear={this.props.onPlaneTraceClear}
+                onPlaneIconChange={this.props.onPlaneIconChange}
                 onPlaneRename={this.props.onPlaneRename.bind(this, plane)}
               />
             ))}

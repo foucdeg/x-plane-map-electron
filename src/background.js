@@ -12,7 +12,7 @@ electronContextMenu();
 import config from './config';
 
 let planesList = {};
-let mapServer = new MapServer(planesList);
+let mapServer = new MapServer(app.getAppPath(), planesList);
 let udpClient = new UDPListener(planesList);
 let mainWindow;
 

@@ -1,4 +1,4 @@
-import { setActivePlane, renamePlane, removePlane, toggleTrace, clearTrace, fetchPlanes } from '../actions';
+import { setActivePlane, renamePlane, removePlane, toggleTrace, clearTrace, changeIcon, fetchPlanes } from '../actions';
 import { connect } from 'react-redux';
 import Panel from '../components/Panel';
 
@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => {
     onPlaneRename: (plane, newName) => dispatch(renamePlane(plane, newName)),
     onPlaneTraceToggle: (plane) => dispatch(toggleTrace(plane)),
     onPlaneTraceClear: (plane) => dispatch(clearTrace(plane)),
-    onPlaneRemove: (plane) => dispatch(removePlane(plane)),
+    onPlaneIconChange: (plane) => dispatch(changeIcon(plane)),
     fetchPlanes: () => dispatch(fetchPlanes())
   };
 };
