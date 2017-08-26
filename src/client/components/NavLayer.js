@@ -1,9 +1,6 @@
 import Leaflet from 'leaflet';
 import { TileLayer } from 'react-leaflet';
 import { decodeConfig } from '../helpers';
-import Geo from '../geo';
-
-const geo = new Geo(512);
 
 const config = decodeConfig();
 const EARTH_PERIMETER = 2 * Math.PI * 6378137;
@@ -16,13 +13,8 @@ Leaflet.TileLayer.NavLayer = Leaflet.TileLayer.extend({
     let maxYMeters = EARTH_PERIMETER / 2 * (0.5 - coords.y / Math.pow(2, coords.z));
     let minYMeters = EARTH_PERIMETER / 2 * (0.5 - (coords.y + 1) / Math.pow(2, coords.z));
 
-    console.log(maxXMeters, minXMeters, maxYMeters, minYMeters);
-
-
     let northEast = Leaflet.Projection.SphericalMercator.unproject(Leaflet.point(maxXMeters, maxYMeters));
-    console.log(northEast);
     let southWest = Leaflet.Projection.SphericalMercator.unproject(Leaflet.point(minXMeters, minYMeters));
-    console.log(southWest);
     return [
       config.mapTilesUrl,
       '?north=', northEast.lat.toFixed(4),
@@ -40,3 +32,5 @@ export default class NavLayer extends TileLayer {
     });
   }
 }
+
+delete NavLayer.propTypes.url;

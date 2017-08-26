@@ -1,11 +1,6 @@
 import { TileLayer } from 'react-leaflet';
 
 export default class GoogleMapLayer extends TileLayer {
-  constructor() {
-    super();
-    GoogleMapLayer.propTypes = {};
-  }
-
   createLeafletElement(props) {
     return L.gridLayer.googleMutant({
       type: 'roadmap' // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
@@ -16,3 +11,5 @@ export default class GoogleMapLayer extends TileLayer {
     super.updateLeafletElement(fromProps, toProps);
   }
 }
+
+delete GoogleMapLayer.propTypes.url;

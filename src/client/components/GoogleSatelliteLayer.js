@@ -1,11 +1,6 @@
 import { TileLayer } from 'react-leaflet';
 
 export default class GoogleSatelliteLayer extends TileLayer {
-  constructor() {
-    super();
-    GoogleSatelliteLayer.propTypes = {};
-  }
-
   createLeafletElement(props) {
     return L.gridLayer.googleMutant({
       type: 'hybrid'
@@ -16,3 +11,5 @@ export default class GoogleSatelliteLayer extends TileLayer {
     super.updateLeafletElement(fromProps, toProps);
   }
 }
+
+delete GoogleSatelliteLayer.propTypes.url;
