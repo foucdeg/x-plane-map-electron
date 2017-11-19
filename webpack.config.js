@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const serverConfig = {
   entry: './src/background.js',
   output: {
-    filename: './app/background.js'
+    filename: './app/background.js',
   },
   target: 'electron',
   module: {
@@ -14,18 +14,18 @@ const serverConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['electron', 'es2015']
-          }
-        }
-      }
-    ]
-  }
+            presets: ['electron', 'es2015'],
+          },
+        },
+      },
+    ],
+  },
 };
 
-let clientConfig = {
+const clientConfig = {
   entry: './src/client/index.js',
   output: {
-    filename: './app/client.js'
+    filename: './app/client.js',
   },
   devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
   target: 'web',
@@ -36,8 +36,8 @@ let clientConfig = {
         use: [
           'style-loader',
           'css-loader',
-          'less-loader'
-        ]
+          'less-loader',
+        ],
       },
       {
         test: /\.jsx?$/,
@@ -45,15 +45,18 @@ let clientConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['electron', 'es2015', 'react']
-          }
-        }
-      }
-    ]
+            presets: ['electron', 'es2015', 'react'],
+          },
+        },
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV'])
-  ]
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
+  ],
 };
 if (process.env.NODE_ENV === 'production') {
   clientConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
@@ -62,7 +65,7 @@ if (process.env.NODE_ENV === 'production') {
 const setupConfig = {
   entry: './src/client/setup.js',
   output: {
-    filename: './app/setup.js'
+    filename: './app/setup.js',
   },
   devtool: 'inline-source-map',
   target: 'electron',
@@ -74,12 +77,12 @@ const setupConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['electron', 'es2015']
-          }
-        }
-      }
-    ]
-  }
-}
+            presets: ['electron', 'es2015'],
+          },
+        },
+      },
+    ],
+  },
+};
 
-module.exports = [ serverConfig, clientConfig, setupConfig ];
+module.exports = [serverConfig, clientConfig, setupConfig];

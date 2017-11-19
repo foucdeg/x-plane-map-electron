@@ -6,17 +6,18 @@ export default class Geo {
   }
 
   getTileLatLngBounds(x, y, zoom) {
-    let bounds = this.getTileBounds(x, y, zoom);
-    let [ minLat, minLon ] = this.metersToLatLon(bounds[0], bounds[1]);
-    let [ maxLat, maxLon ] = this.metersToLatLon(bounds[2], bounds[3]);
+    let { minX, minY, maxX, maxY } = this.getTileBounds(x, y, zoom);
+    console.log({ minX, minY, maxX, maxY });
+    let [ minLat, minLon ] = this.metersToLatLon(minX, minY);
+    let [ maxLat, maxLon ] = this.metersToLatLon(maxX, maxY);
 
-    return [ minLat, minLon, maxLat, maxLon ];
+    return { minLat, minLon, maxLat, maxLon };
   }
 
   getTileBounds(x, y, zoom) {
-    let [ minx, miny ] = this.pixelsToMeters(x * this.tileSize, y * this.tileSize, zoom);
-    let [ maxx, maxy ] = this.pixelsToMeters((x+1) * this.tileSize, (y+1) * this.tileSize, zoom);
-    return [ minx, miny, maxx, maxy ];
+    let [ minX, minY ] = this.pixelsToMeters(x * this.tileSize, (y + 1) * this.tileSize, zoom);
+    let [ maxX, maxY ] = this.pixelsToMeters((x+1) * this.tileSize, y * this.tileSize, zoom);
+    return { minX, minY, maxX, maxY };
   }
 
   pixelsToMeters(x, y, zoom) {
