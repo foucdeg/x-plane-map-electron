@@ -23,7 +23,7 @@ const serverConfig = {
 };
 
 const clientConfig = {
-  entry: './src/client/index.js',
+  entry: './src/client/index.jsx',
   output: {
     filename: './app/client.js',
   },

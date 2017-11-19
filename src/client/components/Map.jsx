@@ -118,9 +118,13 @@ class Map extends Component {
 }
 
 Map.propTypes = {
-  followedPlane: PropTypes.string.isRequired,
+  followedPlane: PropTypes.string,
   planes: PropTypes.arrayOf(PropTypes.any).isRequired,
   onPlaneLeave: PropTypes.func.isRequired,
+};
+
+Map.defaultProps = {
+  followedPlane: null,
 };
 
 export default Map;

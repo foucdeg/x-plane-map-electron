@@ -1,14 +1,16 @@
-import { COLORS, POLYLINE_OPTIONS } from './constants';
+/* globals document */
 
 const BASE_PLANE = {
   isTraceActive: true,
-  path: []
+  path: [],
 };
 
 function makeNewPlane(oldPlane, newData, ip) {
-  let { name, longitude, latitude, altitude, speed, heading, icon } = newData;
+  const {
+    name, longitude, latitude, altitude, speed, heading, icon,
+  } = newData;
 
-  let newPlane = {
+  const newPlane = {
     ...oldPlane,
     icon,
     path: Array.from(oldPlane.path),
@@ -16,13 +18,13 @@ function makeNewPlane(oldPlane, newData, ip) {
     altitude,
     speed,
     heading,
-    position: [ latitude, longitude ]
+    position: [latitude, longitude],
   };
 
   newPlane.path.push({
     lat: latitude,
     lng: longitude,
-    alt: altitude
+    alt: altitude,
   });
 
   if (!newPlane.ip && ip) newPlane.ip = ip;
@@ -31,19 +33,19 @@ function makeNewPlane(oldPlane, newData, ip) {
 }
 
 export function mergePlaneData(oldState, newPlanesData) {
-  let newState = [];
+  const newState = [];
 
   // update all pre-existing planes with their current data
-  oldState.forEach(oldPlane => {
+  oldState.forEach((oldPlane) => {
     if (!(oldPlane.ip in newPlanesData)) return;
     newState.push(makeNewPlane(oldPlane, newPlanesData[oldPlane.ip]));
   });
 
   // add new planes
-  Object.keys(newPlanesData).forEach(ip => {
-    let oldPlaneIndex = oldState.findIndex(_plane => _plane.ip === ip);
+  Object.keys(newPlanesData).forEach((ip) => {
+    const oldPlaneIndex = oldState.findIndex(_plane => _plane.ip === ip);
     if (oldPlaneIndex === -1) {
-      let newPlane = makeNewPlane(BASE_PLANE, newPlanesData[ip], ip);
+      const newPlane = makeNewPlane(BASE_PLANE, newPlanesData[ip], ip);
       newState.push(newPlane);
     }
   });
@@ -52,64 +54,68 @@ export function mergePlaneData(oldState, newPlanesData) {
 }
 
 export function togglePlaneTrace(oldState, ip) {
-  let newState = Array.from(oldState);
+  const newState = Array.from(oldState);
 
-  oldState.forEach(plane => {
+  oldState.forEach((plane, index) => {
     if (plane.ip === ip) {
-      plane.isTraceActive = !plane.isTraceActive;
+      newState[index].isTraceActive = !plane.isTraceActive;
     }
   });
-  return oldState;
+
+  return newState;
 }
 
 export function clearPlaneTrace(oldState, ip) {
-  let newState = Array.from(oldState);
+  const newState = Array.from(oldState);
 
-  oldState.forEach(plane => {
+  oldState.forEach((plane, index) => {
     if (plane.ip === ip) {
-      plane.path = [];
+      newState[index].path = [];
     }
   });
-  return oldState;
+
+  return newState;
 }
 
 export function renamePlane(oldState, ip, name) {
-  let newState = Array.from(oldState);
+  const newState = Array.from(oldState);
 
-  oldState.forEach(plane => {
+  oldState.forEach((plane, index) => {
     if (plane.ip === ip) {
-      plane.name = name;
+      newState[index].name = name;
     }
   });
   return oldState;
 }
 
 export function changePlaneIcon(oldState, ip, icon) {
-  let newState = Array.from(oldState);
+  const newState = Array.from(oldState);
 
-  oldState.forEach(plane => {
+  oldState.forEach((plane, index) => {
     if (plane.ip === ip) {
-      plane.icon = icon;
+      newState[index].icon = icon;
     }
   });
   return oldState;
 }
 
 export function decodeConfig() {
-  let config = document.location.search
-  .substring(1)
-  .split('&')
-  .map(decodeURIComponent)
-  .reduce((accumulator, fragment) => {
-    let [ key, value ] = fragment.split('=');
-    accumulator[key] = value || true;
-    return accumulator
-  }, {});
+  const config = document.location.search
+    .substring(1)
+    .split('&')
+    .map(decodeURIComponent)
+    .reduce((accumulator, fragment) => {
+      const [key, value] = fragment.split('=');
+
+      return {
+        ...accumulator,
+        [key]: value || true,
+      };
+    }, {});
 
   if (config.mode === 'remote') {
     config.mapServerURL = 'http://' + config.remoteServerIP + ':' + config.remoteMapServerPort;
-  }
-  else {
+  } else {
     config.mapServerURL = 'http://' + config.localIP + ':' + config.mapServerPort;
   }
 
