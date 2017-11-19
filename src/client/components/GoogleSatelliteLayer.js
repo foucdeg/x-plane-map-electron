@@ -1,9 +1,12 @@
+/* globals L */
+/* eslint class-methods-use-this: "off" */
+
 import { TileLayer } from 'react-leaflet';
 
 export default class GoogleSatelliteLayer extends TileLayer {
-  createLeafletElement(props) {
+  createLeafletElement() {
     return L.gridLayer.googleMutant({
-      type: 'hybrid'
+      type: 'hybrid',
     });
   }
 

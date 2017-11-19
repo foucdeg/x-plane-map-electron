@@ -1,3 +1,5 @@
+/* globals document */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -7,7 +9,7 @@ import xPlaneMapApp from './reducers';
 import App from './components/App';
 import { decodeConfig } from './helpers';
 
-let store = createStore(
+const store = createStore(
   xPlaneMapApp,
   applyMiddleware(thunk.withExtraArgument(decodeConfig()))
 );
@@ -16,5 +18,5 @@ render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
-)
+  document.getElementById('root'),
+);
