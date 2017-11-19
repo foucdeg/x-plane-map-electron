@@ -1,2 +1,4 @@
 theme: jekyll-theme-cayman
-show_downloads: true
+latest_release: v2.0.0
+title: X-Plane-Map
+description: A cross-platform desktop application to monitor X-Plane air traffic
