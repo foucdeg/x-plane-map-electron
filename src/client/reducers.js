@@ -3,7 +3,7 @@ import * as actions from './actions';
 import { mergePlaneData, togglePlaneTrace, clearPlaneTrace, renamePlane, changePlaneIcon } from './helpers';
 
 const followedPlane = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actions.SET_ACTIVE_PLANE:
       return action.key;
     case actions.RECEIVE_PLANES:
@@ -17,7 +17,7 @@ const followedPlane = (state = null, action) => {
 };
 
 const planes = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actions.RECEIVE_PLANES:
       return mergePlaneData(state, action.planes);
     case actions.TOGGLE_TRACE:
@@ -35,5 +35,5 @@ const planes = (state = [], action) => {
 
 export default combineReducers({
   planes,
-  followedPlane
+  followedPlane,
 });
