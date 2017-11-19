@@ -1,5 +1,7 @@
 # X-Plane-Map by @foucdeg
 
+![](./screenshot.png)
+
 ## How it Works
 
 X-Plane can be configured to send out aircraft location data over the network.
