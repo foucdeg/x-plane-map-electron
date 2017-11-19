@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import url from 'url';
 let config = require('electron').remote.require('./config');
 let hash = document.location.hash.substring(1);
 
@@ -81,6 +82,12 @@ $('.submit-button').click(() => {
   } else {
     config.setSync('mode', 'local');
   }
+  document.location.replace(url.format({
+    pathname: document.location.pathname.replace('setup.html', 'app.html'),
+    protocol: 'file:',
+    slashes: true,
+    query: { ...config.getSync() }
+  }));
 });
 
 function validateIP(ip) {

@@ -1,6 +1,7 @@
 import express from 'express';
-let config = require('./config');
-let _ = require('lodash');
+import config  from './config';
+import _ from 'lodash';
+import path from 'path';
 
 let headers = (req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
@@ -8,17 +9,17 @@ let headers = (req, res, next) => {
   next()
 };
 
-let removePositionHistory = (planeList) => {
+let formatPlaneData = (planeList) => {
   return _.mapValues(planeList, function(item) {
-    return _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading']);
+    return _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading', 'icon']);
   });
 }
 
 export default class MapServer {
-  constructor(planeList) {
+  constructor(appPath, planeList) {
     this.planeList = planeList;
     this.app = express();
-    this.app.use(express.static('./app'));
+    this.app.use(express.static(path.join(appPath, 'app')));
 
     this.app.use('/api', require('body-parser').json());
     this.app.use('/api', headers);
@@ -29,16 +30,11 @@ export default class MapServer {
     });
 
     this.app.get('/api/data', (req, res) => {
-      res.send(JSON.stringify(removePositionHistory(this.planeList)));
+      res.send(JSON.stringify(formatPlaneData(this.planeList)));
     });
 
     this.app.get('/api/config', (req, res) => {
       res.send(JSON.stringify(config.getSync()));
-    });
-
-    this.app.get('/static-config.js', (req, res) => {
-      res.setHeader('Content-Type', 'text/javascript');
-      res.send('window.config = ' + JSON.stringify(config.getSync()) + ';');
     });
 
     this.app.post('/api/rename', (req, res) => {
@@ -46,6 +42,14 @@ export default class MapServer {
         return res.sendStatus(400);
       }
       this.planeList[req.body.ip].name = req.body.name;
+      res.sendStatus(201);
+    });
+
+    this.app.post('/api/change-icon', (req, res) => {
+      if (!(req.body.icon && req.body.ip && this.planeList[req.body.ip])) {
+        return res.sendStatus(400);
+      }
+      this.planeList[req.body.ip].icon = req.body.icon;
       res.sendStatus(201);
     });
 

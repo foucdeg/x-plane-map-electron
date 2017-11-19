@@ -1,0 +1,182 @@
+html, body, #root, div[data-reactroot], .leaflet-container, #map-canvas-wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial,sans-serif;
+}
+
+div[data-reactroot] {
+  width: ~"calc(100% + 300px)";
+}
+
+#map-canvas-wrapper {
+  width: ~"calc(100% - 300px)";;
+  position: relative;
+  transition: width 0.4s;
+  float: left;
+
+  &.shrinked {
+    width: ~"calc(100% - 600px)";
+  }
+
+  #map {
+    height: 600px;
+  }
+}
+
+#errorBox {
+  position: absolute;
+  top: 5px;
+  left: 30%;
+  z-index: 5;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  text-decoration: none;
+  border: 1px solid #ff0000;
+  background-color: #ff5b5b;
+  color: #fff;
+  width: 40%;
+  display: none;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+#panel {
+  float: left;
+  height: 100%;
+  width: 300px;
+  font-size: 13px;
+  font-weight: 300;
+  position: relative;
+
+  #bottom-qr-code, #bottom-note {
+    position: absolute;
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+  }
+
+  #bottom-qr-code {
+    bottom: 0;
+    margin: 0px 5px 5px 5px;
+
+    p {
+      margin: 5px 0px;
+    }
+  }
+}
+
+.buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 400;
+
+  .panel-button {
+    display: inline;
+    text-decoration: none;
+    border: 1px solid #999;
+    font-size: 13px;
+    font-weight: 300;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 3px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ccc;
+    }
+
+    &:active {
+      background-color: #7bbcfc;
+    }
+  }
+}
+
+#planesTable {
+  border-collapse: collapse;
+  border: 0;
+  border-radius: 2px;
+  table-layout: fixed;
+  width: 100%;
+
+  thead, tbody tr:nth-child(even) {
+    background-color: #ddd;
+  }
+
+  tr {
+    height: 35px;
+    overflow: hidden;
+
+    &.followed {
+      background-color: #7bbcfc;
+    }
+
+    td, th {
+      padding: 2px;
+      overflow: hidden;
+
+      &.full-width-cell {
+        text-align: center;
+      }
+
+      &:nth-child(1):not(.full-width-cell) {
+        width: 10%;
+        height: 100%;
+
+        img {
+          height: 24px;
+        }
+      }
+
+      &:nth-child(2) {
+        width: 60%;
+        padding-left: 5px;
+        text-align: left;
+      }
+
+      &:nth-child(3), &:nth-child(4) {
+        width: 15%;
+        text-align: center;
+      }
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: normal;
+    }
+
+    td {
+      &:nth-child(1):not(.full-width-cell) {
+        cursor: pointer;
+
+        label {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+
+      &:nth-child(2) {
+        font-size: 11px;
+
+        input {
+          width: 140px;
+        }
+
+        strong {
+          cursor: pointer;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+.info-window {
+  margin: 0;
+  width: 150px;
+}
