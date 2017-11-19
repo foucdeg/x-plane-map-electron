@@ -5,6 +5,7 @@
     <meta charset="UTF-8"> {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
+    <title>{{ site.title | default: site.github.repository_name }}</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
 </head>
@@ -16,7 +17,6 @@
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
         <a href="{{ site.github.repository_url }}/releases/download/{ site.latest_release }/Mac.Installer.dmg" class="btn">Download for Mac</a>
         <a href="{{ site.github.repository_url }}/releases/download/{ site.latest_release }/Win.Installer.exe" class="btn">Download for Windows</a>
-        {% endif %}
     </section>
 
     <section class="main-content">
