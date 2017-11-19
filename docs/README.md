@@ -1,5 +1,9 @@
-## Latest Releases
+## How it Works
 
+X-Plane can be configured to send out aircraft location data over the network.
+This application listens to those network exchanges and displays your aircraft on a Google Map.
+
+The setup screen will help you get started.
 
 ## Changelog
 
@@ -10,4 +14,4 @@ Some added features:
 
  - New setup page explaining use cases and full configuration
  - Plane icon change
- - Plane trace color varies with altitude.
+ - Plane trace color varies with altitude
