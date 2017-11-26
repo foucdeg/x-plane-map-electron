@@ -14,18 +14,32 @@
     <section class="page-header">
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-        <a
-            href="{{ site.github.repository_url }}/releases/download/v2.0.0/Mac.Installer.dmg"
-            onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac' });"
-            class="btn">
-            Download for Mac
-        </a>
-        <a
-            href="{{ site.github.repository_url }}/releases/download/v2.0.0/Win.Installer.exe"
-            onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win' });"
-            class="btn">
-            Download for Windows
-        </a>
+        {% for asset in site.github.latest_release.assets %}
+            {% if asset.name contains 'dmg' %}
+                <a
+                    href="{{ asset.browser_download_url }}"
+                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac' });"
+                    class="btn">
+                    Download .dmg for Mac
+                </a>
+            {% endif %}
+            {% if asset.name contains 'exe' %}
+                <a
+                    href="{{ asset.browser_download_url }}"
+                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win' });"
+                    class="btn">
+                    Download .exe for Windows
+                </a>
+            {% endif %}
+            {% if asset.name contains 'AppImage' %}
+                <a
+                    href="{{ asset.browser_download_url }}"
+                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin' });"
+                    class="btn">
+                    Download AppImage for Linux
+                </a>
+            {% endif %}
+        {% endfor %}
     </section>
 
     <section class="main-content">
