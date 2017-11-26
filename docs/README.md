@@ -9,6 +9,12 @@ This application listens to those network exchanges and displays your aircraft o
 
 The setup screen will help you get started.
 
+## Need help ?
+
+If you cannot get the map to work, email me (I left an email address in the About window of the map).
+
+For any bug reports or feature requests/ideas, leave an [issue on Github](https://github.com/foucdeg/x-plane-map-electron/issues).
+
 ## Changelog
 
 ### 2.0.0
