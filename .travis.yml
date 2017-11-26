@@ -12,10 +12,3 @@ script: "./scripts/travis-build.sh"
 cache:
   directories:
   - node_modules
-deploy:
-  provider: releases
-  api_key:
-    secure: G27y95d+rLGGUoA4o9IwkFFMBIMo1J9FLxLY4H1uEgFxUWIlCq9D08BkHwpzUBdEdQbBgyEiuKk3xujom1taK2sujql3pV83ElOil1Opwm1RehtGK5WwmMV7mvgns1A3+bMxYIq0sWGV6UlnhAmn583S3NC2LLuFi4ijesFNhxdsBsD0cXqM3L0ohZIoYXbjaDKEtBrDeyTSD6oTCMw59M889/GPV78SHGZ4+ZPSpAQ3XmO2oKGGW+/lxIY3ja63LbQDrHWwknfaPTpao2EAq8J3p/b5ako4kNBaVGCpmvs6OSU2wfjn3qqXvUjd5B32MQUf+z47iuTgEk8ne93yS5ehVrEiXzcfBC7l9meHdL2/wUr48iyu6WvcQY52WVSosU7SSJLZ07skSJIlC4XlHcdqg1eEtjRE4BEmrkDstVMiba2RGBo360nfWd3fhrd9W8UG/66E6aCDXBtKZO3h9KyKTcT3rOWDRWGGfaCoWj9715ghkV7qw+DflTTRxUhaWtHf2vJloH/wQNl4LFIr0muYrEBLM1vYCHvYuO/AeGd7jXvm91ZjnlRVDIzbTgmBMc87bz+ZwRFFkrXEapuzgC2R1U3ROKgAFGUR1oIjHjErW/GkPVy1xNr65ipXnQ/hLn/B13TwH13KkJN0Up690awc0Az+I2S8pNV4qJWNcvE=
-  file: "./dist/*.dmg"
-  on:
-    repo: foucdeg/x-plane-map-electron

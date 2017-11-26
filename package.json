@@ -17,7 +17,12 @@
       "app/**/*",
       "node_modules/**/*",
       "package.json"
-    ]
+    ],
+    "mac": {
+      "publish": {
+        "provider": "github"
+      }
+    }
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
