@@ -21,4 +21,4 @@ install:
 
 test_script:
   - SET NODE_ENV=production
-  - NODE_ENV=production .\node_modules\.bin\npm run compile
+  - .\node_modules\.bin\npm run compile
