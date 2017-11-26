@@ -27,7 +27,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "build": "./node_modules/.bin/webpack",
-    "precompile": "NODE_ENV=production npm run build",
+    "precompile": "npm run build",
     "compile": "electron-builder",
     "start": "./node_modules/.bin/electron .",
     "watch": "./node_modules/.bin/webpack --watch",
