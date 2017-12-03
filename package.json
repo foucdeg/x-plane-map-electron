@@ -2,7 +2,7 @@
   "name": "x-plane-map-electron",
   "productName": "X-Plane-Map",
   "description": "Electron revamp of X-Plane-Map",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Foucauld Degeorges <foucauld.degeorges@gmail.com>",
   "homepage": "https://github.com/foucdeg/x-plane-map-electron/",
   "license": "Beerware",

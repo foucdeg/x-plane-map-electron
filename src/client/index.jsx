@@ -11,7 +11,7 @@ import { decodeConfig } from './helpers';
 
 const store = createStore(
   xPlaneMapApp,
-  applyMiddleware(thunk.withExtraArgument(decodeConfig()))
+  applyMiddleware(thunk.withExtraArgument(decodeConfig())),
 );
 
 render(

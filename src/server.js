@@ -1,19 +1,19 @@
 import express from 'express';
-import config  from './config';
 import _ from 'lodash';
 import path from 'path';
+import config from './config';
 
-let headers = (req, res, next) => {
+const headers = (req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'no-store');
-  next()
+  next();
 };
 
-let formatPlaneData = (planeList) => {
+const formatPlaneData = (planeList) => {
   return _.mapValues(planeList, function(item) {
     return _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading', 'icon']);
   });
-}
+};
 
 export default class MapServer {
   constructor(appPath, planeList) {
@@ -42,7 +42,7 @@ export default class MapServer {
         return res.sendStatus(400);
       }
       this.planeList[req.body.ip].name = req.body.name;
-      res.sendStatus(201);
+      return res.sendStatus(201);
     });
 
     this.app.post('/api/change-icon', (req, res) => {
@@ -50,7 +50,7 @@ export default class MapServer {
         return res.sendStatus(400);
       }
       this.planeList[req.body.ip].icon = req.body.icon;
-      res.sendStatus(201);
+      return res.sendStatus(201);
     });
 
     this.listening = false;
@@ -60,7 +60,7 @@ export default class MapServer {
     this.stopListening(() => {
       this.server = require('http').createServer(this.app)
       this.server.listen(port, null, null, () => {
-        console.log('Map server now listening on port ' + port);
+        console.log(`Map server now listening on port ${port}`);
       });
     })
   }

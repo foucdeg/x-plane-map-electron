@@ -1,6 +1,6 @@
 import path from 'path';
 import url from 'url';
-import { app, Menu } from 'electron';
+import { app, Menu, ipcMain } from 'electron';
 import createWindow from './helpers/window';
 import UDPListener from './udp';
 import MapServer from './server';
@@ -28,7 +28,7 @@ app.on('ready', function () {
     pathname: app.getAppPath() + '/app/setup.html',
     protocol: 'file:',
     slashes: true,
-    hash: '#single'
+    hash: '#single',
   }));
 
   if (config.getSync('mode') === 'local') {
@@ -39,6 +39,22 @@ app.on('ready', function () {
 
 app.on('window-all-closed', function () {
   app.quit();
+});
+
+ipcMain.on('getConfig', (event) => {
+  event.returnValue = config.getSync();
+});
+
+ipcMain.on('setConfig', (event, newConfig) => {
+  for (let key in newConfig) {
+    config.setSync(key, newConfig[key]);
+  }
+  event.returnValue = config.getSync();
+});
+
+ipcMain.on('resetConfig', (event, newConfig) => {
+  config.resetToDefault();
+  event.returnValue = config.getSync();
 });
 
 config.on('mapServerPortChange', function(mapServerPort) {

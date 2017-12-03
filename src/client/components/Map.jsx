@@ -118,7 +118,10 @@ class Map extends Component {
 }
 
 Map.propTypes = {
-  followedPlane: PropTypes.string,
+  followedPlane: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   planes: PropTypes.arrayOf(PropTypes.any).isRequired,
   onPlaneLeave: PropTypes.func.isRequired,
 };

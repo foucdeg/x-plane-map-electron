@@ -1,5 +1,6 @@
 const dgram = require('dgram');
 const geolib = require('geolib');
+
 const historyLength = 50;
 
 export default class UDPListener {
@@ -8,15 +9,15 @@ export default class UDPListener {
       latitude: message.readFloatLE(9),
       longitude: message.readFloatLE(13),
       altitude: message.readFloatLE(17),
-      date: Date.now()
+      date: Date.now(),
     };
   }
 
   static calculateSpeed(from, to) {
     if (!from) return 0;
-    let distanceInMeters = geolib.getDistance(from, to, 1);
-    let deltaTInMilliseconds = to.date - from.date;
-    let speedInMS = 1000 * distanceInMeters / deltaTInMilliseconds;
+    const distanceInMeters = geolib.getDistance(from, to, 1);
+    const deltaTInMilliseconds = to.date - from.date;
+    const speedInMS = 1000 * distanceInMeters / deltaTInMilliseconds;
     return speedInMS * 3600 / 1852;
   }
 
@@ -36,7 +37,7 @@ export default class UDPListener {
 
     this.server.on('message', (msg, rinfo) => {
       if (msg.readInt8(5) === 20) {
-        let newLocation = UDPListener.readMessage(msg);
+        const newLocation = UDPListener.readMessage(msg);
         this.updatePosition(rinfo.address, newLocation);
       }
     });
@@ -47,7 +48,7 @@ export default class UDPListener {
   }
 
   updatePosition(ip, newLocation) {
-    let planeInfo = this.planeList[ip] || {};
+    const planeInfo = this.planeList[ip] || {};
     Object.assign(planeInfo, newLocation);
 
     if (!planeInfo.positionHistory) planeInfo.positionHistory = [];
@@ -59,11 +60,11 @@ export default class UDPListener {
 
     planeInfo.heading = UDPListener.calculateBearing(
       planeInfo.positionHistory[1],
-      planeInfo.positionHistory[0]
+      planeInfo.positionHistory[0],
     );
     planeInfo.speed = UDPListener.calculateSpeed(
       planeInfo.positionHistory[historyLength - 1],
-      planeInfo.positionHistory[0]
+      planeInfo.positionHistory[0],
     );
 
     this.planeList[ip] = planeInfo;
@@ -73,7 +74,7 @@ export default class UDPListener {
     this.stopListening(() => {
       this.server.bind(port, null, () => {
         this.listening = true;
-        console.log('UDP client now listening on port ' + port);
+        console.log(`UDP client now listening on port ${port}`);
       });
     });
   }
@@ -85,13 +86,12 @@ export default class UDPListener {
         this.listening = false;
         if (callback) callback();
       });
-    }
-    else if (callback) callback();
+    } else if (callback) callback();
   }
 
   cleanOutdatedPlanes() {
-    Object.keys(this.planeList).forEach(ip => {
-      let latestPositionDate = this.planeList[ip].positionHistory[0].date;
+    Object.keys(this.planeList).forEach((ip) => {
+      const latestPositionDate = this.planeList[ip].positionHistory[0].date;
       // if latest known position is older than 30s
       if ((Date.now() - latestPositionDate) > 30000) {
         // assume they crashed and call 911
