@@ -2,7 +2,7 @@
 
 ## User instructions
 
-See [website](https://xmap.fouc.net) or [source file](/blob/master/docs/README.md)
+See [website](https://xmap.fouc.net) or [source file](/docs/README.md)
 
 ## Info for developers
 
