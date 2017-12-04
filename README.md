@@ -2,7 +2,7 @@
 
 ## User instructions
 
-https://github.com/foucdeg/x-plane-map-electron/blob/master/docs/README.md
+See [website](https://xmap.fouc.net) or [source file](/blob/master/docs/README.md)
 
 ## Info for developers
 
