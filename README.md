@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+# X-Plane Map
 
-You can use the [editor on GitHub](https://github.com/foucdeg/x-plane-map-electron/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## User instructions
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+https://github.com/foucdeg/x-plane-map-electron/blob/master/docs/README.md
 
-### Markdown
+## Info for developers
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+This is an Electron desktop app for Linux which displays simulated aircraft in X-Plane in real time.
 
-```markdown
-Syntax highlighted code block
+It uses :
+ - X-Plane's UDP data output for plane location
+ - Leaflet for maps
+ 
+It has multiplayer capabilities, where one computer receives all UDP packets from X-Plane and serves the aircraft position data to everybody over HTTP.
+ 
+On top of being a desktop app, it can also serve the client over HTTP to mobile devices.
 
-# Header 1
-## Header 2
-### Header 3
+## Continuous delivery
 
-- Bulleted
-- List
+CI/CD is set up : if you have an Appveyor and Travis.org account, you can make these platforms build the application and upload it to a draft Github release.  They will do so under the following conditions:
 
-1. Numbered
-2. List
+- a draft release is open
+- the version number for this draft release (e.g. v2.0.1) matches the version number in `package.json` in the pushed code (e.g. 2.0.1). 
 
-**Bold** and _Italic_ and `Code` text
+See https://www.electron.build/configuration/publish
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/foucdeg/x-plane-map-electron/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
