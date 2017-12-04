@@ -7,6 +7,8 @@
 X-Plane can be configured to send out aircraft location data over the network.
 This application listens to those network exchanges and displays your aircraft on a Google Map.
 
+## Unsafe / Unknown App Origin Warning
+
 As I have not yet been able to sign the code, you will get a warning about unsafe / unknown app origin. Here is how to get around it:
 
  - Mac: instead of launching the app the usual way, browse to your Applications folder and right-click its icon. The dialog now allows you to open the app.
@@ -19,6 +21,16 @@ If you cannot get the map to work, email me at foucauld.degeorges@gmail.com.
 For any bug reports or feature requests/ideas, leave an [issue on Github](https://github.com/foucdeg/x-plane-map-electron/issues).
 
 ## Changelog
+
+### 2.0.2
+
+Automatic builds and Linux version successful this time!
+
+Still need someone to try the Linux version though.
+
+### 2.0.1
+
+Failed attempt at setting up automatic release build and Linux version.
 
 ### 2.0.0
 

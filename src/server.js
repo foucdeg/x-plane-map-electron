@@ -1,6 +1,8 @@
 import express from 'express';
 import _ from 'lodash';
 import path from 'path';
+import bodyParser from 'body-parser';
+import http from 'http';
 import config from './config';
 
 const headers = (req, res, next) => {
@@ -9,11 +11,11 @@ const headers = (req, res, next) => {
   next();
 };
 
-const formatPlaneData = (planeList) => {
-  return _.mapValues(planeList, function(item) {
-    return _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading', 'icon']);
-  });
-};
+const formatPlaneData = planeList =>
+  _.mapValues(
+    planeList,
+    item => _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading', 'icon']),
+  );
 
 export default class MapServer {
   constructor(appPath, planeList) {
@@ -21,13 +23,8 @@ export default class MapServer {
     this.app = express();
     this.app.use(express.static(path.join(appPath, 'app')));
 
-    this.app.use('/api', require('body-parser').json());
+    this.app.use('/api', bodyParser.json());
     this.app.use('/api', headers);
-
-    this.app.get('/', (req, res, next) => {
-      req.url = '/mobile.html';
-      this.app.handle(req, res);
-    });
 
     this.app.get('/api/data', (req, res) => {
       res.send(JSON.stringify(formatPlaneData(this.planeList)));
@@ -58,7 +55,7 @@ export default class MapServer {
 
   listen(port) {
     this.stopListening(() => {
-      this.server = require('http').createServer(this.app)
+      this.server = http.createServer(this.app);
       this.server.listen(port, null, null, () => {
         console.log(`Map server now listening on port ${port}`);
       });
