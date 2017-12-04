@@ -71,6 +71,8 @@ PlaneRow.propTypes = {
     altitude: PropTypes.number.isRequired,
     heading: PropTypes.number.isRequired,
     speed: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
   }).isRequired,
 };
 

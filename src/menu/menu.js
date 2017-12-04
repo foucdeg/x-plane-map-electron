@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { app, shell, BrowserWindow } from 'electron';
 import path from 'path';
 import url from 'url';

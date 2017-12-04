@@ -1,3 +1,4 @@
+/* eslint no-console: "off", no-mixed-operators: "off" */
 const dgram = require('dgram');
 const geolib = require('geolib');
 

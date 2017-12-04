@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 import express from 'express';
 import _ from 'lodash';
 import path from 'path';
@@ -59,7 +61,7 @@ export default class MapServer {
       this.server.listen(port, null, null, () => {
         console.log(`Map server now listening on port ${port}`);
       });
-    })
+    });
   }
 
   stopListening(callback) {
@@ -67,7 +69,6 @@ export default class MapServer {
       this.server.close(() => {
         if (callback) callback();
       });
-    }
-    else if (callback) callback();
+    } else if (callback) callback();
   }
 }
