@@ -10,5 +10,6 @@ before_script:
 - chmod +x ./scripts/travis-build.sh
 script: "./scripts/travis-build.sh"
 cache:
+  yarn: true
   directories:
-  - node_modules
+    - node_modules
