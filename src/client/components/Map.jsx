@@ -85,33 +85,30 @@ class Map extends Component {
           </LayersControl.Overlay> */}
         </LayersControl>
         { this.props.planes.map(plane => (
-          <Marker
-            key={plane.ip}
-            position={plane.position}
-            icon={BUILT_ICONS[plane.icon]}
-            rotationAngle={plane.heading - 90}
-            rotationOrigin="initial"
-          >
-            <Popup>
-              <div className="info-window">
-                <strong>{ plane.name }</strong><br />
-                { plane.altitude.toLocaleString('en-us', { maximumFractionDigits: 0 }) } ft &middot; &nbsp;
-                { plane.heading.toLocaleString('en-us', { maximumFractionDigits: 0 }) } &deg; <br />
-                GS { plane.speed.toLocaleString('en-us', { maximumFractionDigits: 0 })} kts
-              </div>
-            </Popup>
-          </Marker>
+          <React.Fragment key={plane.ip}>
+            <Marker
+              position={plane.position}
+              icon={BUILT_ICONS[plane.icon]}
+              rotationAngle={plane.heading}
+              rotationOrigin="initial"
+            >
+              <Popup>
+                <div className="info-window">
+                  <strong>{plane.name}</strong><br />
+                  {plane.altitude.toLocaleString('en-us', { maximumFractionDigits: 0 })} ft &middot; &nbsp;
+                  {plane.heading.toLocaleString('en-us', { maximumFractionDigits: 0 })} &deg; <br />
+                  GS {plane.speed.toLocaleString('en-us', { maximumFractionDigits: 0 })} kts
+                </div>
+              </Popup>
+            </Marker>
+            { plane.isTraceActive && (
+              <Trace
+                {...POLYLINE_OPTIONS}
+                positions={plane.path}
+              />
+            )}
+          </React.Fragment>
         ))}
-        { this.props.planes
-          .filter(plane => plane.isTraceActive)
-          .map(plane => (
-            <Trace
-              {...POLYLINE_OPTIONS}
-              key={plane.ip}
-              positions={plane.path}
-            />
-          ))
-        }
       </LeafletMap>
     );
   }

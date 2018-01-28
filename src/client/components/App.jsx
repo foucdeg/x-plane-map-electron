@@ -2,8 +2,13 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_map"] }] */
 
 import React, { Component } from 'react';
+import Drawer from 'material-ui/Drawer/Drawer';
+import Button from 'material-ui/Button';
+import MenuIcon from 'material-ui-icons/Menu';
+import PhoneIcon from 'material-ui-icons/Smartphone';
 import PlanesMap from '../containers/PlanesMap';
 import PlanesPanel from '../containers/PlanesPanel';
+import MobileOverlay from './MobileOverlay';
 import '../stylesheets/map.less';
 
 export default class App extends Component {
@@ -12,9 +17,11 @@ export default class App extends Component {
 
     this.state = {
       isPanelOpen: false,
+      isMobileOverlayVisible: false,
     };
 
     this.togglePanel = this.togglePanel.bind(this);
+    this.handleMapLoad = this.handleMapLoad.bind(this);
   }
 
   componentDidMount() {
@@ -48,26 +55,30 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div id="map-canvas-wrapper" className={this.state.isPanelOpen ? 'shrinked' : ''}>
           <PlanesMap
-            ref={this.handleMapLoad.bind(this)}
-            containerElement={
-              <div style={{ height: '100%' }} />
-            }
-            mapElement={
-              <div style={{ height: '100%' }} />
-            }
+            ref={this.handleMapLoad}
+            containerElement={<div style={{ height: '100%' }} />}
+            mapElement={<div style={{ height: '100%' }} />}
           />
           <div className="buttons">
-            <div className="panel-button" onClick={this.togglePanel}>
-              { this.state.isPanelOpen ? 'Hide Panel (Tab)' : 'Show Panel (Tab)' }
-            </div>
+            <Button dense raised onClick={() => this.setState({ isMobileOverlayVisible: true })}>
+              <PhoneIcon />
+            </Button>
+            <Button dense raised color="primary" onClick={this.togglePanel}>
+              <MenuIcon />
+            </Button>
           </div>
         </div>
-        <PlanesPanel />
-        <div id="errorBox" />
-      </div>
+        <Drawer type="persistent" anchor="right" open={this.state.isPanelOpen}>
+          <PlanesPanel />
+        </Drawer>
+        <MobileOverlay
+          visible={this.state.isMobileOverlayVisible}
+          onClose={() => this.setState({ isMobileOverlayVisible: false })}
+        />
+      </React.Fragment>
     );
   }
 }

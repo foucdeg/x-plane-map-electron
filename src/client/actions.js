@@ -1,5 +1,8 @@
 /* globals fetch */
 import { ICONS } from './constants';
+import { decodeConfig } from './helpers';
+
+const currentConfig = decodeConfig();
 
 export const SET_ACTIVE_PLANE = 'SET_ACTIVE_PLANE';
 export const RENAME_PLANE = 'RENAME_PLANE';
@@ -16,19 +19,15 @@ export function setActivePlane(plane) {
 }
 
 export function renamePlane(plane, name) {
-  return function renamePlaneThunk(dispatch, getState, config) {
-    fetch(`${config.mapServerURL}/api/rename`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ip: plane.ip,
-        name,
-      }),
-    });
-    return { type: RENAME_PLANE, key: plane.ip, name };
-  };
+  fetch(`${currentConfig.mapServerURL}/api/rename`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ip: plane.ip,
+      name,
+    }),
+  });
+  return { type: RENAME_PLANE, key: plane.ip, name };
 }
 
 export function removePlane(plane) {
@@ -51,19 +50,15 @@ function nextIcon(currentIcon) {
 
 export function changeIcon(plane) {
   const icon = nextIcon(plane.icon);
-  return function changeIconThunk(dispatch, getState, config) {
-    fetch(`${config.mapServerURL}/api/change-icon`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ip: plane.ip,
-        icon,
-      }),
-    });
-    return { type: CHANGE_ICON, key: plane.ip, icon };
-  };
+  fetch(`${currentConfig.mapServerURL}/api/change-icon`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ip: plane.ip,
+      icon,
+    }),
+  });
+  return { type: CHANGE_ICON, key: plane.ip, icon };
 }
 
 function receivePlanes(planes) {
@@ -75,8 +70,8 @@ function rejectPlanes(error) {
 }
 
 export function fetchPlanes() {
-  return function fetchPlanesThunk(dispatch, getState, config) {
-    fetch(`${config.mapServerURL}/api/data`)
+  return function fetchPlanesThunk(dispatch) {
+    fetch(`${currentConfig.mapServerURL}/api/data`)
       .then(response => response.json())
       .then(data => dispatch(receivePlanes(data)))
       .catch(error => dispatch(rejectPlanes(error)));

@@ -15,6 +15,16 @@ For any bug reports or feature requests/ideas, leave an [issue on Github](https:
 
 ## Changelog
 
+### 2.1
+
+- Updated UI to use Material Design
+- Added a fourth plane icon representing a general aviation plane
+- Icons now have white outline for better visibility against dark backgrounds
+
+### 2.0.3
+
+Added code signing for Mac
+
 ### 2.0.2
 
 Automatic builds and Linux version successful this time!

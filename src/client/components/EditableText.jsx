@@ -10,7 +10,8 @@ class EditableText extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,31 +31,43 @@ class EditableText extends Component {
     this.setState({ currentValue: e.target.value });
   }
 
-  handleDoubleClick() {
+  handleReset() {
+    this.setState({
+      editing: false,
+      currentValue: this.props.value,
+    });
+  }
+
+  handleClick(e) {
+    e.stopPropagation();
     this.setState({ editing: true });
   }
 
-  render() {
+  renderStatic() {
     return (
-      <span>
-        { !this.state.editing && (
-          <strong onDoubleClick={this.handleDoubleClick}>
-            { this.props.value }
-          </strong>
-        )}
-        { this.state.editing && (
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              autoFocus
-              onFocus={handleFocus}
-              value={this.state.currentValue}
-              onChange={this.handleChange}
-            />
-          </form>
-        )}
-      </span>
+      <strong onClick={this.handleClick} style={{ cursor: 'text' }} title="Click to edit">
+        {this.props.value}
+      </strong>
     );
+  }
+
+  renderEditing() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          autoFocus
+          onFocus={handleFocus}
+          value={this.state.currentValue}
+          onChange={this.handleChange}
+          onBlur={this.handleReset}
+        />
+      </form>
+    );
+  }
+
+  render() {
+    return this.state.editing ? this.renderEditing() : this.renderStatic();
   }
 }
 
