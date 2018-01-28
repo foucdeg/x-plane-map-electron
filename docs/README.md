@@ -15,7 +15,7 @@ For any bug reports or feature requests/ideas, leave an [issue on Github](https:
 
 ## Changelog
 
-### 2.1
+### 2.1.0
 
 - Updated UI to use Material Design
 - Added a fourth plane icon representing a general aviation plane
