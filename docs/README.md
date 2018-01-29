@@ -4,7 +4,7 @@
 
 ## How it Works
 
-X-Plane can be configured to send out aircraft location data over the network.
+X-Plane can be [configured](./XPlaneConfig.md) to send out aircraft location data over the network.
 This application listens to those network exchanges and displays your aircraft on a Google Map.
 
 ## Multiplayer mode

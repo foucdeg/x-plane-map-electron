@@ -1,8 +1,9 @@
 /* eslint no-console: "off", no-mixed-operators: "off" */
 const dgram = require('dgram');
 const geolib = require('geolib');
+const last = require('lodash/last');
 
-const historyLength = 50;
+const HISTORY_DURATION = 5000;
 
 export default class UDPListener {
   static readMessage(message) {
@@ -15,7 +16,7 @@ export default class UDPListener {
   }
 
   static calculateSpeed(from, to) {
-    if (!from) return 0;
+    if (!from || !to) return 0;
     const distanceInMeters = geolib.getDistance(from, to, 1);
     const deltaTInMilliseconds = to.date - from.date;
     const speedInMS = 1000 * distanceInMeters / deltaTInMilliseconds;
@@ -57,14 +58,17 @@ export default class UDPListener {
     if (!planeInfo.icon) planeInfo.icon = 'airliner';
 
     planeInfo.positionHistory.unshift(newLocation);
-    while (planeInfo.positionHistory.length > historyLength) planeInfo.positionHistory.pop();
+    const now = Date.now();
+    while (last(planeInfo.positionHistory).date < (now - HISTORY_DURATION)) {
+      planeInfo.positionHistory.pop();
+    }
 
     planeInfo.heading = UDPListener.calculateBearing(
-      planeInfo.positionHistory[1],
+      planeInfo.positionHistory[planeInfo.positionHistory.length - 1],
       planeInfo.positionHistory[0],
     );
     planeInfo.speed = UDPListener.calculateSpeed(
-      planeInfo.positionHistory[historyLength - 1],
+      planeInfo.positionHistory[planeInfo.positionHistory.length - 1],
       planeInfo.positionHistory[0],
     );
 
