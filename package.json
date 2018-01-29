@@ -2,7 +2,7 @@
   "name": "x-plane-map-electron",
   "productName": "X-Plane-Map",
   "description": "Electron revamp of X-Plane-Map",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Foucauld Degeorges <foucauld.degeorges@gmail.com>",
   "homepage": "https://github.com/foucdeg/x-plane-map-electron/",
   "license": "Beerware",
@@ -31,7 +31,8 @@
     "compile": "electron-builder",
     "start": "./node_modules/.bin/electron .",
     "watch": "./node_modules/.bin/webpack --watch",
-    "fake": "node ./src/faker.js"
+    "fake": "node ./src/faker.js",
+    "update-website": "git commit --allow-empty -m \"[ci skip] Build website\" && git push"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

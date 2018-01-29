@@ -18,7 +18,7 @@
             {% if asset.name contains 'dmg' %}
                 <a
                     href="{{ asset.browser_download_url }}"
-                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac' });"
+                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
                     Download .dmg for Mac
                 </a>
@@ -26,7 +26,7 @@
             {% if asset.name contains 'exe' %}
                 <a
                     href="{{ asset.browser_download_url }}"
-                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win' });"
+                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
                     Download .exe for Windows
                 </a>
@@ -34,7 +34,7 @@
             {% if asset.name contains 'AppImage' %}
                 <a
                     href="{{ asset.browser_download_url }}"
-                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin' });"
+                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
                     Download AppImage for Linux
                 </a>
@@ -60,7 +60,7 @@
     <script type="text/javascript">
         (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)        
+            (i[r].q = i[r].q || []).push(arguments)
 }, i[r].l = 1 * new Date(); a = s.createElement(o),
             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');

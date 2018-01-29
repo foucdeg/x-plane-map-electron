@@ -7,13 +7,30 @@
 X-Plane can be configured to send out aircraft location data over the network.
 This application listens to those network exchanges and displays your aircraft on a Google Map.
 
-## Need help ?
+## Multiplayer mode
+
+Flying with friends? The map can handle that. Instructions are detailed in the setup screen.
+
+## FAQ
+
+- `Javascript Error: Port 8080 or 49003 already in use`
+
+Dismiss the error, then navigate to the setup screen, Advanced Setup tab, and change that port's value.
+
+- `Cannot get /` from mobile version
+
+Your computer's firewall is not allowing your phone to reach the map server on your computer.
+The firewall should accept inbound TCP connections to the web server port (port 8080).
 
 If you cannot get the map to work, email me at foucauld.degeorges@gmail.com.
 
 For any bug reports or feature requests/ideas, leave an [issue on Github](https://github.com/foucdeg/x-plane-map-electron/issues).
 
 ## Changelog
+
+### 2.1.1
+
+Emergency config bugfixes
 
 ### 2.1.0
 
