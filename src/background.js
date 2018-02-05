@@ -7,12 +7,11 @@ import UDPListener from './udp';
 import MapServer from './server';
 import menuTemplate from './menu/menu';
 import config from './config';
+import isPortAvailable from './helpers/net';
 
 electronContextMenu();
 
 const planesList = {};
-const mapServer = new MapServer(app.getAppPath(), planesList);
-const udpClient = new UDPListener(planesList);
 
 app.on('ready', () => {
   Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
@@ -29,38 +28,44 @@ app.on('ready', () => {
     hash: '#single',
   }));
 
-  if (config.getSync('mode') === 'local') {
-    mapServer.listen(config.getSync('mapServerPort'));
-    udpClient.listen(config.getSync('xPlanePort'));
-  }
+  ipcMain.on('start', (mode) => {
+    if (mode === 'local') {
+      app.mapServer = new MapServer(app.getAppPath(), planesList);
+      app.mapServer.listen(config.getSync('mapServerPort'));
+
+      app.udpClient = new UDPListener(planesList);
+      app.udpClient.listen(config.getSync('xPlanePort'));
+    }
+  });
 });
 
 app.on('window-all-closed', () => app.quit());
 
-/* eslint-disable no-param-reassign */
+const loadConfig = () => {
+  const currentConfig = config.getSync();
+  return Promise.all([
+    isPortAvailable(currentConfig.xPlanePort),
+    isPortAvailable(currentConfig.mapServerPort),
+  ]).then((arePortsValid) => {
+    const isConfigValid = arePortsValid[0] && arePortsValid[1];
+    return {
+      ...currentConfig,
+      isConfigValid,
+    };
+  });
+};
+
 ipcMain.on('getConfig', (event) => {
-  event.returnValue = config.getSync();
+  loadConfig().then(currentConfig => event.sender.send('getConfigResponse', currentConfig));
 });
 
 ipcMain.on('setConfig', (event, newConfig) => {
   Object.keys(newConfig).forEach(key => config.setSync(key, newConfig[key]));
-  event.returnValue = config.getSync();
+  loadConfig().then(currentConfig => event.sender.send('setConfigResponse', currentConfig));
 });
 
-ipcMain.on('resetConfig', (event) => {
-  config.resetToDefault();
-  event.returnValue = config.getSync();
-});
-/* eslint-enable no-param-reassign */
-
-config.on('mapServerPortChange', mapServerPort => mapServer.listen(mapServerPort));
-config.on('xPlanePortChange', xPlanePort => udpClient.listen(xPlanePort));
-config.on('modeChange', (mode) => {
-  if (mode === 'local') {
-    mapServer.listen(config.getSync('mapServerPort'));
-    udpClient.listen(config.getSync('xPlanePort'));
-  } else {
-    mapServer.stopListening();
-    udpClient.stopListening();
-  }
+ipcMain.on('checkPort', (event, port) => {
+  isPortAvailable(port).then((result) => {
+    event.sender.send('checkPortResponse', port, result);
+  });
 });

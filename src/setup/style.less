@@ -27,7 +27,7 @@ input:focus {
   color: #666;
 
   header {
-    -webkit-user-select: none;
+    user-select: none;
     cursor: default;
     display: block;
     height: 120px;
@@ -40,6 +40,9 @@ input:focus {
     h1 {
       float: left;
       line-height: 75px;
+      small {
+        color: #999;
+      }
     }
   }
 
@@ -47,10 +50,10 @@ input:focus {
     display: block;
     height: ~"calc(100% - 120px)";
     nav {
-      -webkit-user-select: none;
+      user-select: none;
+      cursor: default;
       width: 35%;
       height: 100%;
-      display: inline-block;
       float: left;
       border-right: 1px solid #aaa;
       position: relative;
@@ -61,10 +64,12 @@ input:focus {
         padding: 10px 20px;
         display: block;
         text-decoration: none;
+        cursor: pointer;
       }
       a.nav-item {
         color: inherit;
         border-bottom: 1px solid #aaa;
+        position: relative;
 
         h3 {
           margin-top: 10px;
@@ -78,6 +83,13 @@ input:focus {
         }
         &.active {
           background: #ccc;
+        }
+
+        .nav-warning {
+          position: absolute;
+          right: 20px;
+          top: 27px;
+          color: #ffcc00;
         }
       }
 
@@ -97,10 +109,9 @@ input:focus {
 
     section {
       width: 65%;
-      display: inline-block;
       float: left;
       padding: 0px 20px;
-      -webkit-user-select: none;
+      user-select: none;
       cursor: default;
 
       input[type="text"], input[type="number"] {

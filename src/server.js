@@ -13,6 +13,8 @@ const headers = (req, res, next) => {
   next();
 };
 
+let socketId = 0;
+
 const formatPlaneData = planeList =>
   _.mapValues(
     planeList,
@@ -22,6 +24,7 @@ const formatPlaneData = planeList =>
 export default class MapServer {
   constructor(appPath, planeList) {
     this.planeList = planeList;
+    this.sockets = {};
     this.app = express();
     this.app.use(express.static(path.join(appPath, 'app')));
 
@@ -58,17 +61,27 @@ export default class MapServer {
   listen(port) {
     this.stopListening(() => {
       this.server = http.createServer(this.app);
+      this.server.on('connection', this.registerSocket.bind(this));
       this.server.listen(port, null, null, () => {
         console.log(`Map server now listening on port ${port}`);
       });
     });
   }
 
+  registerSocket(socket) {
+    const id = socketId++;
+    this.sockets[id] = socket;
+    socket.on('close', () => { delete this.sockets[id]; });
+  }
+
   stopListening(callback) {
     if (this.server && this.server.listening) {
       this.server.close(() => {
         if (callback) callback();
+        // this takes a while to happen as Chrome keeps connection open
+        console.log('Map server no longer listening');
       });
+      Object.keys(this.sockets).map(id => this.sockets[id].destroy());
     } else if (callback) callback();
   }
 }

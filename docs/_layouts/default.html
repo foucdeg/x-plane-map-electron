@@ -20,7 +20,7 @@
                     href="{{ asset.browser_download_url }}"
                     onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
-                    Download .dmg for Mac
+                    Download for Mac
                 </a>
             {% endif %}
             {% if asset.name contains 'exe' %}
@@ -28,7 +28,7 @@
                     href="{{ asset.browser_download_url }}"
                     onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
-                    Download .exe for Windows
+                    Download for Windows
                 </a>
             {% endif %}
             {% if asset.name contains 'AppImage' %}
@@ -36,7 +36,7 @@
                     href="{{ asset.browser_download_url }}"
                     onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
-                    Download AppImage for Linux
+                    Download for Linux
                 </a>
             {% endif %}
         {% endfor %}

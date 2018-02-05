@@ -28,6 +28,11 @@ For any bug reports or feature requests/ideas, leave an [issue on Github](https:
 
 ## Changelog
 
+### 2.2.0
+
+- Rewrote setup page.
+- Setup now prevents users from choosing unavailable ports.
+
 ### 2.1.1
 
 Emergency config bugfixes

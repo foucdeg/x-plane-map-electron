@@ -22,6 +22,9 @@ function openAboutWindow() {
 }
 
 function goToSettings() {
+  app.mapServer.stopListening();
+  app.udpClient.stopListening();
+
   BrowserWindow.getFocusedWindow().loadURL(url.format({
     pathname: path.join(app.getAppPath(), 'app', 'setup.html'),
     protocol: 'file:',

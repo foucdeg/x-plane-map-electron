@@ -65,39 +65,18 @@ const clientConfig = {
     new webpack.EnvironmentPlugin(['NODE_ENV']),
   ],
 };
+
+const setupConfig = { ...clientConfig };
+setupConfig.entry = './src/setup/index.jsx';
+setupConfig.output = { filename: './app/setup.js' };
+setupConfig.plugins = [
+  new webpack.EnvironmentPlugin(['NODE_ENV']),
+];
+setupConfig.target = 'electron';
+
 if (process.env.NODE_ENV === 'production') {
   clientConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
+  setupConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
-
-const setupConfig = {
-  entry: './src/client/setup.js',
-  output: {
-    filename: './app/setup.js',
-  },
-  devtool: 'inline-source-map',
-  target: 'electron',
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'less-loader',
-        ],
-      },
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['electron', 'es2015'],
-          },
-        },
-      },
-    ],
-  },
-};
 
 module.exports = [serverConfig, clientConfig, setupConfig];

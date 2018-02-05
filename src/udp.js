@@ -89,6 +89,7 @@ export default class UDPListener {
       this.server.close(() => {
         this.server = dgram.createSocket('udp4');
         this.listening = false;
+        console.log('UDP client no longer listening');
         if (callback) callback();
       });
     } else if (callback) callback();
