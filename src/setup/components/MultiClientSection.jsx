@@ -1,7 +1,9 @@
 /* globals fetch */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CircularProgress } from 'material-ui/Progress';
 
+import IpAddressInput from './IpAddressInput';
 import PortInput from './PortInput';
 import ExternalLink from './ExternalLink';
 
@@ -83,19 +85,21 @@ class MultiClientSection extends React.Component {
         <h2>Map Server</h2>
         <p>Please enter the map server address as displayed on their setup screen.</p>
         <form id="remoteConfigForm" onSubmit={this.onConnectionAttempt}>
-          IP address : <input
-            type="text"
+          IP address : <IpAddressInput
             value={this.state.remoteServerIP}
             onChange={this.onRemoteServerIPChange}
-            placeholder="e.g. 192.168.1.13"
           /> Port : <PortInput
             value={this.state.remoteMapServerPort}
             onChange={this.onRemoteMapServerPortChange}
-          /> <input
-            className="action"
-            type="submit"
-            value="Connect"
           />
+          { this.state.connectionTestStatus === 'PENDING' && <CircularProgress size={20} />}
+          { this.state.connectionTestStatus !== 'PENDING' && (
+            <input
+              className="action"
+              type="submit"
+              value="Connect"
+            />
+          )}
         </form>
         { this.state.connectionTestStatus === 'FAILURE' && renderConnectionFailure() }
         { this.state.connectionTestStatus === 'SUCCESS' && this.renderConnectionSuccess() }

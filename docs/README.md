@@ -13,14 +13,12 @@ Flying with friends? The map can handle that. Instructions are detailed in the s
 
 ## FAQ
 
-- `Javascript Error: Port 8080 or 49003 already in use`
-
-Dismiss the error, then navigate to the setup screen, Advanced Setup tab, and change that port's value.
-
-- `Cannot get /` from mobile version
+- `Cannot get /` from mobile device
 
 Your computer's firewall is not allowing your phone to reach the map server on your computer.
-The firewall should accept inbound TCP connections to the web server port (port 8080).
+The firewall should accept inbound TCP connections to the web server port (port 8080 by default).
+
+## Help
 
 If you cannot get the map to work, email me at foucauld.degeorges@gmail.com.
 

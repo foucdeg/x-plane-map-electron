@@ -40,6 +40,7 @@ class PortInputWithAvailabilityCheck extends React.Component {
   }
 
   checkAvailability(port) {
+    this.props.onAvailabilityResult(false);
     ipcRenderer.send('checkPort', port);
     this.setState({
       isFetching: true,
