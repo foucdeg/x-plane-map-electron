@@ -2,13 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress } from 'material-ui/Progress';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
 
 import IpAddressInput from './IpAddressInput';
 import PortInput from './PortInput';
 import ExternalLink from './ExternalLink';
 
 const renderConnectionFailure = () => (
-  <p id="mapServerConnectionFailure">
+  <p>
     The map server isn&apos;t responding.
     Please check the above information against the map server config.
     Maybe their firewall isn&apos;t letting you through.
@@ -62,7 +64,7 @@ class MultiClientSection extends React.Component {
 
   renderConnectionSuccess() {
     return (
-      <div id="mapServerConnectionSuccess">
+      <React.Fragment>
         <p>The map server is responding to us. It&apos;s looking good!</p>
         <h2>X-Plane Configuration</h2>
         <p>
@@ -75,7 +77,7 @@ class MultiClientSection extends React.Component {
           <strong>{this.props.remoteXPlanePort}</strong> for the port.
         </p>
         <p><ExternalLink href="http://xmap.fouc.net/XPlaneConfig.html">These screenshots</ExternalLink> may help.</p>
-      </div>
+      </React.Fragment>
     );
   }
 
@@ -84,22 +86,35 @@ class MultiClientSection extends React.Component {
       <section>
         <h2>Map Server</h2>
         <p>Please enter the map server address as displayed on their setup screen.</p>
-        <form id="remoteConfigForm" onSubmit={this.onConnectionAttempt}>
-          IP address : <IpAddressInput
-            value={this.state.remoteServerIP}
-            onChange={this.onRemoteServerIPChange}
-          /> Port : <PortInput
-            value={this.state.remoteMapServerPort}
-            onChange={this.onRemoteMapServerPortChange}
-          />
-          { this.state.connectionTestStatus === 'PENDING' && <CircularProgress size={20} />}
-          { this.state.connectionTestStatus !== 'PENDING' && (
-            <input
-              className="action"
-              type="submit"
-              value="Connect"
-            />
-          )}
+        <form onSubmit={this.onConnectionAttempt}>
+          <Grid container spacing={24}>
+            <Grid item xs={4}>
+              <IpAddressInput
+                fullWidth
+                label="IP address"
+                value={this.state.remoteServerIP}
+                onChange={this.onRemoteServerIPChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <PortInput
+                label="Port"
+                value={this.state.remoteMapServerPort}
+                onChange={this.onRemoteMapServerPortChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                raised
+                type="submit"
+                color="primary"
+                disabled={this.state.connectionTestStatus === 'PENDING'}
+              >
+                {this.state.connectionTestStatus !== 'PENDING' && 'Connect'}
+                {this.state.connectionTestStatus === 'PENDING' && <CircularProgress size={14} />}
+              </Button>
+            </Grid>
+          </Grid>
         </form>
         { this.state.connectionTestStatus === 'FAILURE' && renderConnectionFailure() }
         { this.state.connectionTestStatus === 'SUCCESS' && this.renderConnectionSuccess() }

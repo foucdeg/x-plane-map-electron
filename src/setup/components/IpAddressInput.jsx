@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import some from 'lodash/_arraySome';
+import TextField from 'material-ui/TextField/TextField';
 
 const isValidPartOfIpAddress = (currentValue, newChar) => {
   // expect ints or dots
@@ -35,7 +36,7 @@ class IpAddressInput extends React.Component {
 
   render() {
     return (
-      <input
+      <TextField
         type="text"
         placeholder="e.g. 192.168.1.13"
         onKeyPress={this.handleKeyPress}

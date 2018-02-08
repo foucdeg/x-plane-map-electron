@@ -5,6 +5,9 @@ import ExternalLink from './ExternalLink';
 
 const MultiServerSection = props => (
   <section>
+    {props.isConfigValid || (
+      <p className="error">Please fix the port issue in the Advanced Setup tab first.</p>
+    )}
     <h2>Map Configuration for Other Players</h2>
     <p>
       Tell your fellow pilots to connect their X-Plane-Map to your map server at
@@ -28,6 +31,7 @@ MultiServerSection.propTypes = {
   xPlanePort: PropTypes.number.isRequired,
   localIP: PropTypes.string.isRequired,
   mapServerPort: PropTypes.number.isRequired,
+  isConfigValid: PropTypes.bool.isRequired,
 };
 
 export default MultiServerSection;

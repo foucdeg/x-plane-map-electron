@@ -28,7 +28,7 @@ app.on('ready', () => {
     hash: '#single',
   }));
 
-  ipcMain.on('start', (mode) => {
+  ipcMain.on('start', (event, mode) => {
     if (mode === 'local') {
       app.mapServer = new MapServer(app.getAppPath(), planesList);
       app.mapServer.listen(config.getSync('mapServerPort'));

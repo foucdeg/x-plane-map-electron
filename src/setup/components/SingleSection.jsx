@@ -4,6 +4,9 @@ import ExternalLink from './ExternalLink';
 
 const SingleSectionCmp = props => (
   <section>
+    { props.isConfigValid || (
+      <p className="error">Please fix the port issue in the Advanced Setup tab first.</p>
+    )}
     <h2>X-Plane Configuration</h2>
     <p>
       In Settings &gt; Data Input & Output, under the Data Set tab,
@@ -20,6 +23,7 @@ const SingleSectionCmp = props => (
 
 SingleSectionCmp.propTypes = {
   xPlanePort: PropTypes.number.isRequired,
+  isConfigValid: PropTypes.bool.isRequired,
 };
 
 export default SingleSectionCmp;

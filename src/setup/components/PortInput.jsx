@@ -1,18 +1,28 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types';
 
 const handleKeyPress = (event) => {
+  console.log('hey');
   if (!event.key.match(/\d/)) event.preventDefault();
 };
 
 const PortInput = props => (
-  <input
-    type="number"
-    min={1024}
-    max={65535}
-    size={5}
-    onKeyPress={handleKeyPress}
+  <TextField
     {...props}
+    fullWidth
+    inputProps={{
+      type: 'number',
+      min: 1024,
+      max: 65535,
+    }}
+    onKeyPress={handleKeyPress}
   />
+
 );
+
+PortInput.propTypes = {
+  label: PropTypes.string.isRequired,
+};
 
 export default PortInput;

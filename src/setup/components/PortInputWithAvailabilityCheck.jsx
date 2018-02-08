@@ -2,6 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
+import InputAdornment from 'material-ui/Input/InputAdornment';
+import SearchIcon from 'material-ui-icons/Search';
+import CheckCircleIcon from 'material-ui-icons/CheckCircle';
+import WarningIcon from 'material-ui-icons/Warning';
 import PortInput from './PortInput';
 
 class PortInputWithAvailabilityCheck extends React.Component {
@@ -48,27 +52,21 @@ class PortInputWithAvailabilityCheck extends React.Component {
   }
 
   render() {
-    const { value, onChange, className } = this.props;
-    const inputProps = { value, onChange, className };
+    const { value, onChange, className, label } = this.props;
+    const inputProps = { value, onChange, className, label };
     return (
-      <React.Fragment>
-        <PortInput {...inputProps} />
-        {this.state.isFetching && (
-          <span>Checking...</span>
-        )}
-        {!this.state.isFetching && this.state.isAvailable && (
-          <span>Available!</span>
-        )}
-        {!this.state.isFetching && this.state.isAvailable === false && (
-          <span>Unavailable.</span>
-        )}
-      </React.Fragment>
+      <PortInput
+        {...inputProps}
+        error={!this.state.isFetching && this.state.isAvailable === false}
+        helperText={!this.state.isFetching && this.state.isAvailable === false && 'Port unavailable'}
+      />
     );
   }
 }
 
 PortInputWithAvailabilityCheck.propTypes = {
   value: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
   onAvailabilityResult: PropTypes.func,
