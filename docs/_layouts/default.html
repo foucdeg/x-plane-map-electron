@@ -40,18 +40,35 @@
                 </a>
             {% endif %}
         {% endfor %}
-        <br>
-        <a
-            href="https://github.com/foucdeg/x-plane-map-electron/releases"
-            target="_blank"
-            onClick="ga('send', 'event', { eventCategory: 'download', eventAction: '', eventLabel: 'previous' });"
-            class="btn">
-            Older releases...
-        </a>
     </section>
 
     <section class="main-content">
         {{ content }}
+
+        <h2>Changelog</h2>
+        {% for release in site.github.releases %}
+            <h3>{{ release.tag_name }} - {{ release.name }}</h3>
+            {% if release.body != '' %}
+            <p>{{ release.body }}</p>
+            {% endif %}
+            {% assign mac_url = '' %}
+            {% assign win_url = '' %}
+            {% assign lin_url = '' %}
+            {% for asset in release.assets %}
+                {% if asset.name contains 'dmg' %}
+                    {% assign mac_url = asset.browser_download_url %}
+                {% endif %}
+                {% if asset.name contains 'exe' %}
+                    {% assign win_url = asset.browser_download_url %}
+                {% endif %}
+                {% if asset.name contains 'AppImage' %}
+                    {% assign lin_url = asset.browser_download_url %}
+                {% endif %}
+            {% endfor %}
+            <p>
+                Download: <a href="{{ mac_url }}">Mac</a>, <a href="{{ win_url }}">Windows</a>, <a href="{{ lin_url }}">Linux</a>
+            </p>
+        {% endfor %}
 
         <footer class="site-footer">
             {% if site.github.is_project_page %}
