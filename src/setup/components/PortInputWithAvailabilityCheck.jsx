@@ -2,10 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
-import InputAdornment from 'material-ui/Input/InputAdornment';
-import SearchIcon from 'material-ui-icons/Search';
-import CheckCircleIcon from 'material-ui-icons/CheckCircle';
-import WarningIcon from 'material-ui-icons/Warning';
 import PortInput from './PortInput';
 
 class PortInputWithAvailabilityCheck extends React.Component {

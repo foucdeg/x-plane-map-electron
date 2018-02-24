@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
 
 const handleKeyPress = (event) => {
-  console.log('hey');
   if (!event.key.match(/\d/)) event.preventDefault();
 };
 
