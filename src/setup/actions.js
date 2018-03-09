@@ -33,7 +33,7 @@ export function setConfig(newConfig) {
 export function start(config) {
   ipcRenderer.send('start', config.mode);
   document.location.replace(url.format({
-    pathname: document.location.pathname.replace('setup.html', 'app.html'),
+    pathname: document.location.pathname.replace('setup.html', 'index.html'),
     protocol: 'file:',
     slashes: true,
     query: config,

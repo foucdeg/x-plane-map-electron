@@ -11,7 +11,7 @@ class MobileOverlay extends Component {
     super();
 
     const config = decodeConfig();
-    this.qrCodeUrl = `http://${config.localIP}:${config.mapServerPort}/app.html${document.location.search}`;
+    this.qrCodeUrl = `http://${config.localIP}:${config.mapServerPort}/index.html${document.location.search}`;
   }
 
   componentDidMount() {
