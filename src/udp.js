@@ -59,6 +59,7 @@ export default class UDPListener {
     if (!planeInfo.positionHistory) planeInfo.positionHistory = [];
     if (!planeInfo.name) planeInfo.name = ip;
     if (!planeInfo.icon) planeInfo.icon = 'airliner';
+    if (!planeInfo.heading) planeInfo.heading = 0;
 
     planeInfo.positionHistory.unshift(newLocation);
     const now = Date.now();
