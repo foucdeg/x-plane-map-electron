@@ -4,8 +4,9 @@
 import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer/Drawer';
 import Button from 'material-ui/Button';
+import Tooltip from 'material-ui/Tooltip';
 import MenuIcon from 'material-ui-icons/Menu';
-import PhoneIcon from 'material-ui-icons/Smartphone';
+import OpenInNewIcon from 'material-ui-icons/OpenInNew';
 import PlanesMap from '../containers/PlanesMap';
 import PlanesPanel from '../containers/PlanesPanel';
 import MobileOverlay from './MobileOverlay';
@@ -63,12 +64,16 @@ export default class App extends Component {
             mapElement={<div style={{ height: '100%' }} />}
           />
           <div className="buttons">
-            <Button dense raised onClick={() => this.setState({ isMobileOverlayVisible: true })}>
-              <PhoneIcon />
-            </Button>
-            <Button dense raised color="primary" onClick={this.togglePanel}>
-              <MenuIcon />
-            </Button>
+            <Tooltip title="Open map elsewhere">
+              <Button dense raised onClick={() => this.setState({ isMobileOverlayVisible: true })}>
+                <OpenInNewIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip title={this.state.isPanelOpen ? 'Hide panel' : 'Show panel'}>
+              <Button dense raised color="primary" onClick={this.togglePanel}>
+                <MenuIcon />
+              </Button>
+            </Tooltip>
           </div>
         </div>
         <Drawer type="persistent" anchor="right" open={this.state.isPanelOpen}>
