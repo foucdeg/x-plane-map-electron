@@ -25,6 +25,9 @@ export default class UDPListener {
 
   static calculateBearing(from, to) {
     if (!from) return 0;
+    if (from.longitude === to.longitude && from.latitude === to.latitude) {
+      throw new Error('No bearing');
+    }
     return geolib.getRhumbLineBearing(from, to);
   }
 
@@ -63,14 +66,16 @@ export default class UDPListener {
       planeInfo.positionHistory.pop();
     }
 
-    planeInfo.heading = UDPListener.calculateBearing(
-      planeInfo.positionHistory[planeInfo.positionHistory.length - 1],
-      planeInfo.positionHistory[0],
-    );
-    planeInfo.speed = UDPListener.calculateSpeed(
-      planeInfo.positionHistory[planeInfo.positionHistory.length - 1],
-      planeInfo.positionHistory[0],
-    );
+    const from = planeInfo.positionHistory[planeInfo.positionHistory.length - 1];
+    const to = planeInfo.positionHistory[0];
+
+    try {
+      planeInfo.heading = UDPListener.calculateBearing(from, to);
+    } catch (e) {
+      // keep previous heading
+    }
+
+    planeInfo.speed = UDPListener.calculateSpeed(from, to);
 
     this.planeList[ip] = planeInfo;
   }
