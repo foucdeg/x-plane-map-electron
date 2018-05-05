@@ -7,12 +7,20 @@ const HISTORY_DURATION = 5000;
 
 export default class UDPListener {
   static readMessage(message) {
-    return {
-      latitude: message.readFloatLE(9),
-      longitude: message.readFloatLE(13),
-      altitude: message.readFloatLE(17),
-      date: Date.now(),
-    };
+    // See http://www.nuclearprojects.com/xplane/xplaneref.html
+    let i = 5;
+    while (i + 36 <= message.length) {
+      if (message.readInt8(i) === 20) {
+        return {
+          latitude: message.readFloatLE(i + 4),
+          longitude: message.readFloatLE(i + 8),
+          altitude: message.readFloatLE(i + 12),
+          date: Date.now(),
+        };
+      }
+      i += 36;
+    }
+    return null;
   }
 
   static calculateSpeed(from, to) {
@@ -41,10 +49,8 @@ export default class UDPListener {
     });
 
     this.server.on('message', (msg, rinfo) => {
-      if (msg.readInt8(5) === 20) {
-        const newLocation = UDPListener.readMessage(msg);
-        this.updatePosition(rinfo.address, newLocation);
-      }
+      const newLocation = UDPListener.readMessage(msg);
+      this.updatePosition(rinfo.address, newLocation);
     });
 
     this.listening = false;
@@ -53,6 +59,7 @@ export default class UDPListener {
   }
 
   updatePosition(ip, newLocation) {
+    if (!newLocation) return;
     const planeInfo = this.planeList[ip] || {};
     Object.assign(planeInfo, newLocation);
 
@@ -60,6 +67,7 @@ export default class UDPListener {
     if (!planeInfo.name) planeInfo.name = ip;
     if (!planeInfo.icon) planeInfo.icon = 'airliner';
     if (!planeInfo.heading) planeInfo.heading = 0;
+    if (!planeInfo.speed) planeInfo.speed = 0;
 
     planeInfo.positionHistory.unshift(newLocation);
     const now = Date.now();
@@ -104,8 +112,8 @@ export default class UDPListener {
   cleanOutdatedPlanes() {
     Object.keys(this.planeList).forEach((ip) => {
       const latestPositionDate = this.planeList[ip].positionHistory[0].date;
-      // if latest known position is older than 30s
-      if ((Date.now() - latestPositionDate) > 30000) {
+      // if latest known position is older than 60s
+      if ((Date.now() - latestPositionDate) > 60000) {
         // assume they crashed and call 911
         delete this.planeList[ip];
       }

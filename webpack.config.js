@@ -62,7 +62,7 @@ const clientConfig = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.EnvironmentPlugin({ NODE_ENV: 'dev' }),
   ],
 };
 
@@ -70,7 +70,7 @@ const setupConfig = { ...clientConfig };
 setupConfig.entry = './src/setup/index.jsx';
 setupConfig.output = { filename: './app/setup.js' };
 setupConfig.plugins = [
-  new webpack.EnvironmentPlugin(['NODE_ENV']),
+  new webpack.EnvironmentPlugin({ NODE_ENV: 'dev' }),
 ];
 setupConfig.target = 'electron';
 

@@ -22,10 +22,13 @@ function openAboutWindow() {
 }
 
 function goToSettings() {
+  const mainWindow = BrowserWindow.getFocusedWindow();
+  if (mainWindow.webContents.getURL().indexOf('setup.html') > -1) return;
+
   app.mapServer.stopListening();
   app.udpClient.stopListening();
 
-  BrowserWindow.getFocusedWindow().loadURL(url.format({
+  mainWindow.loadURL(url.format({
     pathname: path.join(app.getAppPath(), 'app', 'setup.html'),
     protocol: 'file:',
     slashes: true,
