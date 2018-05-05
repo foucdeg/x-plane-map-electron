@@ -49,7 +49,7 @@
         {% for release in site.github.releases %}
             <h3>{{ release.tag_name }} - {{ release.name }}</h3>
             {% if release.body != '' %}
-            <p>{{ release.body }}</p>
+            <p>{{ release.body | markdownify }}</p>
             {% endif %}
             {% assign mac_url = '' %}
             {% assign win_url = '' %}
