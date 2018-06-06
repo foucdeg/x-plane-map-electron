@@ -9,6 +9,7 @@ import { decodeConfig } from '../helpers';
 import Trace from './Trace';
 import GoogleMapLayer from './GoogleMapLayer';
 import GoogleSatelliteLayer from './GoogleSatelliteLayer';
+import GoogleTerrainLayer from './GoogleTerrainLayer';
 
 require('leaflet-rotatedmarker');
 require('leaflet.gridlayer.googlemutant');
@@ -79,6 +80,9 @@ class Map extends Component {
           </LayersControl.BaseLayer>
           <LayersControl.BaseLayer name="Satellite">
             <GoogleSatelliteLayer />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="Terrain">
+            <GoogleTerrainLayer />
           </LayersControl.BaseLayer>
           {/* <LayersControl.Overlay name='Navaids'>
             <NavLayer />
