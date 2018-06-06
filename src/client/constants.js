@@ -5,11 +5,14 @@ import * as ICONS from '../../app/images';
 export const PERIOD = 1000;
 
 export const POLYLINE_OPTIONS = {
-  outlineWidth: 0,
+  outlineWidth: 1,
+  outlineColor: '#ffffff',
   weight: 3,
   palette: {
-    0: '#62FDED',
-    1: '#2F006B',
+    0: '#dbedf3',
+    0.33: '#00818a',
+    0.66: '#404b69',
+    1: '#283149',
   },
   min: 0,
   max: 50000,
