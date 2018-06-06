@@ -70,7 +70,7 @@
     "babel-preset-es2015": "^7.0.0-beta.3",
     "babel-preset-react": "^7.0.0-beta.3",
     "css-loader": "^0.28.4",
-    "electron": "1.8",
+    "electron": "1.8.3",
     "electron-builder": "^19.19.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
