@@ -17,6 +17,20 @@ It has multiplayer capabilities: provided that one computer receives the UDP pac
  
 On top of being a desktop app, it can also serve the client over HTTP to mobile devices.
 
+## Running locally
+
+You need NodeJS v8 and Yarn latest.
+
+```
+git clone git@github.com:foucdeg/x-plane-map-electron.git # or your fork
+cd x-plane-map-electron
+yarn
+# then in three distinct terminals:
+yarn start # run Electron
+yarn watch # rebuild js files on change
+yarn fake # optional: simulates a plane flying over France at a rather high airspeed
+```
+
 ## Continuous delivery
 
 CI/CD is set up : if you have an Appveyor and Travis.org account, you can make these platforms build the application and upload it to a draft Github release.  They will do so under the following conditions:
