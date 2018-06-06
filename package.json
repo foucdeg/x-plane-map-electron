@@ -31,7 +31,8 @@
     "compile": "electron-builder",
     "start": "./node_modules/.bin/electron .",
     "watch": "./node_modules/.bin/webpack --watch",
-    "fake": "node ./src/faker.js",
+    "fake": "node ./tools/faker.js",
+    "bump": "node ./tools/bump.js",
     "update-website": "git commit --allow-empty -m \"[ci skip] Build website\" && git push"
   },
   "dependencies": {
@@ -80,6 +81,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "minimist": "^1.2.0",
+    "semver-compare": "^1.0.0",
     "source-map-support": "^0.4.15",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.2"
