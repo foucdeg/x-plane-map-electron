@@ -12,7 +12,7 @@ function sendDatagram() {
   i += 1;
   const longitude = lonOffset + 4 * Math.cos(i / 4000.0);
   const latitude = 45 + 2 * Math.sin(i / 4000.0);
-  const altitude = 25000 + 20000 * Math.sin(i / 400.0);
+  const altitude = 20000 * (1 + Math.sin(i / 400.0));
 
   const startBuffer = Buffer.from([68, 65, 84, 65, 60, 20, 0, 0, 0]);
   const endBuffer = Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
