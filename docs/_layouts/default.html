@@ -45,7 +45,7 @@
     <section class="main-content">
         {{ content }}
 
-        {% if page.url == "/index.html" %}
+        {% if page.url == "/" %}
             <h2>Changelog</h2>
             {% for release in site.github.releases %}
                 <h3>{{ release.tag_name }} - {{ release.name }}</h3>
