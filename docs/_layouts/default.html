@@ -24,12 +24,14 @@
                 </a>
             {% endif %}
             {% if asset.name contains 'exe' %}
+                {% unless asset.name contains 'blockmap' %}
                 <a
                     href="{{ asset.browser_download_url }}"
                     onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
                     class="btn">
                     Download for Windows
                 </a>
+                {% endunless %}
             {% endif %}
             {% if asset.name contains 'AppImage' %}
                 <a
