@@ -99,6 +99,15 @@ export function changePlaneIcon(oldState, ip, icon) {
   return oldState;
 }
 
+export function formatLatLon([latitude, longitude]) {
+  const northOrSouth = latitude > 0 ? 'N' : 'S';
+  const eastOrWest = latitude > 0 ? 'E' : 'W';
+  const latitudeText = Math.abs(latitude).toLocaleString('en-us', { maximumFractionDigits: 4 });
+  const longitudeText = Math.abs(longitude).toLocaleString('en-us', { maximumFractionDigits: 4 });
+
+  return `${latitudeText} ${northOrSouth}, ${longitudeText} ${eastOrWest}`;
+}
+
 export function decodeConfig() {
   const config = document.location.search
     .substring(1)
