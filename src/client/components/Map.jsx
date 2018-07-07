@@ -10,6 +10,7 @@ import Trace from './Trace';
 import GoogleMapLayer from './GoogleMapLayer';
 import GoogleSatelliteLayer from './GoogleSatelliteLayer';
 import GoogleTerrainLayer from './GoogleTerrainLayer';
+import PlanePopup from './PlanePopup';
 
 require('leaflet-rotatedmarker');
 require('leaflet.gridlayer.googlemutant');
@@ -95,14 +96,7 @@ class Map extends Component {
               rotationAngle={plane.heading}
               rotationOrigin="initial"
             >
-              <Popup>
-                <div className="info-window">
-                  <strong>{plane.name}</strong><br />
-                  {plane.altitude.toLocaleString('en-us', { maximumFractionDigits: 0 })} ft &middot; &nbsp;
-                  {plane.heading.toLocaleString('en-us', { maximumFractionDigits: 0 })} &deg; <br />
-                  GS {plane.speed.toLocaleString('en-us', { maximumFractionDigits: 0 })} kts
-                </div>
-              </Popup>
+              <PlanePopup plane={plane} />
             </Marker>
             { plane.isTraceActive && (
               <Trace
