@@ -4,15 +4,15 @@ import { decodeConfig } from './helpers';
 
 const currentConfig = decodeConfig();
 
-export const SET_ACTIVE_PLANE = 'SET_ACTIVE_PLANE';
-export const RENAME_PLANE = 'RENAME_PLANE';
-export const REMOVE_PLANE = 'REMOVE_PLANE';
-export const TOGGLE_TRACE = 'TOGGLE_TRACE';
-export const CLEAR_TRACE = 'CLEAR_TRACE';
-export const CHANGE_ICON = 'CHANGE_ICON';
-export const REQUEST_PLANES = 'REQUEST_PLANES';
-export const RECEIVE_PLANES = 'RECEIVE_PLANES';
-export const REJECT_PLANES = 'REJECT_PLANES';
+export const SET_ACTIVE_PLANE = Symbol('SET_ACTIVE_PLANE');
+export const RENAME_PLANE = Symbol('RENAME_PLANE');
+export const REMOVE_PLANE = Symbol('REMOVE_PLANE');
+export const TOGGLE_TRACE = Symbol('TOGGLE_TRACE');
+export const CLEAR_TRACE = Symbol('CLEAR_TRACE');
+export const CHANGE_ICON = Symbol('CHANGE_ICON');
+export const REQUEST_PLANES = Symbol('REQUEST_PLANES');
+export const RECEIVE_PLANES = Symbol('RECEIVE_PLANES');
+export const REJECT_PLANES = Symbol('REJECT_PLANES');
 
 export function setActivePlane(plane) {
   return { type: SET_ACTIVE_PLANE, key: plane ? plane.ip : plane };

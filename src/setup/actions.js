@@ -3,8 +3,8 @@
 import { ipcRenderer } from 'electron';
 import url from 'url';
 
-export const SET_CONFIG = 'set_config';
-export const RESET_CONFIG = 'reset_config';
+export const SET_CONFIG = Symbol('SET_CONFIG');
+export const RESET_CONFIG = Symbol('RESET_CONFIG');
 
 export function loadConfig() {
   ipcRenderer.send('getConfig');

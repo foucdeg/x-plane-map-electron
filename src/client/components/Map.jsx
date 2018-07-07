@@ -59,7 +59,6 @@ class Map extends Component {
     });
   }
 
-  //
   handleZoom(e) {
     this.setState({
       zoom: e.target._zoom,
