@@ -6,7 +6,7 @@ See [the website](https://xmap.fouc.net) and [its source files](/docs).
 
 ## Info for developers
 
-This is an Electron desktop app for Linux which displays simulated aircraft in X-Plane in real time.
+This is an Electron desktop app for Windows, Mac and Linux which displays simulated aircraft in X-Plane in real time.
 It runs with X-Plane 9 through 11.
 
 It uses :
