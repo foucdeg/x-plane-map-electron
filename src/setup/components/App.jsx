@@ -60,7 +60,7 @@ class App extends React.Component {
       <div className="config-wrapper">
         <header>
           <img className="logo" src="images/logo.png" alt="XMap logo" />
-          <h1>X-Plane Map <small>v2.3.3</small></h1>
+          <h1>X-Plane Map <small>v2.3.4</small></h1>
         </header>
         <main>
           <nav>
