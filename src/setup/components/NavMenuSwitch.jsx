@@ -24,7 +24,7 @@ class NavMenuSwitch extends React.PureComponent {
             checked={this.props.value === X_PLANE_10}
             onChange={this.handleChange}
           />
-          X-Plane 10
+          X-Plane 9-10
         </p>
       </a>
     );
