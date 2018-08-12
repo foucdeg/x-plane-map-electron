@@ -5,7 +5,12 @@ import QRCode from 'qrcode.react';
 import PropTypes from 'prop-types';
 import url from 'url';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { Button, Dialog, DialogContent, DialogContentText } from '@material-ui/core';
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+
 import DoneIcon from '@material-ui/icons/Done';
 import LinkIcon from '@material-ui/icons/Link';
 import { decodeConfig } from '../helpers';

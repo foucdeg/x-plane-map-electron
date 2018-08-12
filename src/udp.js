@@ -1,7 +1,7 @@
 /* eslint no-console: "off", no-mixed-operators: "off" */
-const dgram = require('dgram');
-const geolib = require('geolib');
-const last = require('lodash/last');
+import dgram from 'dgram';
+import geolib from 'geolib';
+import last from 'lodash/last';
 
 const HISTORY_DURATION = 5000;
 

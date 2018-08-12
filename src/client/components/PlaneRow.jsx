@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, ListItemText, ListItemIcon, ListItemAvatar, ListItemSecondaryAction, IconButton, Avatar, Menu, MenuItem } from '@material-ui/core';
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShowChartsIcon from '@material-ui/icons/ShowChart';
 import ClearIcon from '@material-ui/icons/Clear';

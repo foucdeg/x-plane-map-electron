@@ -1,7 +1,9 @@
 /* eslint no-console: "off" */
 
 import express from 'express';
-import _ from 'lodash';
+import pick from 'lodash/pick';
+import mapValues from 'lodash/mapValues';
+
 import path from 'path';
 import bodyParser from 'body-parser';
 import http from 'http';
@@ -16,9 +18,9 @@ const headers = (req, res, next) => {
 let socketId = 0;
 
 const formatPlaneData = planeList =>
-  _.mapValues(
+  mapValues(
     planeList,
-    item => _.pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading', 'icon']),
+    item => pick(item, ['name', 'altitude', 'longitude', 'latitude', 'speed', 'heading', 'icon']),
   );
 
 export default class MapServer {
