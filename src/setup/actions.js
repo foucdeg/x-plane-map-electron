@@ -5,6 +5,9 @@ import url from 'url';
 
 export const SET_CONFIG = Symbol('SET_CONFIG');
 export const RESET_CONFIG = Symbol('RESET_CONFIG');
+export const SET_X_PLANE_VERSION = Symbol('SET_X_PLANE_VERSION');
+export const X_PLANE_11 = 11;
+export const X_PLANE_10 = 10;
 
 export function loadConfig() {
   ipcRenderer.send('getConfig');
@@ -27,6 +30,13 @@ export function setConfig(newConfig) {
         data: config,
       });
     });
+  };
+}
+
+export function setXPlaneVersion(newXPlaneVersion) {
+  return {
+    type: SET_X_PLANE_VERSION,
+    xPlaneVersion: newXPlaneVersion,
   };
 }
 

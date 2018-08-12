@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import ExternalLink from './ExternalLink';
+import XPlaneSetupText from './XPlaneSetupText';
 
 const MultiServerSection = props => (
   <section>
@@ -14,16 +13,11 @@ const MultiServerSection = props => (
       the IP <strong>{props.localIP}</strong> and port <strong>{props.mapServerPort}</strong>.
     </p>
     <h2>X-Plane Configuration for Everybody</h2>
-    <p>
-      In Settings &gt; Data Input & Output, under the Data Set tab, check data line 20 for
-      UDP output (first checkbox).
-    </p>
-    <p>
-      In Settings &gt; Net Connections, under the Data tab,
-      enter <strong>{props.localIP}</strong> for the IP
-      and <strong>{props.xPlanePort}</strong> for the port.
-    </p>
-    <p><ExternalLink href="http://xmap.fouc.net/XPlaneConfig.html">These screenshots</ExternalLink> may help.</p>
+    <XPlaneSetupText
+      ip={props.localIP}
+      port={props.xPlanePort}
+      xPlaneVersion={props.xPlaneVersion}
+    />
   </section>
 );
 
@@ -32,6 +26,7 @@ MultiServerSection.propTypes = {
   localIP: PropTypes.string.isRequired,
   mapServerPort: PropTypes.number.isRequired,
   isConfigValid: PropTypes.bool.isRequired,
+  xPlaneVersion: PropTypes.number.isRequired,
 };
 
 export default MultiServerSection;

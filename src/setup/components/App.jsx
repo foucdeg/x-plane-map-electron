@@ -3,10 +3,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NavMenuItem from './NavMenuItem';
+import NavMenuSwitch from './NavMenuSwitch';
 import SingleSection from '../containers/SingleSection';
 import MultiServerSection from '../containers/MultiServerSection';
 import MultiClientSection from '../containers/MultiClientSection';
 import ConfigSection from '../containers/ConfigSection';
+
+import { X_PLANE_11, X_PLANE_10 } from '../actions';
 
 class App extends React.Component {
   constructor(props) {
@@ -90,6 +93,12 @@ class App extends React.Component {
               active={this.state.page === 'config'}
               hasWarning={!this.props.isConfigValid}
             />
+            <NavMenuSwitch
+              title="X-Plane Version"
+              values={[X_PLANE_11, X_PLANE_10]}
+              value={this.props.xPlaneVersion}
+              onChange={this.props.onXPlaneVersionChange}
+            />
             {/* eslint-enable react/jsx-no-bind */}
             { this.canStart() && (
               <a className="submit-button" onClick={this.handleStart}>
@@ -105,10 +114,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+  xPlaneVersion: PropTypes.number.isRequired,
   isConfigValid: PropTypes.bool,
   loading: PropTypes.bool.isRequired,
   onStart: PropTypes.func.isRequired,
   loadConfig: PropTypes.func.isRequired,
+  onXPlaneVersionChange: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {

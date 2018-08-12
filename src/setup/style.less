@@ -92,6 +92,27 @@ input:focus {
           color: #ffcc00;
         }
       }
+      a.nav-item.nav-switch {
+        position: relative;
+
+        &:hover {
+          background-color: inherit;
+        }
+
+        p {
+          position: relative;
+          top: -25px;
+        }
+
+        .MuiSwitch-checked-11 + .MuiSwitch-bar-8 {
+          background-color: #000;
+          opacity: 0.38;
+        }
+
+        .MuiSwitch-checked-11 {
+          color: #fafafa;
+        }
+      }
 
       a.submit-button {
         position: absolute;

@@ -7,7 +7,7 @@ import Button from 'material-ui/Button';
 
 import IpAddressInput from './IpAddressInput';
 import PortInput from './PortInput';
-import ExternalLink from './ExternalLink';
+import XPlaneSetupText from './XPlaneSetupText';
 
 const renderConnectionFailure = () => (
   <p>
@@ -67,16 +67,11 @@ class MultiClientSection extends React.Component {
       <React.Fragment>
         <p>The map server is responding to us. It&apos;s looking good!</p>
         <h2>X-Plane Configuration</h2>
-        <p>
-          In Settings &gt; Data Input &amp; Output, under the Data Set tab,
-          check data line 20 for UDP output (first checkbox).
-        </p>
-        <p>
-          In Settings &gt; Net Connections, under the Data tab, enter
-          <strong>{this.props.remoteServerIP}</strong> for the IP and
-          <strong>{this.props.remoteXPlanePort}</strong> for the port.
-        </p>
-        <p><ExternalLink href="http://xmap.fouc.net/XPlaneConfig.html">These screenshots</ExternalLink> may help.</p>
+        <XPlaneSetupText
+          ip={this.props.remoteServerIP}
+          port={this.props.remoteXPlanePort}
+          xPlaneVersion={this.props.xPlaneVersion}
+        />
       </React.Fragment>
     );
   }
@@ -127,6 +122,7 @@ MultiClientSection.propTypes = {
   remoteXPlanePort: PropTypes.number.isRequired,
   remoteServerIP: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
+  xPlaneVersion: PropTypes.number.isRequired,
 };
 
 export default MultiClientSection;
