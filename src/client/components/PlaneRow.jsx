@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, ListItemText, ListItemIcon, ListItemAvatar, ListItemSecondaryAction } from 'material-ui/List';
-import { IconButton, Avatar, Menu, MenuItem } from 'material-ui';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
-import ShowChartsIcon from 'material-ui-icons/ShowChart';
-import ClearIcon from 'material-ui-icons/Clear';
+import { ListItem, ListItemText, ListItemIcon, ListItemAvatar, ListItemSecondaryAction, IconButton, Avatar, Menu, MenuItem } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ShowChartsIcon from '@material-ui/icons/ShowChart';
+import ClearIcon from '@material-ui/icons/Clear';
 
 import EditableText from './EditableText';
 import { ICONS } from '../constants';

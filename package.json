@@ -36,6 +36,8 @@
     "update-website": "git commit --allow-empty -m \"[ci skip] Build website\" && git push"
   },
   "dependencies": {
+    "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.1",
     "body-parser": "^1.17.2",
     "electron-context-menu": "^0.8.0",
     "electron-default-menu": "^1.0.1",
@@ -52,8 +54,6 @@
     "leaflet-rotatedmarker": "^0.2.0",
     "leaflet.gridlayer.googlemutant": "^0.6.2",
     "lodash": "^4.17.4",
-    "material-ui": "^1.0.0-beta.30",
-    "material-ui-icons": "^1.0.0-beta.17",
     "prop-types": "^15.6.0",
     "qrcode.react": "^0.7.1",
     "react": "16",

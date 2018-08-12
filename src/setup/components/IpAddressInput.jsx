@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import some from 'lodash/_arraySome';
-import TextField from 'material-ui/TextField/TextField';
+import TextField from '@material-ui/core/TextField/TextField';
 
 const isValidPartOfIpAddress = (currentValue, newChar) => {
   // expect ints or dots

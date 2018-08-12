@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WarningIcon from 'material-ui-icons/Warning';
+import WarningIcon from '@material-ui/icons/Warning';
 
 const NavMenuItem = props => (
   <a className={`nav-item${props.active ? ' active' : ''}`} onClick={props.onClick}>

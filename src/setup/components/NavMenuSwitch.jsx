@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Switch from 'material-ui/Switch';
+import Switch from '@material-ui/core/Switch';
 import { X_PLANE_10, X_PLANE_11 } from '../actions';
 
 class NavMenuSwitch extends React.PureComponent {

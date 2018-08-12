@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem, ListSubheader } from 'material-ui';
+import { List, ListItem, ListSubheader } from '@material-ui/core';
 
 import PlaneRow from './PlaneRow';
 import { PERIOD } from '../constants';

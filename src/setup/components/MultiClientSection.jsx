@@ -1,9 +1,9 @@
 /* globals fetch */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CircularProgress } from 'material-ui/Progress';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import IpAddressInput from './IpAddressInput';
 import PortInput from './PortInput';

@@ -5,9 +5,9 @@ import QRCode from 'qrcode.react';
 import PropTypes from 'prop-types';
 import url from 'url';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { Button, Dialog, DialogContent, DialogContentText } from 'material-ui';
-import DoneIcon from 'material-ui-icons/Done';
-import ContentCopyIcon from 'material-ui-icons/ContentCopy';
+import { Button, Dialog, DialogContent, DialogContentText } from '@material-ui/core';
+import DoneIcon from '@material-ui/icons/Done';
+import LinkIcon from '@material-ui/icons/Link';
 import { decodeConfig } from '../helpers';
 
 class MobileOverlay extends Component {
@@ -60,20 +60,21 @@ class MobileOverlay extends Component {
       >
         <DialogContent style={{ textAlign: 'center' }}>
           <DialogContentText>
-            The below link is an URL to display this map from another device on this network.
+            The below link is an URL to display this map in your Web browser
+            or on another device on this network.
           </DialogContentText>
           <div id="qrcode">
             <QRCode value={this.qrCodeUrl} size={250} />
           </div>
           <CopyToClipboard text={this.qrCodeUrl} onCopy={this.handleCopy}>
             {this.state.wasCopied ? (
-              <Button dense raised disabled color="primary">
+              <Button size="small" variant="raised" disabled color="primary">
                 <DoneIcon />&nbsp;
                 Link copied
               </Button>
             ) : (
-              <Button dense raised color="primary">
-                <ContentCopyIcon />&nbsp;
+              <Button size="small" variant="raised" color="primary">
+                <LinkIcon />&nbsp;
                 Click to copy the link
               </Button>
             )}
