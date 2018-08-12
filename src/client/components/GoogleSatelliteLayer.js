@@ -1,9 +1,8 @@
 /* globals L */
 /* eslint class-methods-use-this: "off" */
+import { GridLayer, withLeaflet } from 'react-leaflet';
 
-import { TileLayer } from 'react-leaflet';
-
-export default class GoogleSatelliteLayer extends TileLayer {
+class GoogleSatelliteLayer extends GridLayer {
   createLeafletElement() {
     return L.gridLayer.googleMutant({
       type: 'hybrid',
@@ -15,4 +14,4 @@ export default class GoogleSatelliteLayer extends TileLayer {
   }
 }
 
-delete GoogleSatelliteLayer.propTypes.url;
+export default withLeaflet(GoogleSatelliteLayer);

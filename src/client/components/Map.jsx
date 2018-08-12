@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_zoom"] }] */
 
 import React, { Component } from 'react';
-import { Map as LeafletMap, Marker, LayersControl } from 'react-leaflet';
+import { Map as LeafletMap, LayersControl } from 'react-leaflet';
 import PropTypes from 'prop-types';
 
 import { POLYLINE_OPTIONS, BUILT_ICONS } from '../constants';
@@ -11,34 +11,9 @@ import GoogleMapLayer from './GoogleMapLayer';
 import GoogleSatelliteLayer from './GoogleSatelliteLayer';
 import GoogleTerrainLayer from './GoogleTerrainLayer';
 import PlanePopup from './PlanePopup';
+import RotatingMarker from './RotatingMarker';
 
-require('leaflet-rotatedmarker');
 require('leaflet.gridlayer.googlemutant');
-
-Marker.prototype.updateLeafletElement = function updateLeafletElement(fromProps, toProps) {
-  if (toProps.position !== fromProps.position) {
-    this.leafletElement.setLatLng(toProps.position);
-  }
-  if (toProps.icon !== fromProps.icon) {
-    this.leafletElement.setIcon(toProps.icon);
-  }
-  if (toProps.zIndexOffset !== fromProps.zIndexOffset) {
-    this.leafletElement.setZIndexOffset(toProps.zIndexOffset);
-  }
-  if (toProps.opacity !== fromProps.opacity) {
-    this.leafletElement.setOpacity(toProps.opacity);
-  }
-  if (toProps.draggable !== fromProps.draggable) {
-    if (toProps.draggable === true) {
-      this.leafletElement.dragging.enable();
-    } else {
-      this.leafletElement.dragging.disable();
-    }
-  }
-  if (toProps.rotationAngle !== fromProps.rotationAngle) {
-    this.leafletElement.setRotationAngle(toProps.rotationAngle);
-  }
-};
 
 class Map extends Component {
   constructor() {
@@ -90,14 +65,14 @@ class Map extends Component {
         </LayersControl>
         { this.props.planes.map(plane => (
           <React.Fragment key={plane.ip}>
-            <Marker
+            <RotatingMarker
               position={plane.position}
               icon={BUILT_ICONS[plane.icon]}
               rotationAngle={plane.heading}
               rotationOrigin="initial"
             >
               <PlanePopup plane={plane} />
-            </Marker>
+            </RotatingMarker>
             { plane.isTraceActive && (
               <Trace
                 {...POLYLINE_OPTIONS}

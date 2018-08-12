@@ -1,12 +1,11 @@
 /* globals L */
 /* eslint class-methods-use-this: "off" */
+import { GridLayer, withLeaflet } from 'react-leaflet';
 
-import { TileLayer } from 'react-leaflet';
-
-export default class GoogleTerrainLayer extends TileLayer {
+class GoogleTerrainLayer extends GridLayer {
   createLeafletElement() {
     return L.gridLayer.googleMutant({
-      type: 'terrain', // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
+      type: 'terrain',
     });
   }
 
@@ -15,4 +14,4 @@ export default class GoogleTerrainLayer extends TileLayer {
   }
 }
 
-delete GoogleTerrainLayer.propTypes.url;
+export default withLeaflet(GoogleTerrainLayer);

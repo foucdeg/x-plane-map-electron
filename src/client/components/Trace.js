@@ -1,7 +1,7 @@
-import { Polyline } from 'react-leaflet';
+import { Path, withLeaflet } from 'react-leaflet';
 import LeafletHotline from 'leaflet-hotline';
 
-export default class Trace extends Polyline {
+class Trace extends Path {
   createLeafletElement(props) {
     return new LeafletHotline.Hotline(props.positions, this.getOptions(props));
   }
@@ -12,3 +12,5 @@ export default class Trace extends Polyline {
     }
   }
 }
+
+export default withLeaflet(Trace);
