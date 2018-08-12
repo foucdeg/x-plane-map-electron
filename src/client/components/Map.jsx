@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_zoom"] }] */
 
 import React, { Component } from 'react';
-import { Map as LeafletMap, LayersControl } from 'react-leaflet';
+import { Map as LeafletMap, LayersControl, TileLayer } from 'react-leaflet';
 import PropTypes from 'prop-types';
 
 import { POLYLINE_OPTIONS, BUILT_ICONS } from '../constants';
@@ -14,6 +14,8 @@ import PlanePopup from './PlanePopup';
 import RotatingMarker from './RotatingMarker';
 
 require('leaflet.gridlayer.googlemutant');
+
+const navTiles = 'https://tiles-{s}.flightplandatabase.com/nav/{z}/{x}/{y}.png';
 
 class Map extends Component {
   constructor() {
@@ -59,9 +61,9 @@ class Map extends Component {
           <LayersControl.BaseLayer name="Terrain">
             <GoogleTerrainLayer />
           </LayersControl.BaseLayer>
-          {/* <LayersControl.Overlay name='Navaids'>
-            <NavLayer />
-          </LayersControl.Overlay> */}
+          <LayersControl.Overlay name="Navaids">
+            <TileLayer url={navTiles} />
+          </LayersControl.Overlay>
         </LayersControl>
         { this.props.planes.map(plane => (
           <React.Fragment key={plane.ip}>
