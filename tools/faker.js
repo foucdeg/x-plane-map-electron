@@ -1,4 +1,3 @@
-/* eslint no-mixed-operators: "off" */
 const dgram = require('dgram');
 
 const ip = process.env.TARGET_IP;
@@ -8,11 +7,17 @@ let i = 0;
 const lonOffset = 4 * Math.random();
 const socket = dgram.createSocket('udp4');
 
+function generateCoordinates(index) {
+  return {
+    longitude: lonOffset + 4 * Math.cos(index / 4000.0),
+    latitude: 45 + 2 * Math.sin(index / 4000.0),
+    altitude: 20000 * (1 + Math.sin(index / 400.0)),
+  };
+}
+
 function sendDatagram() {
   i += 1;
-  const longitude = lonOffset + 4 * Math.cos(i / 4000.0);
-  const latitude = 45 + 2 * Math.sin(i / 4000.0);
-  const altitude = 20000 * (1 + Math.sin(i / 400.0));
+  const { longitude, latitude, altitude } = generateCoordinates(i);
 
   const startBuffer = Buffer.from([68, 65, 84, 65, 60, 20, 0, 0, 0]);
   const endBuffer = Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);

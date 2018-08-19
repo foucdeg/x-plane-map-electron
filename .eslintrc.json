@@ -8,6 +8,7 @@
         "jsx-a11y/anchor-is-valid": "off",
         "radix": "off",
         "object-curly-newline": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "no-mixed-operators": "off"
     }
 }

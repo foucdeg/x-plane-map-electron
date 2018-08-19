@@ -1,4 +1,4 @@
-/* eslint no-console: "off", no-mixed-operators: "off" */
+/* eslint no-console: "off" */
 import dgram from 'dgram';
 import geolib from 'geolib';
 import last from 'lodash/last';
