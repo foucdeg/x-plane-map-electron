@@ -2,7 +2,7 @@
   "name": "x-plane-map-electron",
   "productName": "X-Plane-Map",
   "description": "Google Map view for X-Plane",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "author": "Foucauld Degeorges <foucauld.degeorges@gmail.com>",
   "homepage": "https://github.com/foucdeg/x-plane-map-electron/",
   "license": "Beerware",
