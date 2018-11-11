@@ -17,6 +17,7 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - git submodule update --init
   - yarn
 
 test_script:
