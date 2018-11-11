@@ -86,11 +86,6 @@ setupConfig.plugins = [
 ];
 setupConfig.target = 'electron-renderer';
 
-if (process.env.NODE_ENV === 'production') {
-  clientConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
-  setupConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
-}
-
 if (process.env.ANALYZE_BUNDLE) {
   clientConfig.plugins.push(new BundleAnalyzerPlugin());
   setupConfig.plugins.push(new BundleAnalyzerPlugin());
