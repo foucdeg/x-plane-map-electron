@@ -15,7 +15,7 @@ if (semverCompare(oldVersion, newVersion) === 1) {
   throw new Error('Version numbers should go up');
 }
 
-['app/about.html', 'package.json', 'src/setup/components/App.jsx'].forEach((fileName) => {
+['app/about.html', 'package.json', 'setup/components/App.jsx'].forEach((fileName) => {
   const fileContent = fs.readFileSync(fileName, { encoding: 'utf-8' });
   fs.writeFileSync(fileName, fileContent.replace(oldVersion, newVersion));
 });

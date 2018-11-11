@@ -11,22 +11,20 @@ class ConfigSection extends React.Component {
   constructor(props) {
     super(props);
 
-    const { xPlanePort, mapServerPort, mapTilesUrl } = props;
+    const { xPlanePort, mapServerPort } = props;
     this.state = {
       xPlanePort,
       mapServerPort,
-      mapTilesUrl,
       isXPlanePortValid: false,
       isMapServerPortValid: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onMapTilesUrlChange = this.onMapTilesUrlChange.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
-    const { xPlanePort, mapServerPort, mapTilesUrl } = newProps;
-    this.setState({ xPlanePort, mapServerPort, mapTilesUrl });
+    const { xPlanePort, mapServerPort } = newProps;
+    this.setState({ xPlanePort, mapServerPort });
   }
 
   onPortChange(field, event) {
@@ -40,10 +38,6 @@ class ConfigSection extends React.Component {
     this.setState({ [validKey]: isAvailable });
   }
 
-  onMapTilesUrlChange(event) {
-    this.setState({ mapTilesUrl: event.target.value });
-  }
-
   isValid() {
     return this.state.isXPlanePortValid && this.state.isMapServerPortValid;
   }
@@ -52,8 +46,8 @@ class ConfigSection extends React.Component {
     e.preventDefault();
 
     if (!this.isValid()) return;
-    const { xPlanePort, mapServerPort, mapTilesUrl } = this.state;
-    this.props.onSave({ xPlanePort, mapServerPort, mapTilesUrl });
+    const { xPlanePort, mapServerPort } = this.state;
+    this.props.onSave({ xPlanePort, mapServerPort });
   }
 
   render() {
@@ -103,7 +97,6 @@ class ConfigSection extends React.Component {
 ConfigSection.propTypes = {
   xPlanePort: PropTypes.number.isRequired,
   mapServerPort: PropTypes.number.isRequired,
-  mapTilesUrl: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
 };
 

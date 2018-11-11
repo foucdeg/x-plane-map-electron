@@ -4,7 +4,6 @@ import config from 'electron-settings';
 config.defaults({
   xPlanePort: 49003,
   mapServerPort: 8080,
-  mapTilesUrl: 'http://x-plane-map.fouc.net/nav.php',
   mode: 'local',
   remoteServerIP: null,
   remoteXPlanePort: 49003,

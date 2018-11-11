@@ -1,11 +1,14 @@
 const webpack = require('webpack');
+const path = require('path');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const serverConfig = {
   entry: './src/background.js',
   output: {
-    filename: './app/background.js',
+    filename: 'background.js',
+    path: path.resolve(__dirname, 'app'),
   },
-  target: 'electron',
+  target: 'electron-main',
   module: {
     rules: [
       {
@@ -14,7 +17,7 @@ const serverConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['electron', 'es2015'],
+            presets: ['electron'],
           },
         },
       },
@@ -23,9 +26,10 @@ const serverConfig = {
 };
 
 const clientConfig = {
-  entry: './src/client/index.jsx',
+  entry: './client/src/index.jsx',
   output: {
-    filename: './app/client.js',
+    filename: 'client.js',
+    path: path.resolve(__dirname, 'app'),
   },
   devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
   target: 'web',
@@ -45,7 +49,8 @@ const clientConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['electron', 'es2015', 'react'],
+            presets: ['env', 'react'],
+            plugins: ['transform-object-rest-spread', 'transform-class-properties'],
           },
         },
       },
@@ -60,23 +65,35 @@ const clientConfig = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    modules: ['./client/node_modules'],
+    alias: {
+      leaflet: 'leaflet/dist/leaflet.js',
+    },
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'dev' }),
+    new webpack.DefinePlugin({ PLATFORM: JSON.stringify('electron') }),
   ],
 };
 
 const setupConfig = { ...clientConfig };
-setupConfig.entry = './src/setup/index.jsx';
-setupConfig.output = { filename: './app/setup.js' };
+setupConfig.entry = './setup/index.jsx';
+setupConfig.output = {
+  filename: 'setup.js',
+  path: path.resolve(__dirname, 'app'),
+};
 setupConfig.plugins = [
   new webpack.EnvironmentPlugin({ NODE_ENV: 'dev' }),
 ];
-setupConfig.target = 'electron';
+setupConfig.target = 'electron-renderer';
 
 if (process.env.NODE_ENV === 'production') {
   clientConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
   setupConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
+if (process.env.ANALYZE_BUNDLE) {
+  clientConfig.plugins.push(new BundleAnalyzerPlugin());
+  setupConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
 module.exports = [serverConfig, clientConfig, setupConfig];
