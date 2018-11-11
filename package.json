@@ -25,7 +25,7 @@
     }
   },
   "scripts": {
-    "postinstall": "cd client; yarn",
+    "postinstall": "cd client && yarn",
     "build": "webpack --mode=production",
     "precompile": "npm run build",
     "compile": "electron-builder",
