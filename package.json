@@ -1,10 +1,10 @@
 {
-  "name": "x-plane-map-electron",
-  "productName": "X-Plane-Map",
-  "description": "Google Map view for X-Plane",
+  "name": "airspaces-electron",
+  "productName": "Airspaces",
+  "description": "An online map for your X-Plane flght sessions",
   "version": "2.5.0",
   "author": "Foucauld Degeorges <foucauld.degeorges@gmail.com>",
-  "homepage": "https://github.com/foucdeg/x-plane-map-electron/",
+  "homepage": "https://airspaces.app/",
   "license": "Beerware",
   "repository": {
     "type": "git",

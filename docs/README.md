@@ -1,17 +1,31 @@
-# X-Plane-Map by @foucdeg
+# Airspaces by @foucdeg
 
 [Become a Patreon!](https://www.patreon.com/foucauld)
 
-![](./screenshot.png)
+Airspaces is an online or self-hosted map for viewing single- or multiplayer X-Plane flight sessions.
+
+![screenshot](./screenshot.png)
+
+## Available Versions
+
+Airspaces comes in three flavours:
+
+ - a [public airspace](https://public.airspaces.app) where anyone can monitor their flight
+ - private airspaces: like the above the above but reserved for you. [Contact me](mailto:foucauld.degeorges@gmail.com) for your own private airspace on yourname.airspaces.app
+ - local airspaces: download the Electron app using the links below and host a local network-based airspace.
+
+## Source code
+
+You can also self-host, edit and contribute to my apps. Source code is split in three public Github.com repositories:
+
+ - [the client](https://github.com/foucdeg/x-plane-map-client) is the user interface (ReactJS)
+ - [the backend](https://github.com/foucdeg/x-plane-map-api) manages data coming from X-Plane and serves it to the client (Node.JS)
+ - [the desktop app](https://github.com/foucdeg/x-plane-map-electron) allows users to locally host an airspace (Electron)
 
 ## How it Works
 
 X-Plane can be [configured](./XPlaneConfig.md) to send out aircraft location data over the network.
-This application listens to those network exchanges and displays your aircraft on a Google Map.
-
-## Multiplayer mode
-
-Flying with friends? The map can handle that. Instructions are detailed in the setup screen.
+This application listens to those network exchanges and displays your aircraft on an online map.
 
 ## FAQ
 

@@ -45,7 +45,7 @@ if (process.platform === 'win32') {
   baseMenu[1].submenu.push({ label: 'Settings...', click: goToSettings });
 
   baseMenu[baseMenu.length - 1].submenu.splice(0, 0, {
-    label: 'About X-Plane-Map',
+    label: 'About Airspaces',
     click: openAboutWindow,
   });
 }
@@ -59,7 +59,7 @@ if (process.platform === 'darwin') {
   baseMenu[0].submenu.splice(2, 0, prefs, { type: 'separator' });
 
   const aboutMenu = {
-    label: 'About X-Plane-Map',
+    label: 'About Airspaces',
     accelerator: 'Command+I',
     click: openAboutWindow,
   };
