@@ -1,4 +1,4 @@
-# X-Plane Map
+# Airspaces desktop app
 
 ## User instructions
 
