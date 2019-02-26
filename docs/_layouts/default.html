@@ -22,34 +22,34 @@
             Try online
         </a>
         {% for asset in site.github.latest_release.assets %}
-            {% if asset.name contains 'dmg' %}
-                {% unless asset.name contains 'blockmap' %}
-                <a
-                    href="{{ asset.browser_download_url }}"
-                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
-                    class="btn">
-                    Download for Mac
-                </a>
-                {% endunless %}
-            {% endif %}
-            {% if asset.name contains 'exe' %}
-                {% unless asset.name contains 'blockmap' %}
-                <a
-                    href="{{ asset.browser_download_url }}"
-                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
-                    class="btn">
-                    Download for Windows
-                </a>
-                {% endunless %}
-            {% endif %}
-            {% if asset.name contains 'AppImage' %}
-                <a
-                    href="{{ asset.browser_download_url }}"
-                    onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
-                    class="btn">
-                    Download for Linux
-                </a>
-            {% endif %}
+            {% unless asset.name contains 'blockmap' %}
+                {% if asset.name contains 'dmg' %}
+                    <a
+                        href="{{ asset.browser_download_url }}"
+                        onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
+                        class="btn">
+                        Download for Mac
+                    </a>
+                {% endif %}
+                {% if asset.name contains 'exe' %}
+                    {% unless asset.name contains 'blockmap' %}
+                    <a
+                        href="{{ asset.browser_download_url }}"
+                        onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
+                        class="btn">
+                        Download for Windows
+                    </a>
+                    {% endunless %}
+                {% endif %}
+                {% if asset.name contains 'AppImage' %}
+                    <a
+                        href="{{ asset.browser_download_url }}"
+                        onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
+                        class="btn">
+                        Download for Linux
+                    </a>
+                {% endif %}
+            {% endunless %}
         {% endfor %}
     </section>
 
@@ -67,15 +67,17 @@
                 {% assign win_url = '' %}
                 {% assign lin_url = '' %}
                 {% for asset in release.assets %}
-                    {% if asset.name contains 'dmg' %}
-                        {% assign mac_url = asset.browser_download_url %}
-                    {% endif %}
-                    {% if asset.name contains 'exe' %}
-                        {% assign win_url = asset.browser_download_url %}
-                    {% endif %}
-                    {% if asset.name contains 'AppImage' %}
-                        {% assign lin_url = asset.browser_download_url %}
-                    {% endif %}
+                    {% unless asset.name contains 'blockmap' %}
+                        {% if asset.name contains 'dmg' %}
+                                {% assign mac_url = asset.browser_download_url %}
+                        {% endif %}
+                        {% if asset.name contains 'exe' %}
+                            {% assign win_url = asset.browser_download_url %}
+                        {% endif %}
+                        {% if asset.name contains 'AppImage' %}
+                            {% assign lin_url = asset.browser_download_url %}
+                        {% endif %}
+                    {% endunless %}
                 {% endfor %}
                 <p>
                     Download: <a href="{{ mac_url }}">Mac</a>, <a href="{{ win_url }}">Windows</a>, <a href="{{ lin_url }}">Linux</a>
