@@ -15,7 +15,7 @@
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
         {% for asset in site.github.latest_release.assets %}
-            {% if asset.name contains 'dmg' %}
+            {% if asset.name contains 'dmg' and not asset.name contains 'blockmap' %}
                 <a
                     href="{{ asset.browser_download_url }}"
                     onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
