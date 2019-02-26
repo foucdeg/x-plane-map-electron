@@ -14,6 +14,13 @@
     <section class="page-header">
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
         <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+        <a
+            href="https://public.airspaces.app"
+            target="_blank"
+            onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'accessed_online', eventLabel: 'public });"
+            class="btn">
+            Try online
+        </a>
         {% for asset in site.github.latest_release.assets %}
             {% if asset.name contains 'dmg' %}
                 {% unless asset.name contains 'blockmap' %}
