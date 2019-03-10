@@ -1,4 +1,8 @@
-theme: jekyll-theme-cayman
 title: Airspaces
 description: An online map for your X-Plane flight sessions
 google_analytics: UA-109852306-1
+repository: foucdeg/x-plane-map-electron
+plugins:
+- jekyll-github-metadata
+- jekyll-sitemap
+- jemoji

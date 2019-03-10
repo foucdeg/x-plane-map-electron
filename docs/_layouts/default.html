@@ -1,101 +1,20 @@
-<!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US " }}">
-
-<head>
-    <meta charset="UTF-8"> {% seo %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <link rel="icon" href="favicon.ico" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-</head>
-
-<body>
-    <section class="page-header">
-        <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-        <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-        <a
-            href="https://public.airspaces.app"
-            target="_blank"
-            onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'accessed_online', eventLabel: 'public });"
-            class="btn">
-            Try online
-        </a>
-        {% for asset in site.github.latest_release.assets %}
-            {% unless asset.name contains 'blockmap' %}
-                {% if asset.name contains 'dmg' %}
-                    <a
-                        href="{{ asset.browser_download_url }}"
-                        onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_mac', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
-                        class="btn">
-                        Download for Mac
-                    </a>
-                {% endif %}
-                {% if asset.name contains 'exe' %}
-                    {% unless asset.name contains 'blockmap' %}
-                    <a
-                        href="{{ asset.browser_download_url }}"
-                        onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_win', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
-                        class="btn">
-                        Download for Windows
-                    </a>
-                    {% endunless %}
-                {% endif %}
-                {% if asset.name contains 'AppImage' %}
-                    <a
-                        href="{{ asset.browser_download_url }}"
-                        onClick="ga('send', 'event', { eventCategory: 'download', eventAction: 'download_lin', eventLabel: '{{ site.github.latest_release.tag_name }}' });"
-                        class="btn">
-                        Download for Linux
-                    </a>
-                {% endif %}
-            {% endunless %}
-        {% endfor %}
-    </section>
-
-    <section class="main-content">
+<!doctype html>
+<html lang="en">
+  {% include head.html %}
+  <body>
+    <main>
+      <iframe src="https://public.airspaces.app" class="demo-frame"></iframe>
+      <div class="demo-overlay">
+        <img src="icon.png" alt="Airspaces icon" />
+        <div class="titles">
+          <h1>Airspaces</h1>
+          <p>An online map for your X-Plane flight sessions</p>
+        </div>
+      </div>
+      <section class="page-body">
         {{ content }}
-
-        {% if page.url == "/" %}
-            <h2>Changelog</h2>
-            {% for release in site.github.releases %}
-                <h3>{{ release.tag_name }} - {{ release.name }}</h3>
-                {% if release.body != '' %}
-                <p>{{ release.body | markdownify }}</p>
-                {% endif %}
-                {% assign mac_url = '' %}
-                {% assign win_url = '' %}
-                {% assign lin_url = '' %}
-                {% for asset in release.assets %}
-                    {% unless asset.name contains 'blockmap' %}
-                        {% if asset.name contains 'dmg' %}
-                                {% assign mac_url = asset.browser_download_url %}
-                        {% endif %}
-                        {% if asset.name contains 'exe' %}
-                            {% assign win_url = asset.browser_download_url %}
-                        {% endif %}
-                        {% if asset.name contains 'AppImage' %}
-                            {% assign lin_url = asset.browser_download_url %}
-                        {% endif %}
-                    {% endunless %}
-                {% endfor %}
-                <p>
-                    Download: <a href="{{ mac_url }}">Mac</a>, <a href="{{ win_url }}">Windows</a>, <a href="{{ lin_url }}">Linux</a>
-                </p>
-            {% endfor %}
-        {% endif %}
-
-        <footer class="site-footer">
-            {% if site.github.is_project_page %}
-            <span class="site-footer-owner">
-                <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by
-                <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
-            {% endif %}
-            <span class="site-footer-credits">This page was generated by
-                <a href="https://pages.github.com">GitHub Pages</a>.</span>
-        </footer>
-    </section>
-
+      </section>
+    </main>
     {% if site.google_analytics %}
     <script type="text/javascript">
         (function (i, s, o, g, r, a, m) {
@@ -108,6 +27,5 @@
         ga('create', '{{ site.google_analytics }}', 'auto');
         ga('send', 'pageview');
     </script> {% endif %}
-</body>
-
+  </body>
 </html>
