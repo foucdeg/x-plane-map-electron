@@ -4,9 +4,9 @@ body {
 }
 .demo-frame {
   width: 100%;
-  height: 20rem;
+  height: 100%;
   border: 0;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: -1;
@@ -24,7 +24,7 @@ body {
 
 .demo-overlay {
   display: flex;
-  margin: 6rem auto;
+  margin: calc(50vh - 12rem) auto 8rem auto;
   padding: 1.5rem;
   height: 8rem;
   box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.1);
@@ -39,6 +39,8 @@ body {
 }
 
 .page-body {
+  box-shadow: 3px -3px 7px 0px rgba(0,0,0,0.1);
+  background-color: white;
   max-width: 45rem;
   margin: 0px auto;
   padding: 1.5rem;
@@ -108,6 +110,7 @@ h3 {
 
 @media (max-width:720px) {
   body{ font-size: 12px; }
+  h1 { font-size: 2rem; }
 }
 
 p {
@@ -141,24 +144,11 @@ pre {
   background: #f4f6f6;
 }
 
-/* A link that has not been visited */
-a:link {
+a {
   color: #2CB7CD;
   text-decoration: none;
 }
 
-/* A link that has been visited */
-a:visited {
-  color: #2CB7CD;
-}
-
-/* A link that is hovered on */
 a:hover {
-  color: #2CB7CD;
   text-decoration: underline;
-}
-
-/* A link that is selected */
-a:active {
-  color: #2CB7CD;
 }
