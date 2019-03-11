@@ -143,22 +143,22 @@ pre {
 
 /* A link that has not been visited */
 a:link {
-  color: #00AEEF;
+  color: #2CB7CD;
   text-decoration: none;
 }
 
 /* A link that has been visited */
 a:visited {
-  color: #00AEEF;
+  color: #2CB7CD;
 }
 
 /* A link that is hovered on */
 a:hover {
-  color: #00AEEF;
+  color: #2CB7CD;
   text-decoration: underline;
 }
 
 /* A link that is selected */
 a:active {
-  color: #00AEEF;
+  color: #2CB7CD;
 }
