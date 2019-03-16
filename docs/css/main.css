@@ -32,10 +32,20 @@ body {
   background: white;
 }
 
-.demo-overlay img {
+.demo-overlay .titles {
+  flex-grow: 1;
+}
+
+.demo-overlay img.logo {
   align-self: center;
   height: 120%;
   margin-right: 2em;
+}
+
+.demo-overlay .gotoapp svg {
+  display: block;
+  margin: 0px auto;
+  fill: #2CB7CD;
 }
 
 .page-body {
@@ -64,6 +74,11 @@ h3 {
   color: #00A651;
   margin-bottom: 2rem;
   margin-top: 3rem;
+}
+p {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.25rem;
 }
 
 .versions {
@@ -108,15 +123,33 @@ h3 {
 }
 
 
-@media (max-width:720px) {
+@media (max-width: 720px) {
   body{ font-size: 12px; }
   h1 { font-size: 2rem; }
+  h2 { font-size: 1rem; margin-bottom: 1.5rem; }
+  h3 { margin-top: 2rem; margin-bottom: 1.5rem; }
+  p { line-height: 1rem; }
+  a.gotoapp { display: none; }
+
+  .demo-overlay .titles p {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+  }
+  a.gotoapp-small {
+    position: relative;
+    top: -3px;
+  }
+  a.gotoapp-small svg {
+    position: relative;
+    top: 3px;
+    fill: #2CB7CD;
+  }
 }
 
-p {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.25rem;
+@media (min-width: 721px) {
+  a.gotoapp-small {
+    display: none;
+  }
 }
 
 img {
