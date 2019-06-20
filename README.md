@@ -2,7 +2,7 @@
 
 ## User instructions
 
-See [the website](https://xmap.fouc.net) and [its source files](/docs).
+See [the website](https://airspaces.app) and [its source files](/docs).
 
 ## Info for developers
 
