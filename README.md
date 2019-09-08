@@ -2,7 +2,7 @@
 
 This repository holds the desktop app for [airspaces.app](https://airspaces.app).
 
-The repository for the online version of Airspaces is located at [foucdeg/airspaces](https://github.com/foucdeg/airspaces). The desktop app is here, but no longer in active development. This is why this repositoryu is archived.
+The repository for the online version of Airspaces is located at [foucdeg/airspaces](https://github.com/foucdeg/airspaces). The desktop app is here, but no longer in active development. This is why this repository is archived.
 
 For any questions, you are welcome to either post an issue on [foucdeg/airspaces](https://github.com/foucdeg/airspaces) or send me an email at foucauld.degeorges@gmail.com .
 
